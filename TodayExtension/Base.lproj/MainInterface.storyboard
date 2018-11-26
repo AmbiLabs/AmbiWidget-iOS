@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,28 +13,98 @@
         <!--Today View Controller-->
         <scene sceneID="cwh-vc-ff4">
             <objects>
-                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="TodayExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mmI-90-FBI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3O-Ua-WPI">
+                                <rect key="frame" x="0.0" y="55" width="320" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VN-hM-0qz">
+                                        <rect key="frame" x="0.0" y="0.0" width="53.5" height="55"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.56862745100000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Too warm">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WO1-dX-pgx">
+                                        <rect key="frame" x="53.5" y="0.0" width="53" height="55"/>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Bit warm">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gay-9K-BVp">
+                                        <rect key="frame" x="106.5" y="0.0" width="53.5" height="55"/>
+                                        <color key="backgroundColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Comfy">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBj-1E-4W0">
+                                        <rect key="frame" x="160" y="0.0" width="53.5" height="55"/>
+                                        <color key="backgroundColor" red="0.63137254899999995" green="0.74117647060000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Bit cold">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YP7-C2-aHO">
+                                        <rect key="frame" x="213.5" y="0.0" width="53" height="55"/>
+                                        <color key="backgroundColor" red="0.44705882349999998" green="0.5568627451" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Too cold">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hR2-rb-QlN">
+                                        <rect key="frame" x="266.5" y="0.0" width="53.5" height="55"/>
+                                        <color key="backgroundColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="MODE">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="WO1-dX-pgx" firstAttribute="width" secondItem="2VN-hM-0qz" secondAttribute="width" id="1bj-AN-LxC"/>
+                                    <constraint firstItem="hR2-rb-QlN" firstAttribute="width" secondItem="2VN-hM-0qz" secondAttribute="width" id="5kW-eU-VC0"/>
+                                    <constraint firstItem="Gay-9K-BVp" firstAttribute="width" secondItem="2VN-hM-0qz" secondAttribute="width" id="WgA-sy-GeH"/>
+                                    <constraint firstItem="YP7-C2-aHO" firstAttribute="width" secondItem="2VN-hM-0qz" secondAttribute="width" id="bF5-Ic-uDD"/>
+                                    <constraint firstItem="HBj-1E-4W0" firstAttribute="width" secondItem="2VN-hM-0qz" secondAttribute="width" id="bYP-51-3yr"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iep-8B-hay">
+                                <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBp-Ex-Z0t">
+                                <rect key="frame" x="263" y="0.0" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH">
+                                <rect key="frame" x="110.5" y="0.0" width="99" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="20" symbolic="YES" id="0Q0-KW-PJ6"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="20" symbolic="YES" id="6Vq-gs-PHe"/>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="20" symbolic="YES" id="L8K-9R-egU"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="20" symbolic="YES" id="mYS-Cv-VNx"/>
+                            <constraint firstItem="i3O-Ua-WPI" firstAttribute="height" secondItem="mmI-90-FBI" secondAttribute="height" multiplier="0.5" id="31O-vo-pX6"/>
+                            <constraint firstItem="QRD-7a-zf8" firstAttribute="trailing" secondItem="i3O-Ua-WPI" secondAttribute="trailing" id="5im-k5-dTa"/>
+                            <constraint firstItem="i3O-Ua-WPI" firstAttribute="leading" secondItem="QRD-7a-zf8" secondAttribute="leading" id="CF0-OJ-GwR"/>
+                            <constraint firstItem="Iep-8B-hay" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="HDx-LB-1Ig"/>
+                            <constraint firstItem="QRD-7a-zf8" firstAttribute="trailing" secondItem="KBp-Ex-Z0t" secondAttribute="trailing" id="KXC-8y-3kh"/>
+                            <constraint firstItem="ofb-Pf-tuH" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="NXb-Yi-5pR"/>
+                            <constraint firstItem="ofb-Pf-tuH" firstAttribute="centerX" secondItem="mmI-90-FBI" secondAttribute="centerX" id="Qju-AX-Grc"/>
+                            <constraint firstItem="KBp-Ex-Z0t" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="RF1-w1-bFy"/>
+                            <constraint firstItem="QRD-7a-zf8" firstAttribute="bottom" secondItem="i3O-Ua-WPI" secondAttribute="bottom" id="Ypd-MZ-RID"/>
+                            <constraint firstItem="Iep-8B-hay" firstAttribute="leading" secondItem="QRD-7a-zf8" secondAttribute="leading" id="crz-Q1-uuh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                        <viewLayoutGuide key="safeArea" id="QRD-7a-zf8"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="37"/>
+                    <size key="freeformSize" width="320" height="110"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

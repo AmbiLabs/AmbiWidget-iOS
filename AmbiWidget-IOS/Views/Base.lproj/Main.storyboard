@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sxJ-AE-EnB">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Authentication View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="auth" title="Authentication View Controller" id="BYZ-38-t0r" customClass="AuthVC" customModule="AmbiWidget_IOS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqL-c0-cTc">
+                                <rect key="frame" x="16" y="36" width="193.5" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs permission from the Ambi Climate Cloud to control and read your Ambi devices." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-0x-R8x">
+                                <rect key="frame" x="16" y="64.5" width="343" height="61"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezv-tb-Ria">
+                                <rect key="frame" x="148.5" y="133.5" width="78" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Authorise">
+                                    <color key="titleColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="authoriseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vPi-uS-4wX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ezv-tb-Ria" firstAttribute="top" secondItem="eUE-0x-R8x" secondAttribute="bottom" constant="8" symbolic="YES" id="1aB-v8-hhN"/>
+                            <constraint firstItem="oqL-c0-cTc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="3jJ-LG-UtF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oqL-c0-cTc" secondAttribute="trailing" symbolic="YES" id="Hbw-dc-l1T"/>
+                            <constraint firstItem="Ezv-tb-Ria" firstAttribute="centerX" secondItem="eUE-0x-R8x" secondAttribute="centerX" id="P5k-Y9-64p"/>
+                            <constraint firstItem="eUE-0x-R8x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dtg-Ws-jmO"/>
+                            <constraint firstItem="eUE-0x-R8x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="16" id="hsd-Nz-750"/>
+                            <constraint firstItem="eUE-0x-R8x" firstAttribute="top" secondItem="oqL-c0-cTc" secondAttribute="bottom" constant="8" symbolic="YES" id="u65-8P-QYQ"/>
+                            <constraint firstItem="oqL-c0-cTc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="yJO-uH-D2Q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6C0-fo-Mbb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1833" y="27"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="bey-su-DTe">
+            <objects>
+                <viewController storyboardIdentifier="main" title="Main View Controller" id="sxJ-AE-EnB" customClass="MainVC" customModule="AmbiWidget_IOS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aqP-eW-zdn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mOd-dR-R2E"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="91T-RC-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1178" y="27"/>
+        </scene>
+    </scenes>
+</document>

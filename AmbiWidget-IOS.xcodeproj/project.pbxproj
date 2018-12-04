@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		620C202621B4DF490072BBEA /* Models in Resources */ = {isa = PBXBuildFile; fileRef = 620C202521B4DF490072BBEA /* Models */; };
-		620C202921B4DF7E0072BBEA /* Views in Resources */ = {isa = PBXBuildFile; fileRef = 620C202721B4DF7E0072BBEA /* Views */; };
-		620C202A21B4DF7E0072BBEA /* Controllers in Resources */ = {isa = PBXBuildFile; fileRef = 620C202821B4DF7E0072BBEA /* Controllers */; };
-		620C203021B4E14C0072BBEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C202F21B4E14C0072BBEA /* User.swift */; };
-		620C203221B4E1DD0072BBEA /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C203121B4E1DD0072BBEA /* Device.swift */; };
-		620C203421B4E73C0072BBEA /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C203321B4E73C0072BBEA /* DeviceViewModel.swift */; };
 		6250EC3721A693C5004F4F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6250EC3621A693C5004F4F59 /* AppDelegate.swift */; };
 		6250EC3921A693C5004F4F59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6250EC3821A693C5004F4F59 /* ViewController.swift */; };
 		6250EC3C21A693C5004F4F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6250EC3A21A693C5004F4F59 /* Main.storyboard */; };
@@ -24,6 +18,13 @@
 		6250EC7121A6953F004F4F59 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6250EC6F21A6953F004F4F59 /* MainInterface.storyboard */; };
 		6250EC7521A6953F004F4F59 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6250EC6821A6953E004F4F59 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		626B652B21AFCF3D009C0E6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6250EC3D21A693C7004F4F59 /* Assets.xcassets */; };
+		626FBCFB21B666FE009A93D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCF821B666FE009A93D9 /* User.swift */; };
+		626FBCFC21B666FE009A93D9 /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCF921B666FE009A93D9 /* DeviceViewModel.swift */; };
+		626FBCFD21B666FE009A93D9 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCFA21B666FE009A93D9 /* Device.swift */; };
+		626FBD0121B66704009A93D9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCFF21B66703009A93D9 /* TodayViewController.swift */; };
+		626FBD0621B668E3009A93D9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBD0521B668E3009A93D9 /* SecondViewController.swift */; };
+		626FBD0821B6755F009A93D9 /* ComfortMode.xib in Resources */ = {isa = PBXBuildFile; fileRef = 626FBD0721B6755F009A93D9 /* ComfortMode.xib */; };
+		626FBD0A21B678A5009A93D9 /* ComfortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBD0921B678A5009A93D9 /* ComfortMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,12 +66,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		620C202521B4DF490072BBEA /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
-		620C202721B4DF7E0072BBEA /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
-		620C202821B4DF7E0072BBEA /* Controllers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Controllers; sourceTree = "<group>"; };
-		620C202F21B4E14C0072BBEA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = TodayExtension/Models/User.swift; sourceTree = "<group>"; };
-		620C203121B4E1DD0072BBEA /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Device.swift; path = TodayExtension/Models/Device.swift; sourceTree = "<group>"; };
-		620C203321B4E73C0072BBEA /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeviceViewModel.swift; path = TodayExtension/Models/DeviceViewModel.swift; sourceTree = "<group>"; };
 		6250EC3321A693C5004F4F59 /* AmbiWidget-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AmbiWidget-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6250EC3621A693C5004F4F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6250EC3821A693C5004F4F59 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +83,13 @@
 		6250EC6A21A6953E004F4F59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		6250EC7021A6953F004F4F59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		6250EC7221A6953F004F4F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		626FBCF821B666FE009A93D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		626FBCF921B666FE009A93D9 /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewModel.swift; sourceTree = "<group>"; };
+		626FBCFA21B666FE009A93D9 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		626FBCFF21B66703009A93D9 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		626FBD0521B668E3009A93D9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		626FBD0721B6755F009A93D9 /* ComfortMode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComfortMode.xib; sourceTree = "<group>"; };
+		626FBD0921B678A5009A93D9 /* ComfortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,9 +128,6 @@
 		6250EC2A21A693C5004F4F59 = {
 			isa = PBXGroup;
 			children = (
-				620C203321B4E73C0072BBEA /* DeviceViewModel.swift */,
-				620C203121B4E1DD0072BBEA /* Device.swift */,
-				620C202F21B4E14C0072BBEA /* User.swift */,
 				6250EC3521A693C5004F4F59 /* AmbiWidget-IOS */,
 				6250EC4A21A693C8004F4F59 /* AmbiWidget-IOSTests */,
 				6250EC5521A693C8004F4F59 /* AmbiWidget-IOSUITests */,
@@ -191,13 +190,41 @@
 		6250EC6C21A6953F004F4F59 /* TodayExtension */ = {
 			isa = PBXGroup;
 			children = (
-				620C202821B4DF7E0072BBEA /* Controllers */,
-				620C202721B4DF7E0072BBEA /* Views */,
-				620C202521B4DF490072BBEA /* Models */,
+				626FBD0421B66752009A93D9 /* Models */,
+				626FBD0321B6674A009A93D9 /* Views */,
+				626FBD0221B6673D009A93D9 /* Controllers */,
 				6250EC6F21A6953F004F4F59 /* MainInterface.storyboard */,
 				6250EC7221A6953F004F4F59 /* Info.plist */,
 			);
 			path = TodayExtension;
+			sourceTree = "<group>";
+		};
+		626FBD0221B6673D009A93D9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				626FBD0921B678A5009A93D9 /* ComfortMode.swift */,
+				626FBCFF21B66703009A93D9 /* TodayViewController.swift */,
+				626FBD0521B668E3009A93D9 /* SecondViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		626FBD0321B6674A009A93D9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				626FBD0721B6755F009A93D9 /* ComfortMode.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		626FBD0421B66752009A93D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				626FBCFA21B666FE009A93D9 /* Device.swift */,
+				626FBCF921B666FE009A93D9 /* DeviceViewModel.swift */,
+				626FBCF821B666FE009A93D9 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,11 +379,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				620C202A21B4DF7E0072BBEA /* Controllers in Resources */,
-				620C202621B4DF490072BBEA /* Models in Resources */,
 				626B652B21AFCF3D009C0E6C /* Assets.xcassets in Resources */,
+				626FBD0821B6755F009A93D9 /* ComfortMode.xib in Resources */,
 				6250EC7121A6953F004F4F59 /* MainInterface.storyboard in Resources */,
-				620C202921B4DF7E0072BBEA /* Views in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,9 +417,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				620C203421B4E73C0072BBEA /* DeviceViewModel.swift in Sources */,
-				620C203021B4E14C0072BBEA /* User.swift in Sources */,
-				620C203221B4E1DD0072BBEA /* Device.swift in Sources */,
+				626FBCFB21B666FE009A93D9 /* User.swift in Sources */,
+				626FBCFD21B666FE009A93D9 /* Device.swift in Sources */,
+				626FBD0121B66704009A93D9 /* TodayViewController.swift in Sources */,
+				626FBD0A21B678A5009A93D9 /* ComfortMode.swift in Sources */,
+				626FBD0621B668E3009A93D9 /* SecondViewController.swift in Sources */,
+				626FBCFC21B666FE009A93D9 /* DeviceViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

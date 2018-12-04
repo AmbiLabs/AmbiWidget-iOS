@@ -1,16 +1,16 @@
 //
-//  TodayViewController.swift
-//  TodayExtension
+//  SecondViewController.swift
+//  AmbiWidget-IOS
 //
-//  Created by Milan Sosef on 22/11/2018.
+//  Created by Milan Sosef on 4/12/2018.
 //  Copyright © 2018 tonglaicha. All rights reserved.
 //
 
 import UIKit
 import NotificationCenter
 
-class TodayViewController: UIViewController, NCWidgetProviding {
-        
+class SecondViewController: UIViewController, NCWidgetProviding {
+    
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var humidity: UILabel!
@@ -19,7 +19,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
     }
-        
+    
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         
@@ -33,6 +33,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateWidget() {
         print("Updating the widget")
+        
         deviceName.text = "Bedroom"
         temperature.text = "24.2"
         humidity.text = "76.8"
@@ -40,20 +41,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBAction func touchComfortButton(_ sender: UIButton) {
         var comfortTag: String?
-    
+        
         switch sender.tag {
-            case 1:
-                comfortTag = "too_warm"
-            case 2:
-                comfortTag = "bit_warm"
-            case 3:
-                comfortTag = "comfy"
-            case 4:
-                comfortTag = "bit_cold"
-            case 5:
-                comfortTag = "too_cold"
-            default:
-                comfortTag = nil
+        case 1:
+            comfortTag = "too_warm"
+        case 2:
+            comfortTag = "bit_warm"
+        case 3:
+            comfortTag = "comfy"
+        case 4:
+            comfortTag = "bit_cold"
+        case 5:
+            comfortTag = "too_cold"
+        default:
+            comfortTag = nil
         }
         
         print("\(comfortTag!) button clicked")
@@ -82,6 +83,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             switchDirection = "right"
         }
         print("Switch device button clicked with tag \(switchDirection!)")
-    
+        
     }
 }

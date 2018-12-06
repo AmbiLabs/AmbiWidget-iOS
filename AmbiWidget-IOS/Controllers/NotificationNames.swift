@@ -9,5 +9,5 @@
 import Foundation
 
 extension Notification.Name {
-	static let onDidAuthentication = Notification.Name("onDidAuthentication")
+	static let onAuthCodeReceive = Notification.Name("onAuthCodeReceive")
 }

@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import PromiseKit
 
 enum DeviceManagerError: Error {
 	case httpErrorCode(errorMessage: String)
+	case noDeviceListInResult(errorMessage: String)
+	case invalidRefreshToken(errorMessage: String)
 }
 
 class DeviceManager {
@@ -21,70 +24,61 @@ class DeviceManager {
 	//
 	// Gets the device list from the open API
 	//
-	static func getDeviceList(completion: @escaping (Error?, String?) -> Void) {
-		print("[getDeviceList]")
+	static func getDeviceList() -> Promise<[Device]> {
 		
-		guard let accessToken = TokenController.accessToken else {
-			print("Access token not found, requesting new.")
-			
-			// Request new access token before continuing with device list call
-			guard let refreshToken = TokenController.refreshToken?.code else {
-				print("[\(self)] Error: Could not get refresh token for new access token request.")
-				return
-			}
-			
-			TokenManager.getNewAccessToken(with: refreshToken) { (error, nameOfThrower) -> Void in
-				if let error = error {
-					print("[\(nameOfThrower ?? "Unknown")] Error requesting new access token: \(error)")
-					return
-				} else {
-					// New access token is saved, so we can re-execute the same request.
-					getDeviceList(completion: completion)
-				}
-			}
-			
-			return
+		func fetchDeviceListData(accessToken: Token) -> Promise<(data: Data, response: URLResponse)> {
+			// Construct & encode the redirect URL
+			let queryString = "access_token=\(accessToken.code)"
+			let url = URL(string: deviceListUrl + "?" + queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
+			print(">>> [URL] \(url)")
+			return URLSession.shared.dataTask(.promise, with: url)
 		}
 		
-		// Construct & encode the redirect URL
-		let queryString = "&access_token=\(accessToken.code)"
-		let url = URL(string: deviceListUrl + "?" + queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
-		
-		print(">>> [URL] \(url)")
-		
-		// Authenticate in a background task and save access & refresh tokens
-		URLSession.shared.dataTask(with: url) { (data, response, error) in
-			do {
-				if let error = error {
-					throw error
-				}
-				
-				struct DeviceResult: Codable {
-					let device_id: String
-					let location_name: String
-					let room_name: String
-				}
-				
-				struct Result: Codable {
-					let data: [DeviceResult]?
-					let error_code: Int?
-				}
-				
-				// Decode retrieved data with JSONDecoder
-				guard let data = data else { throw TokenManagerError.noResultData(errorMessage: "No result data found.")}
-				let result = try JSONDecoder().decode(Result.self, from: data)
-				print("<<< \(result)")
-				
-				// If there is an error in the result
-				if let errorCode = result.error_code {
-					throw DeviceManagerError.httpErrorCode(errorMessage: "Error code: \(errorCode)")
-				}
-				
-				completion(nil, nil)
-				
-			} catch {
-				completion(error, String(describing: self))
+		func decodeData(_ data: Data) throws -> [Device] {
+			
+			struct DeviceResult: Codable {
+				let device_id: String
+				let location_name: String
+				let room_name: String
 			}
-			}.resume()
+			
+			struct Result: Codable {
+				let data: [DeviceResult]?
+				let error_code: Int?
+			}
+			
+			// Decode retrieved data with JSONDecoder
+			let result = try JSONDecoder().decode(Result.self, from: data)
+			print("<<< \(result)")
+			
+			// If there is an error in the result
+			if let errorCode = result.error_code {
+				if errorCode > 399 && errorCode < 500 {
+					throw DeviceManagerError.invalidRefreshToken(errorMessage: "\(errorCode): RefreshToken not valid?")
+				}
+				throw DeviceManagerError.httpErrorCode(errorMessage: "Error code: \(errorCode)")
+			}
+			
+			guard let rawDeviceList = result.data else {
+				throw DeviceManagerError.noDeviceListInResult(errorMessage: "No device list found in result.")
+			}
+			
+			var deviceList = [Device]()
+			
+			// Create Array of Devices from result data
+			for device in rawDeviceList {
+				deviceList.append(Device(ID: device.device_id, name: device.room_name, locationName: device.room_name))
+			}
+			
+			return deviceList
+		}
+		
+		return firstly {
+			TokenManager.getAccessToken()
+		}.then { accessToken in
+			fetchDeviceListData(accessToken: accessToken)
+		}.compactMap { result in
+			try decodeData(result.data)
+		}
 	}
 }

@@ -1,0 +1,6 @@
+framework module Pods_AmbiWidget_IOSTests {
+  umbrella header "Pods-AmbiWidget-IOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

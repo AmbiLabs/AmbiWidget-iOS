@@ -30,15 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				return false
 		}
 		
-		// Get authCode from query parameter
-		if let authCode = params.first(where: { $0.name == "code" })?.value {
-			// Set authCode for Auth VC
-			TokenController.authoriseApp(with: authCode)
-			return true
-		} else {
-			print("authCode missing")
+		// Get authCode from query params
+		guard let authCode = params.first(where: { $0.name == "code" })?.value else {
+			print("[\(String(describing: self))] Could not retrieve authCode when opening app from browser URL.")
 			return false
 		}
+		
+		NotificationCenter.default.post(name: .onAuthCodeReceive, object: self, userInfo: ["authCode": authCode])
+		
+		return true
 	}
 
     func applicationWillResignActive(_ application: UIApplication) {

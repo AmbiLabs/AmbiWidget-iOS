@@ -17,7 +17,7 @@ class AuthVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(onDidAuthentication(_:)), name: .onDidAuthentication, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(onAuthCodeReceive(_:)), name: .onAuthCodeReceive, object: nil)
     }
 
 	@IBAction func authoriseButton(_ sender: UIButton) {
@@ -35,10 +35,20 @@ class AuthVC: UIViewController {
 		}
 	}
 	
-	@objc func onDidAuthentication(_ notification: Notification) {
-		let data = notification.userInfo as! [String: Bool]
-		if (data["success"]!) {
-			self.dismiss(animated: true, completion: nil)
+	// When a user opens the app from browser (authentication) link.
+	@objc func onAuthCodeReceive(_ notification: Notification) {
+		let data = notification.userInfo as! [String: String]
+		let authCode = data["authCode"]!
+		
+		TokenManager.authenticateApp(with: authCode)
+		.map { tokens in
+			try TokenManager.saveTokenToUserDefaults(token: tokens.accessToken)
+			try TokenManager.saveTokenToUserDefaults(token: tokens.refreshToken)
+		}.done{
+			self.dismiss(animated: true)
+			print("Dismissed the AuthVC")
+		}.catch { error in
+			print("Error: \(error)")
 		}
 	}
 	

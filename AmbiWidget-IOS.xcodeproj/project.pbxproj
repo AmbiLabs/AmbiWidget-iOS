@@ -22,9 +22,12 @@
 		626FBCFC21B666FE009A93D9 /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCF921B666FE009A93D9 /* DeviceViewModel.swift */; };
 		626FBCFD21B666FE009A93D9 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCFA21B666FE009A93D9 /* Device.swift */; };
 		626FBD0121B66704009A93D9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBCFF21B66703009A93D9 /* TodayViewController.swift */; };
-		626FBD0621B668E3009A93D9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBD0521B668E3009A93D9 /* SecondViewController.swift */; };
 		626FBD0821B6755F009A93D9 /* ComfortMode.xib in Resources */ = {isa = PBXBuildFile; fileRef = 626FBD0721B6755F009A93D9 /* ComfortMode.xib */; };
 		626FBD0A21B678A5009A93D9 /* ComfortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FBD0921B678A5009A93D9 /* ComfortMode.swift */; };
+		627616E821B77D2F001B567A /* TemperatureMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627616E621B77D2F001B567A /* TemperatureMode.swift */; };
+		627616E921B77D2F001B567A /* TemperatureMode.xib in Resources */ = {isa = PBXBuildFile; fileRef = 627616E721B77D2F001B567A /* TemperatureMode.xib */; };
+		627616F021B77DD7001B567A /* ModeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627616EE21B77DD7001B567A /* ModeSelection.swift */; };
+		627616F121B77DD7001B567A /* ModeSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 627616EF21B77DD7001B567A /* ModeSelection.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,9 +90,12 @@
 		626FBCF921B666FE009A93D9 /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewModel.swift; sourceTree = "<group>"; };
 		626FBCFA21B666FE009A93D9 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		626FBCFF21B66703009A93D9 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		626FBD0521B668E3009A93D9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		626FBD0721B6755F009A93D9 /* ComfortMode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComfortMode.xib; sourceTree = "<group>"; };
 		626FBD0921B678A5009A93D9 /* ComfortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortMode.swift; sourceTree = "<group>"; };
+		627616E621B77D2F001B567A /* TemperatureMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureMode.swift; sourceTree = "<group>"; };
+		627616E721B77D2F001B567A /* TemperatureMode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TemperatureMode.xib; sourceTree = "<group>"; };
+		627616EE21B77DD7001B567A /* ModeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelection.swift; sourceTree = "<group>"; };
+		627616EF21B77DD7001B567A /* ModeSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeSelection.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +199,6 @@
 				626FBD0421B66752009A93D9 /* Models */,
 				626FBD0321B6674A009A93D9 /* Views */,
 				626FBD0221B6673D009A93D9 /* Controllers */,
-				6250EC6F21A6953F004F4F59 /* MainInterface.storyboard */,
 				6250EC7221A6953F004F4F59 /* Info.plist */,
 			);
 			path = TodayExtension;
@@ -204,7 +209,8 @@
 			children = (
 				626FBD0921B678A5009A93D9 /* ComfortMode.swift */,
 				626FBCFF21B66703009A93D9 /* TodayViewController.swift */,
-				626FBD0521B668E3009A93D9 /* SecondViewController.swift */,
+				627616E621B77D2F001B567A /* TemperatureMode.swift */,
+				627616EE21B77DD7001B567A /* ModeSelection.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,7 +218,10 @@
 		626FBD0321B6674A009A93D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				627616E721B77D2F001B567A /* TemperatureMode.xib */,
 				626FBD0721B6755F009A93D9 /* ComfortMode.xib */,
+				627616EF21B77DD7001B567A /* ModeSelection.xib */,
+				6250EC6F21A6953F004F4F59 /* MainInterface.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -380,8 +389,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				626B652B21AFCF3D009C0E6C /* Assets.xcassets in Resources */,
+				627616F121B77DD7001B567A /* ModeSelection.xib in Resources */,
 				626FBD0821B6755F009A93D9 /* ComfortMode.xib in Resources */,
 				6250EC7121A6953F004F4F59 /* MainInterface.storyboard in Resources */,
+				627616E921B77D2F001B567A /* TemperatureMode.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,10 +429,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				626FBCFB21B666FE009A93D9 /* User.swift in Sources */,
+				627616F021B77DD7001B567A /* ModeSelection.swift in Sources */,
 				626FBCFD21B666FE009A93D9 /* Device.swift in Sources */,
+				627616E821B77D2F001B567A /* TemperatureMode.swift in Sources */,
 				626FBD0121B66704009A93D9 /* TodayViewController.swift in Sources */,
 				626FBD0A21B678A5009A93D9 /* ComfortMode.swift in Sources */,
-				626FBD0621B668E3009A93D9 /* SecondViewController.swift in Sources */,
 				626FBCFC21B666FE009A93D9 /* DeviceViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

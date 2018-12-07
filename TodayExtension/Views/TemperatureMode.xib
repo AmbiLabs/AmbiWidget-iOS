@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TemperatureMode" customModule="TodayExtension" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="i5M-Pr-FkT" id="Hs9-6e-kdY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="BfJ-dg-R5C" userLabel="Button row">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" placeholderIntrinsicWidth="2" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHX-Sm-Fub" userLabel="Button decrease temperature">
+                            <rect key="frame" x="0.0" y="0.0" width="106.5" height="55"/>
+                            <color key="backgroundColor" red="0.94901960780000005" green="0.45882352939999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                            <state key="normal" image="icn_add_grey">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="touchDecreaseTemperatureButton:" destination="-1" eventType="touchUpInside" id="Mn0-8o-Y6k"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="1" placeholderIntrinsicHeight="infinite" text="21.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44F-nf-aKu" userLabel="Temperature label">
+                            <rect key="frame" x="106.5" y="0.0" width="53.5" height="55"/>
+                            <color key="backgroundColor" red="0.94901960780000005" green="0.45882352939999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" placeholderIntrinsicWidth="2" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqT-7Y-zDX" userLabel="Button add temperature">
+                            <rect key="frame" x="160" y="0.0" width="106.5" height="55"/>
+                            <color key="backgroundColor" red="0.94901960780000005" green="0.45882352939999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                            <state key="normal" image="icn_add_grey">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="touchAddTemperatureButton:" destination="-1" eventType="touchUpInside" id="0dD-Tu-cyz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="1" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-4i-lAx" userLabel="Button mode">
+                            <rect key="frame" x="266.5" y="0.0" width="53.5" height="55"/>
+                            <color key="backgroundColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="MODE">
+                                <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="touchModeButton:" destination="-1" eventType="touchUpInside" id="2mE-37-3ZJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="QIv-cE-nDd"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BfJ-dg-R5C" secondAttribute="bottom" id="CIt-uj-olb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BfJ-dg-R5C" secondAttribute="trailing" id="IEx-mR-d2X"/>
+                <constraint firstItem="BfJ-dg-R5C" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="VA0-GP-Xbr"/>
+                <constraint firstItem="BfJ-dg-R5C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pDS-WX-DnC"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icn_add_grey" width="44" height="44"/>
+    </resources>
+</document>

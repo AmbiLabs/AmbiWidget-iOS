@@ -12,46 +12,50 @@ class ComfortMode: UIViewController {
 
     @IBOutlet var contentView: UIView!
     
+    private enum ComfortFeedback {
+        case too_warm
+        case bit_warm
+        case comfy
+        case bit_cold
+        case too_cold
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(contentView.frame.size)
         // Do any additional setup after loading the view.
+        
+//        var frm: CGRect = view.frame
+//        frm.size.width = 320
+//        contentView.frame = frm
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBAction func touchComfortButton(_ sender: UIButton) {
-        var comfortTag: String?
+        let feedback: ComfortFeedback?
         
         switch sender.tag {
         case 1:
-            comfortTag = "too_warm"
+            feedback = ComfortFeedback.too_warm
         case 2:
-            comfortTag = "bit_warm"
+            feedback = ComfortFeedback.bit_warm
         case 3:
-            comfortTag = "comfy"
+            feedback = ComfortFeedback.comfy
         case 4:
-            comfortTag = "bit_cold"
+            feedback = ComfortFeedback.bit_cold
         case 5:
-            comfortTag = "too_cold"
+            feedback = ComfortFeedback.too_cold
         default:
-            comfortTag = nil
+            feedback = nil
         }
         
-        print("\(comfortTag!) button clicked")
+        print("\(feedback!) button clicked")
     }
     
     @IBAction func touchModeButton(_ sender: UIButton) {
         print("Mode button clicked")
+        remove()
+        let name = Notification.Name(rawValue: modeSelectionNotificationKey)
+        NotificationCenter.default.post(name: name, object: nil)
     }
 
 }

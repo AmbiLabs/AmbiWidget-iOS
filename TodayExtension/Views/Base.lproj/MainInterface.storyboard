@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="TodayExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mmI-90-FBI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="27.5" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBp-Ex-Z0t" userLabel="Button settings">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Fee-6s-LHm"/>
+                                    <constraint firstAttribute="height" constant="30" id="ZYA-Ga-DQm"/>
+                                </constraints>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="icn_settings_ios_grey"/>
+                                <connections>
+                                    <action selector="touchSettingsButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="XOV-q3-3oq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iep-8B-hay" userLabel="Button refresh">
+                                <rect key="frame" x="290" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="5YW-fQ-0Gu"/>
+                                    <constraint firstAttribute="height" constant="30" id="g5Z-Cb-EY0"/>
+                                </constraints>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="icn_cloud_checking_grey"/>
+                                <connections>
+                                    <action selector="touchRefreshButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="obs-eP-Mu2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="6" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yp-PJ-cKU" userLabel="Button left">
+                                <rect key="frame" x="50" y="0.0" width="24" height="24"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="icn_arrow_previous">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchSwitchDeviceButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="Sx9-mI-wO3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH" userLabel="Label device name">
+                                <rect key="frame" x="110.5" y="0.0" width="99" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="7" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epJ-44-CAP" userLabel="Button right">
+                                <rect key="frame" x="246" y="0.0" width="24" height="24"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="icn_arrow_next_grey"/>
+                                <connections>
+                                    <action selector="touchSwitchDeviceButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="oxh-Kw-Mkm"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-D2-fB2" userLabel="Stats row">
+                                <rect key="frame" x="43" y="27.5" width="234" height="27.5"/>
+                                <subviews>
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_temperature_inactive" translatesAutoresizingMaskIntoConstraints="NO" id="fB5-3U-xJx" userLabel="Icon temperature">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="27.5"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPa-ju-krI" userLabel="Label temperature">
+                                        <rect key="frame" x="48" y="3.5" width="42.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_humidity_inactive" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIL-rF-Pjz" userLabel="Icon humidity">
+                                        <rect key="frame" x="95.5" y="0.0" width="43" height="27.5"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="81.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-gV-Tyc" userLabel="Label humidity">
+                                        <rect key="frame" x="143.5" y="3.5" width="42.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_mode_comfort" translatesAutoresizingMaskIntoConstraints="NO" id="tLE-7j-zXa" userLabel="Icon mode">
+                                        <rect key="frame" x="191" y="4" width="43" height="20"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="234" id="fEA-R1-AQA"/>
+                                </constraints>
+                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZB-am-XN0">
+                                <rect key="frame" x="0.0" y="55" width="320" height="55"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kZB-am-XN0" firstAttribute="height" secondItem="mmI-90-FBI" secondAttribute="height" multiplier="0.5" id="1gX-SD-ZJ0"/>
+                            <constraint firstItem="kZB-am-XN0" firstAttribute="top" secondItem="9Yf-D2-fB2" secondAttribute="bottom" id="3g7-Sa-dO0"/>
+                            <constraint firstItem="kZB-am-XN0" firstAttribute="leading" secondItem="QRD-7a-zf8" secondAttribute="leading" id="3zX-Bv-bK5"/>
+                            <constraint firstItem="Iep-8B-hay" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="4MX-ui-4Km"/>
+                            <constraint firstItem="7yp-PJ-cKU" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="4pI-re-1eo"/>
+                            <constraint firstItem="epJ-44-CAP" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="5h1-KL-7wK"/>
+                            <constraint firstItem="7yp-PJ-cKU" firstAttribute="leading" secondItem="KBp-Ex-Z0t" secondAttribute="trailing" constant="20" id="BrY-Kr-hLN"/>
+                            <constraint firstItem="KBp-Ex-Z0t" firstAttribute="leading" secondItem="QRD-7a-zf8" secondAttribute="leading" id="CzA-II-grG"/>
+                            <constraint firstItem="QRD-7a-zf8" firstAttribute="trailing" secondItem="Iep-8B-hay" secondAttribute="trailing" id="IBd-f1-Odg"/>
+                            <constraint firstItem="KBp-Ex-Z0t" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="J6h-tZ-lzi"/>
+                            <constraint firstItem="QRD-7a-zf8" firstAttribute="trailing" secondItem="kZB-am-XN0" secondAttribute="trailing" id="JGn-Aq-dHg"/>
+                            <constraint firstItem="9Yf-D2-fB2" firstAttribute="centerX" secondItem="mmI-90-FBI" secondAttribute="centerX" id="c1O-Yd-Z1g"/>
+                            <constraint firstAttribute="bottom" secondItem="kZB-am-XN0" secondAttribute="bottom" id="c5e-6r-27A"/>
+                            <constraint firstItem="ofb-Pf-tuH" firstAttribute="centerX" secondItem="mmI-90-FBI" secondAttribute="centerX" id="c9s-Rr-rcT"/>
+                            <constraint firstItem="Iep-8B-hay" firstAttribute="leading" secondItem="epJ-44-CAP" secondAttribute="trailing" constant="20" id="dlf-XA-pFh"/>
+                            <constraint firstItem="9Yf-D2-fB2" firstAttribute="height" secondItem="mmI-90-FBI" secondAttribute="height" multiplier="0.25" id="i3n-UN-r9h"/>
+                            <constraint firstItem="ofb-Pf-tuH" firstAttribute="top" secondItem="QRD-7a-zf8" secondAttribute="top" id="ljg-Kj-7rd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QRD-7a-zf8"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="110"/>
+                    <connections>
+                        <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
+                        <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
+                        <outlet property="modeContentView" destination="kZB-am-XN0" id="YAg-0O-Jj6"/>
+                        <outlet property="temperatureLabel" destination="sPa-ju-krI" id="8zg-aV-a3P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-262.39999999999998" y="19.790104947526238"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="control_humidity_inactive" width="40" height="40"/>
+        <image name="control_temperature_inactive" width="40" height="40"/>
+        <image name="icn_arrow_next_grey" width="24" height="24"/>
+        <image name="icn_arrow_previous" width="24" height="24"/>
+        <image name="icn_cloud_checking_grey" width="13" height="13"/>
+        <image name="icn_mode_comfort" width="20" height="20"/>
+        <image name="icn_settings_ios_grey" width="44" height="44"/>
+    </resources>
+</document>

@@ -9,15 +9,35 @@
 import UIKit
 import NotificationCenter
 
+// Should be in a constants file
+let modeSelectionNotificationKey = "tonglaicha.brandonmilan.modeselection"
+let comfortNotificationKey = "tonglaicha.brandonmilan.comfort"
+let temperatureNotificationKey = "tonglaicha.brandonmilan.temperature"
+
 class TodayViewController: UIViewController, NCWidgetProviding {
-        
-    @IBOutlet weak var deviceName: UILabel!
-    @IBOutlet weak var temperature: UILabel!
-    @IBOutlet weak var humidity: UILabel!
+    @IBOutlet weak var modeContentView: UIView!
+    @IBOutlet weak var deviceNameLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    
+    // Notification names
+    let modeSelection = Notification.Name(rawValue: modeSelectionNotificationKey)
+    let comfortMode = Notification.Name(rawValue: comfortNotificationKey)
+    let temperatureMode = Notification.Name(rawValue: temperatureNotificationKey)
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
+        createObservers()
+        
+        let comfortModeViewController = ModeSelection()
+        add(comfortModeViewController, viewContainer: modeContentView)
+        
+        print("container \(modeContentView.frame.size)" )
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -31,36 +51,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.newData)
     }
     
-    func updateWidget() {
+    public func updateWidget() {
         print("Updating the widget")
-        deviceName.text = "Bedroom"
-        temperature.text = "24.2"
-        humidity.text = "76.8"
+        deviceNameLabel.text = "Bedroom"
+        temperatureLabel.text = "24.2"
+        humidityLabel.text = "76.8"
     }
     
-    @IBAction func touchComfortButton(_ sender: UIButton) {
-        var comfortTag: String?
+    func createObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: modeSelection, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: comfortMode, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: temperatureMode, object: nil)
+    }
     
-        switch sender.tag {
-            case 1:
-                comfortTag = "too_warm"
-            case 2:
-                comfortTag = "bit_warm"
-            case 3:
-                comfortTag = "comfy"
-            case 4:
-                comfortTag = "bit_cold"
-            case 5:
-                comfortTag = "too_cold"
-            default:
-                comfortTag = nil
+    @objc func switchMode(notification: NSNotification) {
+        switch notification.name {
+        case modeSelection:
+            let modeSelectionVC = ModeSelection()
+            add(modeSelectionVC, viewContainer: modeContentView)
+        case comfortMode:
+            let comfortModeVC = ComfortMode()
+            add(comfortModeVC, viewContainer: modeContentView)
+        case temperatureMode:
+            let temperatureModeVC = TemperatureMode()
+            add(temperatureModeVC, viewContainer: modeContentView)
+        default:
+            print("default")
         }
         
-        print("\(comfortTag!) button clicked")
-    }
-    
-    @IBAction func touchModeButton(_ sender: UIButton) {
-        print("Mode button clicked")
     }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {
@@ -83,5 +101,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         print("Switch device button clicked with tag \(switchDirection!)")
     
+    }
+}
+
+extension UIViewController {
+    func add(_ child: UIViewController, viewContainer: UIView) {
+        addChild(child)
+        viewContainer.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    func remove() {
+        guard parent != nil else {
+            return
+        }
+        willMove(toParent: nil)
+        removeFromParent()
+        view.removeFromSuperview()
     }
 }

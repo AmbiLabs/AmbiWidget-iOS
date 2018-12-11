@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class DeviceViewModel {
-    private let device: Device
+    // Change this to let later
+    public var device: Device
     
     init(device: Device) {
         self.device = device
@@ -27,7 +28,7 @@ class DeviceViewModel {
     }
     
     public var humidityLabel: String {
-        return "\(device.humidity)%"
+        return "\(device.humidity) %"
     }
     
     public var modeIcon: UIImage {
@@ -40,6 +41,19 @@ class DeviceViewModel {
             return UIImage(named: "icn_mode_manual")!
         case .off:
             return UIImage(named: "icn_mode_off_grey")!
+        }
+    }
+    
+    public var modeSegmentView: UIViewController {
+        switch device.mode {
+        case .comfort:
+            return ComfortMode()
+        case .temperature:
+            return TemperatureMode()
+        case .manual:
+            return ModeSelection()
+        case .off:
+            return ModeSelection()
         }
     }
 }

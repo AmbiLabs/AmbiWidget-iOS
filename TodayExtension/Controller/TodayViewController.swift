@@ -13,31 +13,40 @@ import NotificationCenter
 let modeSelectionNotificationKey = "tonglaicha.brandonmilan.modeselection"
 let comfortNotificationKey = "tonglaicha.brandonmilan.comfort"
 let temperatureNotificationKey = "tonglaicha.brandonmilan.temperature"
+let offNotificationKey = "tonglaicha.brandonmilan.off"
+
+// TODO:
+// 1) Fix the layout incorrect size bug
+// 2) Off mode icon is not displayed when setting device to off mode
+// 3) Switch the current device displayed
 
 class TodayViewController: UIViewController, NCWidgetProviding {
+    var deviceViewModels = [DeviceViewModel]()
+    var currentDeviceViewModel: DeviceViewModel?
+    
     @IBOutlet weak var modeContentView: UIView!
     @IBOutlet weak var deviceNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var modeIcon: UIImageView!
     
     // Notification names
     let modeSelection = Notification.Name(rawValue: modeSelectionNotificationKey)
     let comfortMode = Notification.Name(rawValue: comfortNotificationKey)
     let temperatureMode = Notification.Name(rawValue: temperatureNotificationKey)
+    let offMode = Notification.Name(rawValue: offNotificationKey)
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // Do any additional setup after loading the view from its nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
+        fetchData()
         createObservers()
         
-        let comfortModeViewController = ModeSelection()
-        add(comfortModeViewController, viewContainer: modeContentView)
-        
-        print("container \(modeContentView.frame.size)" )
+        print("viewDidLoad: container size = \(modeContentView.frame.size)")
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -47,15 +56,35 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         self.updateWidget()
+        print("widgetPerformUpdate called")
         
         completionHandler(NCUpdateResult.newData)
     }
     
     public func updateWidget() {
         print("Updating the widget")
-        deviceNameLabel.text = "Bedroom"
-        temperatureLabel.text = "24.2"
-        humidityLabel.text = "76.8"
+        
+        self.currentDeviceViewModel = deviceViewModels[0]
+        deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
+        temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
+        humidityLabel.text = currentDeviceViewModel!.humidityLabel
+        modeIcon.image = currentDeviceViewModel!.modeIcon
+        
+        // Set the initial childViewController for the modeContentView.
+        add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
+    }
+    
+    func fetchData() {
+        // Get the device data from the API
+        
+        var devices = [Device]()
+        devices.append(Device(name: "Bedroom Milan", location: "Home", temperature: 18.5, humidity: 77.0, mode: Device.Mode.comfort))
+        devices.append(Device(name: "Living room", location: "Home", temperature: 19.2, humidity: 69.4, mode: Device.Mode.temperature))
+        
+        self.deviceViewModels = devices.map({return
+            DeviceViewModel(device: $0)})
+        print("fetchData: \(self.deviceViewModels)")
+        
     }
     
     func createObservers() {
@@ -65,20 +94,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @objc func switchMode(notification: NSNotification) {
+        // TODO: call mode switch to API, get updated device object, update widget
         switch notification.name {
+        case comfortMode:
+            currentDeviceViewModel?.device.mode = Device.Mode.comfort
+            self.updateWidget()
+        case temperatureMode:
+            currentDeviceViewModel?.device.mode = Device.Mode.temperature
+            self.updateWidget()
         case modeSelection:
             let modeSelectionVC = ModeSelection()
             add(modeSelectionVC, viewContainer: modeContentView)
-        case comfortMode:
-            let comfortModeVC = ComfortMode()
-            add(comfortModeVC, viewContainer: modeContentView)
-        case temperatureMode:
-            let temperatureModeVC = TemperatureMode()
-            add(temperatureModeVC, viewContainer: modeContentView)
+        case offMode:
+            currentDeviceViewModel?.device.mode = Device.Mode.off
+            self.updateWidget()
         default:
             print("default")
         }
-        
     }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {

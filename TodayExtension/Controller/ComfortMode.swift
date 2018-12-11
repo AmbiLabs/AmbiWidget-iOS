@@ -22,7 +22,7 @@ class ComfortMode: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(contentView.frame.size)
+//        print(contentView.frame.size)
         // Do any additional setup after loading the view.
         
 //        var frm: CGRect = view.frame

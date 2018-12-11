@@ -132,6 +132,7 @@
                         <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
                         <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
                         <outlet property="modeContentView" destination="kZB-am-XN0" id="YAg-0O-Jj6"/>
+                        <outlet property="modeIcon" destination="tLE-7j-zXa" id="11B-Sm-38D"/>
                         <outlet property="temperatureLabel" destination="sPa-ju-krI" id="8zg-aV-a3P"/>
                     </connections>
                 </viewController>

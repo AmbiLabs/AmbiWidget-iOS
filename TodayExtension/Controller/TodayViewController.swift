@@ -9,18 +9,12 @@
 import UIKit
 import NotificationCenter
 
-// Should be in a constants file
-let modeSelectionNotificationKey = "tonglaicha.brandonmilan.modeselection"
-let comfortNotificationKey = "tonglaicha.brandonmilan.comfort"
-let temperatureNotificationKey = "tonglaicha.brandonmilan.temperature"
-let offNotificationKey = "tonglaicha.brandonmilan.off"
-
 // TODO:
 // 1) Fix the layout incorrect size bug
 // 2) Off mode icon is not displayed when setting device to off mode
-// 3) Switch the current device displayed
+// DONE 3) Switch the current device displayed
 // 4) Open settings page on button click
-// 5) Make a file for saving constants
+// DONE 5) Make a file for saving constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels = [DeviceViewModel]()
@@ -39,10 +33,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var modeIcon: UIImageView!
     
     // Notification names
-    let modeSelection = Notification.Name(rawValue: modeSelectionNotificationKey)
-    let comfortMode = Notification.Name(rawValue: comfortNotificationKey)
-    let temperatureMode = Notification.Name(rawValue: temperatureNotificationKey)
-    let offMode = Notification.Name(rawValue: offNotificationKey)
+    let modeSelection = Notification.Name(rawValue: Constants.modeSelectionNotificationKey)
+    let comfortMode = Notification.Name(rawValue: Constants.comfortNotificationKey)
+    let temperatureMode = Notification.Name(rawValue: Constants.temperatureNotificationKey)
+    let offMode = Notification.Name(rawValue: Constants.offNotificationKey)
     
     deinit {
         NotificationCenter.default.removeObserver(self)

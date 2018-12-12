@@ -25,7 +25,7 @@ class TemperatureMode: UIViewController {
     @IBAction func touchModeButton(_ sender: UIButton) {
         print("Mode button clicked")
         remove()
-        let name = Notification.Name(rawValue: modeSelectionNotificationKey)
+        let name = Notification.Name(rawValue: Constants.modeSelectionNotificationKey)
         NotificationCenter.default.post(name: name, object: nil)
     }
 

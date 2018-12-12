@@ -31,15 +31,15 @@ class ModeSelection: UIViewController {
         switch sender.tag {
         case 1:
             modeTag = "comfort"
-            notificationName = Notification.Name(rawValue: comfortNotificationKey)
+            notificationName = Notification.Name(rawValue: Constants.comfortNotificationKey)
             remove()
         case 2:
             modeTag = "temperature"
-            notificationName = Notification.Name(rawValue: temperatureNotificationKey)
+            notificationName = Notification.Name(rawValue: Constants.temperatureNotificationKey)
             remove()
         case 3:
             modeTag = "off"
-            notificationName = Notification.Name(rawValue: modeSelectionNotificationKey)
+            notificationName = Notification.Name(rawValue: Constants.modeSelectionNotificationKey)
         default:
             modeTag = nil
         }
@@ -49,15 +49,5 @@ class ModeSelection: UIViewController {
         
         print("\(modeTag!) button clicked")
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

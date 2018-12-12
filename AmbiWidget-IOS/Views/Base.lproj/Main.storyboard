@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="27"/>
+            <point key="canvasLocation" x="1832.8" y="26.53673163418291"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="bey-su-DTe">
@@ -67,7 +67,53 @@
                     <view key="view" contentMode="scaleToFill" id="aqP-eW-zdn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Widget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb">
+                                <rect key="frame" x="16" y="36" width="58" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With this app you can add an Ambi Widget to your Today View." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH">
+                                <rect key="frame" x="16" y="64.5" width="349" height="41"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a Widget:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ">
+                                <rect key="frame" x="16" y="133" width="171.5" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham">
+                                <rect key="frame" x="16" y="161.5" width="268" height="122"/>
+                                <string key="text">1. Press the Home button.
+2. Navigate to the most left screen.
+3. Click on the "Edit" button.
+4. Look for "Ambi Widget".
+5. Press the green (+) button.
+5. Done! </string>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="16" id="0RW-Dn-WhJ"/>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="top" secondItem="oew-BC-YVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Bb5-Eo-8lU"/>
+                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="top" secondItem="w5k-vu-0vb" secondAttribute="bottom" constant="8" symbolic="YES" id="Kdq-py-lti"/>
+                            <constraint firstItem="oew-BC-YVJ" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="SA5-De-FaP"/>
+                            <constraint firstItem="w5k-vu-0vb" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="XR9-oN-aGz"/>
+                            <constraint firstItem="oew-BC-YVJ" firstAttribute="top" secondItem="WPt-Ej-ETH" secondAttribute="baseline" constant="32" id="XzR-wl-5lL"/>
+                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="16" id="dNK-L2-0y1"/>
+                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="hvY-VU-dSR"/>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="jUx-XW-885">
+                                <string key="userLabel">1. Press the Home button. 2. Navigate to the most left screen, this the Today View. 3. Click on the "Edit" button. 4. Look for "Ambi Widget" and press the green + button. 5. Done! .leading = Safe Area.leading + 16</string>
+                            </constraint>
+                            <constraint firstItem="w5k-vu-0vb" firstAttribute="top" secondItem="mOd-dR-R2E" secondAttribute="top" constant="16" id="p6e-Hl-dGJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mOd-dR-R2E"/>
                     </view>
                 </viewController>

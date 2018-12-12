@@ -20,23 +20,40 @@ class MainVC: UIViewController {
 		
 		// Get the refresh token
 		firstly {
-			TokenManager.getRefreshToken()
+			TokenManager.loadTokenFromUserDefaults(with: .RefreshToken)
 		}.done { token in
 			// Do nothing...
+			
+			// Debugging
+			DeviceManager.getDeviceList().done { arrayOfDevices in
+				print("Device List: ")
+				for device in arrayOfDevices {
+					if device.name.contains("Desk") {
+						print(device)
+						DeviceManager.getDeviceStatus(for: device)
+							.done { deviceStatus in
+								var newDevice = device
+								newDevice.status = deviceStatus
+								print("Name: \(newDevice.name)")
+								print("Mode: \(newDevice.simpleMode!)")
+								print("Temperature: \(newDevice.temperature!)")
+								print("Humidity: \(newDevice.humidity!)")
+								print("Comfort Level: \(newDevice.predictedComfort!.rawValue)")
+								
+							}.catch { error in
+								print("Error: \(error)")
+						}
+						return
+					}
+				}
+			}.catch { error in
+				print ("\(String(describing: self)) Error: \(error)")
+			}
+			
 		}.catch { error in
 			// Show auth view page
 			let vc = self.storyboard?.instantiateViewController(withIdentifier: "auth") as! AuthVC
 			self.present(vc, animated: true, completion: nil)
-		}
-		
-		// Debugging
-		DeviceManager.getDeviceList().done { arrayOfDevices in
-			print("Device List: ")
-			for device in arrayOfDevices {
-				print(device)
-			}
-		}.catch { error in
-			print ("\(String(describing: self)) Error: \(error)")
 		}
 	}
 }

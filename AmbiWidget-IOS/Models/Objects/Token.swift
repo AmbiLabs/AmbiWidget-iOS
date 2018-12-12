@@ -9,15 +9,15 @@
 import Foundation
 
 enum TokenType {
-	case refreshToken
-	case accessToken
+	case RefreshToken
+	case AccessToken
 	
 	var defaultsKey: String {
 		get {
 			switch self {
-			case .refreshToken:
+			case .RefreshToken:
 				return UserDefaultsKeys.refreshToken
-			case .accessToken:
+			case .AccessToken:
 				return UserDefaultsKeys.accessToken
 			}
 		}
@@ -39,9 +39,9 @@ extension TokenType: Codable {
 		let type = try container.decode(String.self, forKey: .rawValue)
 		switch type {
 		case "refreshToken":
-			self = .refreshToken
+			self = .RefreshToken
 		case "accessToken":
-			self = .accessToken
+			self = .AccessToken
 		default:
 			throw CodingError.unknownValue
 		}
@@ -50,14 +50,13 @@ extension TokenType: Codable {
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: Key.self)
 		switch self {
-		case .refreshToken:
+		case .RefreshToken:
 			try container.encode("refreshToken", forKey: .rawValue)
-		case .accessToken:
+		case .AccessToken:
 			try container.encode("accessToken", forKey: .rawValue)
 		}
 	}
 }
-
 
 struct Token: Codable {
 	let code: String

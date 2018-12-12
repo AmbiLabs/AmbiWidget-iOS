@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
 	static let onAuthCodeReceive = Notification.Name("onAuthCodeReceive")
+	static let onRefreshTokenDelete = Notification.Name("onRefreshTokenDelete")
 }

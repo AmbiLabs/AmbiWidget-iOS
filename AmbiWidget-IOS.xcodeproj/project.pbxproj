@@ -22,7 +22,6 @@
 		6250EC7521A6953F004F4F59 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6250EC6821A6953E004F4F59 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7815DFDAFF2CE9D460FBA19D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */; };
 		95F7F9F80293F957796A681E /* Pods_AmbiWidget_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */; };
-		CA48AF3621B6297900F6295D /* URLSessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48AF3521B6297900F6295D /* URLSessionHelper.swift */; };
 		CA4C20B121B6758200A23C2A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4C20B021B6758200A23C2A /* Device.swift */; };
 		CA4EEF1D21ACEA7B00B33294 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */; };
 		CA4EEF2121AD1F4500B33294 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF2021AD1F4500B33294 /* Token.swift */; };
@@ -30,6 +29,9 @@
 		CA50E54A21B5358B00C852B5 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50E54921B5358B00C852B5 /* DeviceManager.swift */; };
 		CA50E54C21B536DB00C852B5 /* APISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50E54B21B536DB00C852B5 /* APISettings.swift */; };
 		CA5F9C5C21B1245D0002C649 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5F9C5B21B1245D0002C649 /* MainVC.swift */; };
+		CA9A978521BA601D0015EB39 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A978421BA601D0015EB39 /* DeviceStatus.swift */; };
+		CA9A978721C0E8DF0015EB39 /* ComfortLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A978621C0E8DF0015EB39 /* ComfortLevel.swift */; };
+		CAA5D82021B8CA0C00D5145B /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */; };
 		CAD81EBF21AD3CF20078FD9F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +112,6 @@
 		98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbiWidget_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4F2326ED7F65267E65F364 /* Pods-AmbiWidget-IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOS/Pods-AmbiWidget-IOS.release.xcconfig"; sourceTree = "<group>"; };
 		B457B6946712C40C216B6C45 /* Pods_AmbiWidget_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbiWidget_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA48AF3521B6297900F6295D /* URLSessionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHelper.swift; sourceTree = "<group>"; };
 		CA4C20B021B6758200A23C2A /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		CA4EEF2021AD1F4500B33294 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -118,6 +119,9 @@
 		CA50E54921B5358B00C852B5 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		CA50E54B21B536DB00C852B5 /* APISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISettings.swift; sourceTree = "<group>"; };
 		CA5F9C5B21B1245D0002C649 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		CA9A978421BA601D0015EB39 /* DeviceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
+		CA9A978621C0E8DF0015EB39 /* ComfortLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortLevel.swift; sourceTree = "<group>"; };
+		CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21704173721C9BC24A0A410 /* Pods-AmbiWidget-IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOSUITests/Pods-AmbiWidget-IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 		6250EC3521A693C5004F4F59 /* AmbiWidget-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				CAA5D82421B8CB7500D5145B /* Settings */,
 				CA4EEF1921ACE9D800B33294 /* Models */,
 				CA4EEF1B21ACE9FB00B33294 /* Views */,
 				CA4EEF1A21ACE9E500B33294 /* Controllers */,
@@ -241,13 +246,10 @@
 		CA4EEF1921ACE9D800B33294 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CA50E54B21B536DB00C852B5 /* APISettings.swift */,
-				CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */,
+				CAA5D82221B8CAD400D5145B /* Objects */,
+				CAA5D82121B8CABB00D5145B /* Helpers */,
 				CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */,
 				CA50E54921B5358B00C852B5 /* DeviceManager.swift */,
-				CA48AF3521B6297900F6295D /* URLSessionHelper.swift */,
-				CA4EEF2021AD1F4500B33294 /* Token.swift */,
-				CA4C20B021B6758200A23C2A /* Device.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,7 +257,6 @@
 		CA4EEF1A21ACE9E500B33294 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CA50E54721B4CD8200C852B5 /* NotificationNames.swift */,
 				CA5F9C5B21B1245D0002C649 /* MainVC.swift */,
 				6250EC3821A693C5004F4F59 /* AuthVC.swift */,
 			);
@@ -268,6 +269,35 @@
 				6250EC3A21A693C5004F4F59 /* Main.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CAA5D82121B8CABB00D5145B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CAA5D82221B8CAD400D5145B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				CA4EEF2021AD1F4500B33294 /* Token.swift */,
+				CA4C20B021B6758200A23C2A /* Device.swift */,
+				CA9A978421BA601D0015EB39 /* DeviceStatus.swift */,
+				CA9A978621C0E8DF0015EB39 /* ComfortLevel.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		CAA5D82421B8CB7500D5145B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CA50E54B21B536DB00C852B5 /* APISettings.swift */,
+				CA50E54721B4CD8200C852B5 /* NotificationNames.swift */,
+				CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		F076AA15E7B88EF407BDE4C1 /* Pods */ = {
@@ -567,15 +597,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6250EC3921A693C5004F4F59 /* AuthVC.swift in Sources */,
+				CA9A978521BA601D0015EB39 /* DeviceStatus.swift in Sources */,
 				CA50E54C21B536DB00C852B5 /* APISettings.swift in Sources */,
 				CA4EEF2121AD1F4500B33294 /* Token.swift in Sources */,
 				CA4C20B121B6758200A23C2A /* Device.swift in Sources */,
 				CA4EEF1D21ACEA7B00B33294 /* TokenManager.swift in Sources */,
+				CA9A978721C0E8DF0015EB39 /* ComfortLevel.swift in Sources */,
 				CAD81EBF21AD3CF20078FD9F /* UserDefaultsKeys.swift in Sources */,
 				CA50E54821B4CD8200C852B5 /* NotificationNames.swift in Sources */,
-				CA48AF3621B6297900F6295D /* URLSessionHelper.swift in Sources */,
 				6250EC3721A693C5004F4F59 /* AppDelegate.swift in Sources */,
 				CA50E54A21B5358B00C852B5 /* DeviceManager.swift in Sources */,
+				CAA5D82021B8CA0C00D5145B /* ErrorHelper.swift in Sources */,
 				CA5F9C5C21B1245D0002C649 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

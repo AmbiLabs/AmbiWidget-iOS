@@ -25,19 +25,30 @@ class TokenManager {
 	
 	private static let tokenUrl = "https://api.ambiclimate.com/oauth2/token"
 	
+	//
+	// Authenticates the app with a user's Authorisation Code which he/she obtained from the Ambi Open API.
+	// Return a promise for a Refresh Token and Access Token
+	//
 	static func authenticateApp(with authCode: String) -> Promise<(refreshToken: Token, accessToken: Token)> {
 		
 		func authenticateAndFetchTokens(_ authCode:String) -> Promise<(data: Data, response: URLResponse)> {
 			
-			// Construct & encode the redirect URL
-			let queryString = "client_id=\(APISettings.clientID)&redirect_uri=\(APISettings.callbackURL)&code=\(authCode)&client_secret=\(APISettings.clientSecret)&grant_type=authorization_code"
-			let url = URL(string: tokenUrl + "?" + queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
-			
+			// Construct & encode the URL
+			var urlComp = URLComponents(string: tokenUrl)!
+			var queryItems = [URLQueryItem]()
+			queryItems.append(URLQueryItem(name: "client_id", value: APISettings.clientID))
+			queryItems.append(URLQueryItem(name: "client_secret", value: APISettings.clientSecret))
+			queryItems.append(URLQueryItem(name: "redirect_uri", value: APISettings.callbackURL))
+			queryItems.append(URLQueryItem(name: "code", value: authCode))
+			queryItems.append(URLQueryItem(name: "grant_type", value: "authorization_code"))
+			urlComp.queryItems = queryItems
+			let url = urlComp.url!
 			print(">>> [URL] \(url)")
+			
 			return URLSession.shared.dataTask(.promise, with: url)
 		}
 		
-		func decodeData(_ data: Data) throws -> (refreshToken: Token, accessToken: Token) {
+		func decodeAndValidateData(_ data: Data) throws -> (refreshToken: Token, accessToken: Token) {
 			
 			struct Result: Codable {
 				let refresh_token: String?
@@ -60,8 +71,8 @@ class TokenManager {
 				throw TokenManagerError.noResultData(errorMessage: "No tokens found in result data.")
 			}
 			
-			let refreshToken = Token(code: refreshTokenCode, type: .refreshToken)
-			let accessToken = Token(code: accessTokenCode, type: .accessToken, expiresIn: expiresIn)
+			let refreshToken = Token(code: refreshTokenCode, type: .RefreshToken)
+			let accessToken = Token(code: accessTokenCode, type: .AccessToken, expiresIn: expiresIn)
 			
 			return (refreshToken, accessToken)
 		}
@@ -69,76 +80,35 @@ class TokenManager {
 		return firstly {
 				authenticateAndFetchTokens(authCode)
 			}.map { result in
-				try decodeData(result.data)
+				try decodeAndValidateData(result.data)
 		}
-	}
-	
-	//
-	// Authorises the app with an authCode by calling the Authentication API Endpoint
-	//
-	static func authenticateAndSaveTokens(with authCode: String, completion: @escaping (Error?, String?) -> Void) {
-		
-		// Construct & encode the redirect URL
-		let queryString = "client_id=\(APISettings.clientID)&redirect_uri=\(APISettings.callbackURL)&code=\(authCode)&client_secret=\(APISettings.clientSecret)&grant_type=authorization_code"
-		let url = URL(string: tokenUrl + "?" + queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
-		
-		print(">>> [URL] \(url)")
-		
-		// Authenticate in a background task and save access & refresh tokens
-		URLSession.shared.dataTask(with: url) { (data, response, error) in
-			do {
-				if let error = error {
-					throw error
-				}
-				struct Result: Codable {
-					let refresh_token: String?
-					let access_token: String?
-					let expires_in: Int?
-					let error: String?
-				}
-				
-				// Decode retrieved data with JSONDecoder
-				guard let data = data else { throw TokenManagerError.noResultData(errorMessage: "No result data found.")}
-				let result = try JSONDecoder().decode(Result.self, from: data)
-				print("<<< \(result)")
-				
-				// If there is an error in the result
-				if let error = result.error {
-					throw TokenManagerError.resultHasError(errorMessage: error)
-				}
-				
-				// If the refresh or access tokens are not in the result
-				guard let refreshToken = result.refresh_token, let accessToken = result.access_token, let expiresIn = result.expires_in else {
-					throw TokenManagerError.noResultData(errorMessage: "No tokens found in result data.")
-				}
-				
-				// Save tokens to user defaults
-				try saveTokenToUserDefaults(token: Token(code: refreshToken, type: .refreshToken))
-				try saveTokenToUserDefaults(token: Token(code: accessToken, type: .accessToken, expiresIn: expiresIn))
-				
-				completion(nil, nil)
-				
-			} catch {
-				completion(error, String(describing: self))
-			}
-		}.resume()
 	}
 	
 	//
 	// Gets a new access token from the API
+	// Will delete the refresh token if it appears to be invalid
+	// NOTE: The deleteTokenFromUserDefaults() method will broadcast a notification for views
 	//
-	private static func getNewAccessToken() -> Promise<Token> {
+	static func getNewAccessToken() -> Promise<Token> {
 		print("[getNewAccessToken]")
 		
 		func fetchAccessTokenData(refreshToken: Token) -> Promise<(data: Data, response: URLResponse)> {
-			// Construct & encode the redirect URL
-			let queryString = "client_id=\(APISettings.clientID)&redirect_uri=\(APISettings.callbackURL)&refresh_token=\(refreshToken.code)&client_secret=\(APISettings.clientSecret)&grant_type=refresh_token"
-			let url = URL(string: tokenUrl + "?" + queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
+			// Construct & encode the URL
+			var urlComp = URLComponents(string: tokenUrl)!
+			var queryItems = [URLQueryItem]()
+			queryItems.append(URLQueryItem(name: "client_id", value: APISettings.clientID.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)))
+			queryItems.append(URLQueryItem(name: "client_secret", value: APISettings.clientSecret.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)))
+			queryItems.append(URLQueryItem(name: "redirect_uri", value: APISettings.callbackURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)))
+			queryItems.append(URLQueryItem(name: "refresh_token", value: refreshToken.code.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)))
+			queryItems.append(URLQueryItem(name: "grant_type", value: "refresh_token"))
+			urlComp.queryItems = queryItems
+			let url = urlComp.url!
 			print(">>> [URL] \(url)")
+			
 			return URLSession.shared.dataTask(.promise, with: url)
 		}
 		
-		func decodeData(_ data:Data) throws -> Token? {
+		func decodeAndValidateData(_ rawResult:(data: Data, urlResponse: URLResponse)) throws -> Token? {
 			
 			struct Result: Codable {
 				let access_token: String?
@@ -147,8 +117,21 @@ class TokenManager {
 			}
 			
 			// Decode retrieved data with JSONDecoder
-			let result = try JSONDecoder().decode(Result.self, from: data)
+			let result = try JSONDecoder().decode(Result.self, from: rawResult.data)
 			print("<<< \(result)")
+			
+			// Check for errors in httpResponse
+			let httpResponse = rawResult.urlResponse as! HTTPURLResponse
+			if let error = ErrorHelper.checkHttpStatusCode(statusCode: httpResponse.statusCode) {
+				
+				// If error was because of unauthorised (401) it means the refresh_token is invalid
+				if case .unauthorised = error {
+					print("[\(String(describing: self))] Could not get new Access Token because the Refresh Token is not valid.")
+					deleteTokenFromUserDefaults(with: TokenType.RefreshToken)
+				}
+				
+				throw error
+			}
 			
 			// If there is an error in the result
 			if let error = result.error {
@@ -161,7 +144,7 @@ class TokenManager {
 			}
 			
 			// Create Token from
-			let accessToken = Token(code: accessTokenCode, type: .accessToken, expiresIn: expiresIn)
+			let accessToken = Token(code: accessTokenCode, type: .AccessToken, expiresIn: expiresIn)
 			
 			// Save tokens to user defaults
 			try saveTokenToUserDefaults(token: accessToken)
@@ -170,23 +153,18 @@ class TokenManager {
 		}
 		
 		return firstly {
-			TokenManager.getRefreshToken()
+			TokenManager.loadTokenFromUserDefaults(with: TokenType.RefreshToken)
 		}.then { refreshToken in
-			fetchAccessTokenData(refreshToken: refreshToken)
+			fetchAccessTokenData(refreshToken: refreshToken!)// This is force-unwraped becaue loadTokenFromUserDefaults() should never actually return a nil token, but throw errors instead. And yes it MUST be an optional because Promise resolving needs a (result, err) as parameter. Meaning there is always a result, even when errors are handled.
 		}.compactMap { result in
-			try decodeData(result.data)
+			try decodeAndValidateData(result)
 		}
 	}
 	
-	public static func getRefreshToken() -> Promise<Token> {
-		
-		return TokenManager.loadTokenFromUserDefaults(with: TokenType.refreshToken)
-			.map { token in
-				return token! // This is force-unwraped becaue loadTokenFromUserDefaults() should never actually return a nil token, but throw errors instead. And yes it MUST be an optional because Promise resolving needs a (result, err) as parameter. Meaning there is always a result, even when errors are handled.
-		}
-		
-	}
-	
+	//
+	// Returns a Promise for an Access Token
+	// Will also check if it's expired and fetch a new one from the API
+	//
 	public static func getAccessToken() -> Promise<Token> {
 		
 		func checkIfExpired(_ token: Token?) -> Promise<Token> {
@@ -205,7 +183,7 @@ class TokenManager {
 			}
 		}
 		
-		return TokenManager.loadTokenFromUserDefaults(with: TokenType.accessToken)
+		return TokenManager.loadTokenFromUserDefaults(with: TokenType.AccessToken)
 			.then { token in
 				checkIfExpired(token)
 			}.recover { error in
@@ -251,12 +229,21 @@ class TokenManager {
 				print("Loaded '\(tokenType)': '\(token?.code)'")
 			} catch {
 				// If there is ANY error loading Token, delete the token from user defaults...
-				UserDefaults.standard.removeObject(forKey: tokenType.defaultsKey)
+				deleteTokenFromUserDefaults(with: tokenType)
 				
 				// ...and return a generalised error.
 				err = TokenManagerError.tokenNotLoadable(errorMessage: "[\(self)] Error loading \(tokenType), deleted (json) string in UserDefaults.")
 			}
 			seal.resolve(token, err)
+		}
+	}
+	
+	static func deleteTokenFromUserDefaults(with tokenType: TokenType) {
+		UserDefaults.standard.removeObject(forKey: tokenType.defaultsKey)
+		
+		// Post a notification to let views know that the app is unauthorised
+		if (tokenType == TokenType.RefreshToken) {
+			NotificationCenter.default.post(name: .onRefreshTokenDelete, object: self)
 		}
 	}
 }

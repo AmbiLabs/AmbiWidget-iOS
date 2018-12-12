@@ -19,10 +19,18 @@ let offNotificationKey = "tonglaicha.brandonmilan.off"
 // 1) Fix the layout incorrect size bug
 // 2) Off mode icon is not displayed when setting device to off mode
 // 3) Switch the current device displayed
+// 4) Open settings page on button click
+// 5) Make a file for saving constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels = [DeviceViewModel]()
     var currentDeviceViewModel: DeviceViewModel?
+    var deviceViewModelIndex: Int = 0
+    
+    enum SwitchDirection {
+        case left
+        case right
+    }
     
     @IBOutlet weak var modeContentView: UIView!
     @IBOutlet weak var deviceNameLabel: UILabel!
@@ -43,10 +51,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // Do any additional setup after loading the view from its nib.
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad: container size = \(modeContentView.frame.size)")
+        
         fetchData()
         createObservers()
-        
-        print("viewDidLoad: container size = \(modeContentView.frame.size)")
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -55,8 +63,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        self.updateWidget()
         print("widgetPerformUpdate called")
+        self.updateWidget()
         
         completionHandler(NCUpdateResult.newData)
     }
@@ -64,11 +72,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     public func updateWidget() {
         print("Updating the widget")
         
-        self.currentDeviceViewModel = deviceViewModels[0]
-        deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
-        temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
-        humidityLabel.text = currentDeviceViewModel!.humidityLabel
-        modeIcon.image = currentDeviceViewModel!.modeIcon
+        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
+        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
+        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
+        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
+        self.modeIcon.image = currentDeviceViewModel!.modeIcon
         
         // Set the initial childViewController for the modeContentView.
         add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
@@ -114,8 +122,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {
-        print("refresh button clicked")
-        
         self.updateWidget()
     }
     
@@ -124,16 +130,36 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {
-        var switchDirection: String?
+        var direction: SwitchDirection
         
         if sender.tag == 6 {
-            switchDirection = "left"
+            direction = .left
+            switchDevice(with: direction)
         } else if sender.tag == 7 {
-            switchDirection = "right"
+            direction = .right
+            switchDevice(with: direction)
         }
-        print("Switch device button clicked with tag \(switchDirection!)")
-    
+        
     }
+    
+    func switchDevice(with direction: SwitchDirection) {
+        switch direction {
+        case .left:
+            if deviceViewModelIndex + 1 == deviceViewModels.endIndex {
+                deviceViewModelIndex = 0
+            } else {
+                deviceViewModelIndex += 1
+            }
+        case .right:
+            if deviceViewModelIndex - 1 < deviceViewModels.startIndex {
+                deviceViewModelIndex = deviceViewModels.endIndex - 1
+            } else {
+                deviceViewModelIndex -= 1
+            }
+        }
+        updateWidget()
+    }
+    
 }
 
 extension UIViewController {

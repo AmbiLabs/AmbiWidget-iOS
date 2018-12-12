@@ -13,7 +13,7 @@ import NotificationCenter
 // 1) Fix the layout incorrect size bug
 // 2) Off mode icon is not displayed when setting device to off mode
 // DONE 3) Switch the current device displayed
-// 4) Open settings page on button click
+// DONE 4) Open settings page on button click
 // DONE 5) Make a file for saving constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
@@ -85,6 +85,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         self.deviceViewModels = devices.map({return
             DeviceViewModel(device: $0)})
+        
         print("fetchData: \(self.deviceViewModels)")
         
     }
@@ -111,7 +112,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             currentDeviceViewModel?.device.mode = Device.Mode.off
             self.updateWidget()
         default:
-            print("default")
+            print("Error: notification.name does not match any of the switch cases.")
+            break
         }
     }
     
@@ -121,6 +123,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBAction func touchSettingsButton(_ sender: UIButton) {
         print("Settings button clicked")
+        
+        let myAppUrl = NSURL(string: "widgetcontainingapp://")!
+        extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
+            if (!success) {
+                // let the user know it failed
+                print("Error: something went wrong when tried opening the app...")
+            }
+        })
     }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {

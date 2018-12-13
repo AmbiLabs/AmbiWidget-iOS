@@ -2,6 +2,12 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## Project files (Need to manually merge new files....)
+*.xcodeproj
+*.xcworkspace
+*.pbxproj
+AmbiWidget-IOS.xcodeproj/
+
 ## User settings
 xcuserdata/
 
@@ -21,3 +27,6 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+*.pbxproj
+AmbiWidget-IOS.xcodeproj/project.pbxproj
+AmbiWidget-IOS.xcodeproj/project.pbxproj

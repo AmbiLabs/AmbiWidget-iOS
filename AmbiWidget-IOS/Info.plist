@@ -21,11 +21,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>CFBundleURLName</key>
 			<string>brandonmilan.tonglaicha.AmbiWidget-IOS</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>ambiwidgetios</string>
+				<string>widgetcontainingapp</string>
 			</array>
 		</dict>
 	</array>

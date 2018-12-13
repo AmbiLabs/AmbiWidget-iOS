@@ -32,27 +32,37 @@ class DeviceViewModel {
     }
     
     public var modeIcon: UIImage {
-        switch device.mode {
-        case .comfort:
+		
+		guard let simpleMode = device.simpleMode else {
+			return UIImage(named: "icn_mode_off_grey")!
+		}
+		
+        switch simpleMode {
+        case .Comfort:
             return UIImage(named: "icn_mode_comfort")!
-        case .temperature:
+        case .Temperature:
             return UIImage(named: "icn_mode_temperature")!
-        case .manual:
+        case .Manual:
             return UIImage(named: "icn_mode_manual")!
-        case .off:
+        case .Off:
             return UIImage(named: "icn_mode_off_grey")!
         }
     }
     
     public var modeSegmentView: UIViewController {
-        switch device.mode {
-        case .comfort:
+		
+		guard let simpleMode = device.simpleMode else {
+			return ModeSelection()
+		}
+		
+        switch simpleMode {
+        case .Comfort:
             return ComfortMode()
-        case .temperature:
+        case .Temperature:
             return TemperatureMode()
-        case .manual:
+        case .Manual:
             return ModeSelection()
-        case .off:
+        case .Off:
             return ModeSelection()
         }
     }

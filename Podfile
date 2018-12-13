@@ -25,5 +25,6 @@ target 'TodayExtension' do
   use_frameworks!
 
   # Pods for TodayExtension
+  pod "PromiseKit", "~> 6.0"
 
 end

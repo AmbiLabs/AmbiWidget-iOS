@@ -12,6 +12,7 @@ enum SimpleMode {
 	case Off
 	case Comfort
 	case Temperature
+	case Manual
 }
 
 struct Device: Codable {
@@ -38,6 +39,11 @@ struct Device: Codable {
 		// If device is off
 		if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() == "off") || applianceControlTarget.quantity.lowercased() == "off" {
 			simpleMode = SimpleMode.Off
+		}
+		
+		// If Manual mode
+		if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() != "off") {
+			simpleMode = SimpleMode.Manual
 		}
 		
 		// If Comfort mode

@@ -80,9 +80,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Get the device data from the API
         
         var devices = [Device]()
-        devices.append(Device(name: "Bedroom Milan", location: "Home", temperature: 18.5, humidity: 77.0, mode: Device.Mode.comfort))
-        devices.append(Device(name: "Living room", location: "Home", temperature: 19.2, humidity: 69.4, mode: Device.Mode.temperature))
-        
+		// TODO: Fetch data using DeviceManager
+//        devices.append(Device(name: "Bedroom Milan", location: "Home", temperature: 18.5, humidity: 77.0, mode: Device.Mode.comfort))
+//        devices.append(Device(name: "Living room", location: "Home", temperature: 19.2, humidity: 69.4, mode: Device.Mode.temperature))
+		
         self.deviceViewModels = devices.map({return
             DeviceViewModel(device: $0)})
         
@@ -98,23 +99,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @objc func switchMode(notification: NSNotification) {
         // TODO: call mode switch to API, get updated device object, update widget
-        switch notification.name {
-        case comfortMode:
-            currentDeviceViewModel?.device.mode = Device.Mode.comfort
-            self.updateWidget()
-        case temperatureMode:
-            currentDeviceViewModel?.device.mode = Device.Mode.temperature
-            self.updateWidget()
-        case modeSelection:
-            let modeSelectionVC = ModeSelection()
-            add(modeSelectionVC, viewContainer: modeContentView)
-        case offMode:
-            currentDeviceViewModel?.device.mode = Device.Mode.off
-            self.updateWidget()
-        default:
-            print("Error: notification.name does not match any of the switch cases.")
-            break
-        }
+//        switch notification.name {
+//        case comfortMode:
+//            currentDeviceViewModel?.device.mode = Device.Mode.comfort
+//            self.updateWidget()
+//        case temperatureMode:
+//            currentDeviceViewModel?.device.mode = Device.Mode.temperature
+//            self.updateWidget()
+//        case modeSelection:
+//            let modeSelectionVC = ModeSelection()
+//            add(modeSelectionVC, viewContainer: modeContentView)
+//        case offMode:
+//            currentDeviceViewModel?.device.mode = Device.Mode.off
+//            self.updateWidget()
+//        default:
+//            print("Error: notification.name does not match any of the switch cases.")
+//            break
+//        }
     }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {

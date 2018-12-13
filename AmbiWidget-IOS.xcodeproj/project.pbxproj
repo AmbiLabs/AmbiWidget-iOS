@@ -20,6 +20,7 @@
 		6250EC7521A6953F004F4F59 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6250EC6821A6953E004F4F59 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7815DFDAFF2CE9D460FBA19D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */; };
 		95F7F9F80293F957796A681E /* Pods_AmbiWidget_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */; };
+		C3CDED83F960EA64312CA57D /* Pods_AmbiWidget_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9A981621C2100B0015EB39 /* Pods_AmbiWidget_IOS.framework */; };
 		CA4C20B121B6758200A23C2A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4C20B021B6758200A23C2A /* Device.swift */; };
 		CA4EEF1D21ACEA7B00B33294 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */; };
 		CA4EEF2121AD1F4500B33294 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF2021AD1F4500B33294 /* Token.swift */; };
@@ -34,7 +35,7 @@
 		CA9A97F521C203D20015EB39 /* TemperatureMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A97F121C203D20015EB39 /* TemperatureMode.swift */; };
 		CA9A97F621C203D20015EB39 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A97F221C203D20015EB39 /* TodayViewController.swift */; };
 		CA9A97FA21C204000015EB39 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A97F821C204000015EB39 /* User.swift */; };
-		CA9A97FB21C204000015EB39 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A97F921C204000015EB39 /* Device.swift */; };
+		CA9A97FB21C204000015EB39 /* OldDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A97F921C204000015EB39 /* OldDevice.swift */; };
 		CA9A980121C204190015EB39 /* TemperatureMode.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9A97FD21C204190015EB39 /* TemperatureMode.xib */; };
 		CA9A980221C204190015EB39 /* ModeSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9A97FE21C204190015EB39 /* ModeSelection.xib */; };
 		CA9A980321C204190015EB39 /* ComfortMode.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA9A97FF21C204190015EB39 /* ComfortMode.xib */; };
@@ -42,6 +43,18 @@
 		CA9A980721C2043B0015EB39 /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A980621C2043B0015EB39 /* DeviceViewModel.swift */; };
 		CA9A980B21C204520015EB39 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A980921C204510015EB39 /* Constants.swift */; };
 		CA9A980F21C206100015EB39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6250EC3D21A693C7004F4F59 /* Assets.xcassets */; };
+		CA9A981321C20F100015EB39 /* ComfortLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A978621C0E8DF0015EB39 /* ComfortLevel.swift */; };
+		CA9A981921C21FC50015EB39 /* Pods_AmbiWidget_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B457B6946712C40C216B6C45 /* Pods_AmbiWidget_IOS.framework */; };
+		CA9A981B21C2284A0015EB39 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50E54921B5358B00C852B5 /* DeviceManager.swift */; };
+		CA9A982421C229690015EB39 /* APISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50E54B21B536DB00C852B5 /* APISettings.swift */; };
+		CA9A982521C229690015EB39 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50E54721B4CD8200C852B5 /* NotificationNames.swift */; };
+		CA9A982621C229690015EB39 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */; };
+		CA9A982721C229690015EB39 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF2021AD1F4500B33294 /* Token.swift */; };
+		CA9A982821C229690015EB39 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4C20B021B6758200A23C2A /* Device.swift */; };
+		CA9A982921C229690015EB39 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A978421BA601D0015EB39 /* DeviceStatus.swift */; };
+		CA9A982A21C229690015EB39 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */; };
+		CA9A982B21C229690015EB39 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */; };
+		CA9A982E21C229690015EB39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6250EC3621A693C5004F4F59 /* AppDelegate.swift */; };
 		CAA5D82021B8CA0C00D5145B /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */; };
 		CAD81EBF21AD3CF20078FD9F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */; };
 /* End PBXBuildFile section */
@@ -135,7 +148,7 @@
 		CA9A97F121C203D20015EB39 /* TemperatureMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureMode.swift; sourceTree = "<group>"; };
 		CA9A97F221C203D20015EB39 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		CA9A97F821C204000015EB39 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		CA9A97F921C204000015EB39 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		CA9A97F921C204000015EB39 /* OldDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldDevice.swift; sourceTree = "<group>"; };
 		CA9A97FD21C204190015EB39 /* TemperatureMode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemperatureMode.xib; sourceTree = "<group>"; };
 		CA9A97FE21C204190015EB39 /* ModeSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModeSelection.xib; sourceTree = "<group>"; };
 		CA9A97FF21C204190015EB39 /* ComfortMode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComfortMode.xib; sourceTree = "<group>"; };
@@ -144,6 +157,8 @@
 		CA9A980821C204510015EB39 /* TodayExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		CA9A980921C204510015EB39 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA9A980A21C204520015EB39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA9A981421C20FFF0015EB39 /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA9A981621C2100B0015EB39 /* Pods_AmbiWidget_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AmbiWidget_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				328029D185C237F0F0B0D680 /* Pods_AmbiWidget_IOS.framework in Frameworks */,
+				C3CDED83F960EA64312CA57D /* Pods_AmbiWidget_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +197,7 @@
 			files = (
 				6250EC6B21A6953F004F4F59 /* NotificationCenter.framework in Frameworks */,
 				7815DFDAFF2CE9D460FBA19D /* Pods_TodayExtension.framework in Frameworks */,
+				CA9A981921C21FC50015EB39 /* Pods_AmbiWidget_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +264,8 @@
 		6250EC6921A6953E004F4F59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CA9A981621C2100B0015EB39 /* Pods_AmbiWidget_IOS.framework */,
+				CA9A981421C20FFF0015EB39 /* PromiseKit.framework */,
 				6250EC6A21A6953E004F4F59 /* NotificationCenter.framework */,
 				B457B6946712C40C216B6C45 /* Pods_AmbiWidget_IOS.framework */,
 				98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */,
@@ -262,9 +281,9 @@
 				CA9A980921C204510015EB39 /* Constants.swift */,
 				CA9A980A21C204520015EB39 /* Info.plist */,
 				CA9A980821C204510015EB39 /* TodayExtension.entitlements */,
-				CA9A980521C204280015EB39 /* ViewModel */,
-				CA9A97FC21C204080015EB39 /* View */,
 				CA9A97F721C203E00015EB39 /* Model */,
+				CA9A97FC21C204080015EB39 /* View */,
+				CA9A980521C204280015EB39 /* ViewModel */,
 				CA9A97ED21C2037A0015EB39 /* Controllers */,
 			);
 			path = TodayExtension;
@@ -313,7 +332,7 @@
 		CA9A97F721C203E00015EB39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CA9A97F921C204000015EB39 /* Device.swift */,
+				CA9A97F921C204000015EB39 /* OldDevice.swift */,
 				CA9A97F821C204000015EB39 /* User.swift */,
 			);
 			path = Model;
@@ -715,11 +734,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA9A97F621C203D20015EB39 /* TodayViewController.swift in Sources */,
+				CA9A982B21C229690015EB39 /* TokenManager.swift in Sources */,
+				CA9A982921C229690015EB39 /* DeviceStatus.swift in Sources */,
+				CA9A982721C229690015EB39 /* Token.swift in Sources */,
+				CA9A982521C229690015EB39 /* NotificationNames.swift in Sources */,
+				CA9A982621C229690015EB39 /* UserDefaultsKeys.swift in Sources */,
+				CA9A981321C20F100015EB39 /* ComfortLevel.swift in Sources */,
 				CA9A97F521C203D20015EB39 /* TemperatureMode.swift in Sources */,
+				CA9A981B21C2284A0015EB39 /* DeviceManager.swift in Sources */,
+				CA9A982A21C229690015EB39 /* ErrorHelper.swift in Sources */,
+				CA9A982421C229690015EB39 /* APISettings.swift in Sources */,
 				CA9A97F321C203D20015EB39 /* ModeSelection.swift in Sources */,
-				CA9A97FB21C204000015EB39 /* Device.swift in Sources */,
+				CA9A982821C229690015EB39 /* Device.swift in Sources */,
+				CA9A97FB21C204000015EB39 /* OldDevice.swift in Sources */,
 				CA9A97FA21C204000015EB39 /* User.swift in Sources */,
 				CA9A980721C2043B0015EB39 /* DeviceViewModel.swift in Sources */,
+				CA9A982E21C229690015EB39 /* AppDelegate.swift in Sources */,
 				CA9A97F421C203D20015EB39 /* ComfortMode.swift in Sources */,
 				CA9A980B21C204520015EB39 /* Constants.swift in Sources */,
 			);

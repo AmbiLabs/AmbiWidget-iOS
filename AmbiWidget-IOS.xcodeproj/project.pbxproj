@@ -159,6 +159,7 @@
 		CA9A980A21C204520015EB39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA9A981421C20FFF0015EB39 /* PromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA9A981621C2100B0015EB39 /* Pods_AmbiWidget_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AmbiWidget_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA9A982F21C25FA70015EB39 /* AmbiWidget-IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmbiWidget-IOS.entitlements"; sourceTree = "<group>"; };
 		CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +232,7 @@
 		6250EC3521A693C5004F4F59 /* AmbiWidget-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				CA9A982F21C25FA70015EB39 /* AmbiWidget-IOS.entitlements */,
 				CAA5D82421B8CB7500D5145B /* Settings */,
 				CA4EEF1921ACE9D800B33294 /* Models */,
 				CA4EEF1B21ACE9FB00B33294 /* Views */,
@@ -918,15 +920,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "AmbiWidget-IOS/AmbiWidget-IOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wilfred Anorma (66S3ZJ5N29)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = "AmbiWidget-IOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brandonmilan.tonglaicha.AmbiWidget-IOS";
+				PRODUCT_BUNDLE_IDENTIFIER = ambicontol.remote.universal.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Ambi Control Dev";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
@@ -941,15 +945,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "AmbiWidget-IOS/AmbiWidget-IOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wilfred Anorma (66S3ZJ5N29)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = "AmbiWidget-IOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brandonmilan.tonglaicha.AmbiWidget-IOS";
+				PRODUCT_BUNDLE_IDENTIFIER = ambicontol.remote.universal.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Ambi Control Dev";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 4.2;
@@ -1045,16 +1051,17 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brandonmilan.tonglaicha.AmbiWidget-IOS.TodayExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = ambicontol.remote.universal.ios.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Ambi Control Widget";
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TodayExtension/Controllers/TodayExtension-Bridging-Header.h";
@@ -1070,16 +1077,17 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brandonmilan.tonglaicha.AmbiWidget-IOS.TodayExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = ambicontol.remote.universal.ios.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Ambi Control Widget";
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TodayExtension/Controllers/TodayExtension-Bridging-Header.h";

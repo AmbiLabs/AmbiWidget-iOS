@@ -66,18 +66,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     public func updateWidget() {
         print("Updating the widget")
         
-        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
-        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
-        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
-        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
-        self.modeIcon.image = currentDeviceViewModel!.modeIcon
-        
+//        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
+//        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
+//        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
+//        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
+//        self.modeIcon.image = currentDeviceViewModel!.modeIcon
+		
         // Set the initial childViewController for the modeContentView.
-        add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
+        //add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
     }
     
     func fetchData() {
         // Get the device data from the API
+		
+		DeviceManager.getDeviceList()
+		.done { deviceListArray in
+			print("Today View Controller: \(deviceListArray)")
+		}.catch{ error in
+			print("Error: \(error)")
+		}
         
         var devices = [Device]()
 		// TODO: Fetch data using DeviceManager

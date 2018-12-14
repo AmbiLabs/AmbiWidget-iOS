@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.tonglaicha.brandonmilan.ambiwidgetIOS</string>
+		<string>group.ambicontol.remote.universal.ios</string>
 	</array>
 </dict>
 </plist>

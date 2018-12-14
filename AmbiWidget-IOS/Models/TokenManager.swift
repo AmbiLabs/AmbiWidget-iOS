@@ -199,7 +199,7 @@ class TokenManager {
 	//
 	static func saveTokenToUserDefaults(token: Token) throws {
 		let tokenAsJson = try token.asJson()
-		UserDefaults.standard.set(tokenAsJson, forKey: token.type.defaultsKey)
+		UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.set(tokenAsJson, forKey: token.type.defaultsKey)
 		print("Saved '\(token.type)': \(token.code)")
 	}
 	
@@ -214,7 +214,7 @@ class TokenManager {
 			do {
 				
 				// Load token from UserDefaults as Json, if unable to load, return nil for Token?
-				guard let tokenAsJson = UserDefaults.standard.string(forKey: tokenType.defaultsKey) else {
+				guard let tokenAsJson = UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.string(forKey: tokenType.defaultsKey) else {
 					throw TokenManagerError.tokenNotExist(errorMessage: "Token of type '\(tokenType)' does not exist.")
 				}
 				
@@ -239,7 +239,7 @@ class TokenManager {
 	}
 	
 	static func deleteTokenFromUserDefaults(with tokenType: TokenType) {
-		UserDefaults.standard.removeObject(forKey: tokenType.defaultsKey)
+		UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.removeObject(forKey: tokenType.defaultsKey)
 		
 		// Post a notification to let views know that the app is unauthorised
 		if (tokenType == TokenType.RefreshToken) {

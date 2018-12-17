@@ -57,6 +57,9 @@
 		CA9A982E21C229690015EB39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6250EC3621A693C5004F4F59 /* AppDelegate.swift */; };
 		CAA5D82021B8CA0C00D5145B /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */; };
 		CAD81EBF21AD3CF20078FD9F /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */; };
+		CAEA2BF921C3573600907EDB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAEA2BF821C3573600907EDB /* Settings.bundle */; };
+		CAEA2BFB21C3863900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
+		CAEA2BFC21C3870900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +165,8 @@
 		CA9A982F21C25FA70015EB39 /* AmbiWidget-IOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AmbiWidget-IOS.entitlements"; sourceTree = "<group>"; };
 		CAA5D81F21B8CA0C00D5145B /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		CAD81EBE21AD3CF20078FD9F /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		CAEA2BF821C3573600907EDB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21704173721C9BC24A0A410 /* Pods-AmbiWidget-IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOSUITests/Pods-AmbiWidget-IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,6 +246,8 @@
 				6250EC3D21A693C7004F4F59 /* Assets.xcassets */,
 				6250EC3F21A693C7004F4F59 /* LaunchScreen.storyboard */,
 				6250EC4221A693C7004F4F59 /* Info.plist */,
+				CAEA2BF821C3573600907EDB /* Settings.bundle */,
+				CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */,
 			);
 			path = "AmbiWidget-IOS";
 			sourceTree = "<group>";
@@ -547,6 +554,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAEA2BF921C3573600907EDB /* Settings.bundle in Resources */,
 				6250EC4121A693C7004F4F59 /* LaunchScreen.storyboard in Resources */,
 				6250EC3E21A693C7004F4F59 /* Assets.xcassets in Resources */,
 				6250EC3C21A693C5004F4F59 /* Main.storyboard in Resources */,
@@ -699,6 +707,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAEA2BFB21C3863900907EDB /* SettingsBundleHelper.swift in Sources */,
 				6250EC3921A693C5004F4F59 /* AuthVC.swift in Sources */,
 				CA9A978521BA601D0015EB39 /* DeviceStatus.swift in Sources */,
 				CA50E54C21B536DB00C852B5 /* APISettings.swift in Sources */,
@@ -743,6 +752,7 @@
 				CA9A982621C229690015EB39 /* UserDefaultsKeys.swift in Sources */,
 				CA9A981321C20F100015EB39 /* ComfortLevel.swift in Sources */,
 				CA9A97F521C203D20015EB39 /* TemperatureMode.swift in Sources */,
+				CAEA2BFC21C3870900907EDB /* SettingsBundleHelper.swift in Sources */,
 				CA9A981B21C2284A0015EB39 /* DeviceManager.swift in Sources */,
 				CA9A982A21C229690015EB39 /* ErrorHelper.swift in Sources */,
 				CA9A982421C229690015EB39 /* APISettings.swift in Sources */,

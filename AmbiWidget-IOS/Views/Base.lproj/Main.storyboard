@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sxJ-AE-EnB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rvj-hz-Edm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832.8" y="26.53673163418291"/>
+            <point key="canvasLocation" x="2116" y="-653"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="bey-su-DTe">
@@ -69,25 +69,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Widget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb">
-                                <rect key="frame" x="16" y="36" width="58" height="20.5"/>
+                                <rect key="frame" x="16" y="80" width="58" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With this app you can add an Ambi Widget to your Today View." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH">
-                                <rect key="frame" x="16" y="64.5" width="349" height="41"/>
+                                <rect key="frame" x="16" y="108.5" width="349" height="41"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a Widget:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ">
-                                <rect key="frame" x="16" y="133" width="171.5" height="20.5"/>
+                                <rect key="frame" x="16" y="177" width="171.5" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham">
-                                <rect key="frame" x="16" y="161.5" width="268" height="122"/>
+                                <rect key="frame" x="16" y="205.5" width="268" height="122"/>
                                 <string key="text">1. Press the Home button.
 2. Navigate to the most left screen.
 3. Click on the "Edit" button.
@@ -103,6 +103,7 @@
                         <constraints>
                             <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="16" id="0RW-Dn-WhJ"/>
                             <constraint firstItem="vGl-w0-ham" firstAttribute="top" secondItem="oew-BC-YVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Bb5-Eo-8lU"/>
+                            <constraint firstItem="mOd-dR-R2E" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="w5k-vu-0vb" secondAttribute="trailing" symbolic="YES" id="HCj-VE-rr6"/>
                             <constraint firstItem="WPt-Ej-ETH" firstAttribute="top" secondItem="w5k-vu-0vb" secondAttribute="bottom" constant="8" symbolic="YES" id="Kdq-py-lti"/>
                             <constraint firstItem="oew-BC-YVJ" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="SA5-De-FaP"/>
                             <constraint firstItem="w5k-vu-0vb" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="XR9-oN-aGz"/>
@@ -113,13 +114,38 @@
                                 <string key="userLabel">1. Press the Home button. 2. Navigate to the most left screen, this the Today View. 3. Click on the "Edit" button. 4. Look for "Ambi Widget" and press the green + button. 5. Done! .leading = Safe Area.leading + 16</string>
                             </constraint>
                             <constraint firstItem="w5k-vu-0vb" firstAttribute="top" secondItem="mOd-dR-R2E" secondAttribute="top" constant="16" id="p6e-Hl-dGJ"/>
+                            <constraint firstItem="mOd-dR-R2E" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oew-BC-YVJ" secondAttribute="trailing" symbolic="YES" id="rx3-e0-d1j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mOd-dR-R2E"/>
                     </view>
+                    <navigationItem key="navigationItem" id="AL9-G6-H95">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="icn_settings_ios_grey" id="ejm-8E-wTm"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91T-RC-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1178" y="27"/>
+            <point key="canvasLocation" x="2116" y="26.53673163418291"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fxm-f2-E4A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rvj-hz-Edm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gCc-kf-1En">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sxJ-AE-EnB" kind="relationship" relationship="rootViewController" id="vzB-Dc-LaG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ptx-mY-gLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1176.8" y="26.53673163418291"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icn_settings_ios_grey" width="44" height="44"/>
+    </resources>
 </document>

@@ -79,9 +79,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func fetchData() {
         // Get the device data from the API
 		
-		DeviceManager.getDeviceList()
+		DeviceManager.API.getDeviceList()
 		.done { deviceListArray in
 			print("Today View Controller: \(deviceListArray)")
+			
 		}.catch{ error in
 			print("Error: \(error)")
 		}

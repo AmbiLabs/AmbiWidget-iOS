@@ -61,7 +61,7 @@ class ErrorHelper {
 			}
 		}
 			
-		// 400 - 499 (Server Error)
+		// 500 - 599 (Server Error)
 		else if (statusCode >= 500 && statusCode <= 599) {
 			error = HttpError.unknown(errorMessage: "Error (\(statusCode)): Unknown server error.")
 		}

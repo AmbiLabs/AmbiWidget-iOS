@@ -19,33 +19,18 @@ class MainVC: UIViewController {
 		super.viewDidAppear(animated)
 		
 		// Get the refresh token
-		firstly {
-			TokenManager.loadTokenFromUserDefaults(with: .RefreshToken)
-		}.done { token in
+		TokenManager.loadTokenFromUserDefaults(with: .RefreshToken)
+		.done { token in
 			// Do nothing...
 			
 			// Debugging
-			DeviceManager.getDeviceList().done { arrayOfDevices in
-				print("Device List: ")
-				for device in arrayOfDevices {
-					if device.name.contains("Desk") {
-						print(device)
-						DeviceManager.getDeviceStatus(for: device)
-							.done { deviceStatus in
-								var newDevice = device
-								newDevice.status = deviceStatus
-								print("Name: \(newDevice.name)")
-								print("Mode: \(newDevice.simpleMode!)")
-								print("Temperature: \(newDevice.temperature!)")
-								print("Humidity: \(newDevice.humidity!)")
-								print("Comfort Level: \(newDevice.predictedComfort!.rawValue)")
-								
-							}.catch { error in
-								print("Error: \(error)")
-						}
-						return
-					}
-				}
+			DeviceManager.API.getDeviceList()
+			.map { arrayOfDevices -> ([Device]) in
+				try DeviceManager.Local.saveDeviceList(deviceList: arrayOfDevices)
+				let deviceList = try DeviceManager.Local.getDeviceList()
+				return deviceList
+			}.done { deviceList in
+				print("getDeviceList: \(deviceList)")
 			}.catch { error in
 				print ("\(String(describing: self)) Error: \(error)")
 			}

@@ -10,4 +10,5 @@ struct UserDefaultsKeys {
 	static let appGroupName = "group.ambicontol.remote.universal.ios"
 	static let refreshToken = "REFRESH_TOKEN"
 	static let accessToken = "ACCESS_TOKEN"
+	static let deviceList = "DEVICE_LIST"
 }

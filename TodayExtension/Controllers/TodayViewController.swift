@@ -79,7 +79,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateDeviceViewModelsFromAPI() {
         // Get the device data from the API
-		DeviceManager.getDeviceList()
+		DeviceManager.API.getDeviceList()
 		.done { deviceListArray in
 			print("Today View Controller: \(deviceListArray)")
             

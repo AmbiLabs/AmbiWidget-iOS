@@ -11,13 +11,13 @@ import Foundation
 struct DeviceStatus: Codable {
 	
 	struct ApplianceControlTarget: Codable {
-		let quantity: String
-		let value: Double?
+		var quantity: String
+		var value: Double?
 	}
 	
 	struct ApplianceState: Codable {
-		let mode: String
-		let power: String
+		var mode: String
+		var power: String
 	}
 	
 	struct ComfortPrediction: Codable {
@@ -29,8 +29,8 @@ struct DeviceStatus: Codable {
 		let temperature_refined: Double
 	}
 	
-	let applianceControlTarget: ApplianceControlTarget
-	let applianceState: ApplianceState
+	var applianceControlTarget: ApplianceControlTarget
+	var applianceState: ApplianceState
 	let comfortPrediction: ComfortPrediction
 	let sensorData: SensorData
 }

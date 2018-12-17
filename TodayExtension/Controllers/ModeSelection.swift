@@ -19,7 +19,7 @@ class ModeSelection: UIViewController {
 //        frm.size.width = 320
 //        contentView.frame = frm
         
-        print(contentView.frame.size)
+//        print(contentView.frame.size)
         
         // Do any additional setup after loading the view.
     }
@@ -47,7 +47,7 @@ class ModeSelection: UIViewController {
         // Send a notification to the observer in TodayViewController
         NotificationCenter.default.post(name: notificationName!, object: nil)
         
-        print("\(modeTag!) button clicked")
+//        print("\(modeTag!) button clicked")
     }
 
 }

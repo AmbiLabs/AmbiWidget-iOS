@@ -45,9 +45,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // Do any additional setup after loading the view from its nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad: container size = \(modeContentView.frame.size)")
+//        print("viewDidLoad: container size = \(modeContentView.frame.size)")
+//        add(ComfortMode(), viewContainer: modeContentView)
         
-        fetchData()
         createObservers()
     }
         
@@ -58,44 +58,37 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         print("widgetPerformUpdate called")
-        self.updateWidget()
+        updateDeviceViewModelsFromAPI()
         
         completionHandler(NCUpdateResult.newData)
     }
     
-    public func updateWidget() {
+    public func updateWidgetViews() {
         print("Updating the widget")
         
-//        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
-//        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
-//        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
-//        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
-//        self.modeIcon.image = currentDeviceViewModel!.modeIcon
+        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
+        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
+        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
+        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
+        self.modeIcon.image = currentDeviceViewModel!.modeIcon
 		
         // Set the initial childViewController for the modeContentView.
-        //add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
+        add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
+        print("viewModel mode = \(currentDeviceViewModel!.device.simpleMode)")
     }
     
-    func fetchData() {
+    func updateDeviceViewModelsFromAPI() {
         // Get the device data from the API
-		
 		DeviceManager.API.getDeviceList()
 		.done { deviceListArray in
 			print("Today View Controller: \(deviceListArray)")
-			
-		}.catch{ error in
+            
+            self.deviceViewModels = deviceListArray.map({return
+                DeviceViewModel(device: $0)})
+            self.updateWidgetViews()
+		}.catch { error in
 			print("Error: \(error)")
 		}
-        
-        var devices = [Device]()
-		// TODO: Fetch data using DeviceManager
-//        devices.append(Device(name: "Bedroom Milan", location: "Home", temperature: 18.5, humidity: 77.0, mode: Device.Mode.comfort))
-//        devices.append(Device(name: "Living room", location: "Home", temperature: 19.2, humidity: 69.4, mode: Device.Mode.temperature))
-		
-        self.deviceViewModels = devices.map({return
-            DeviceViewModel(device: $0)})
-        
-        print("fetchData: \(self.deviceViewModels)")
         
     }
     
@@ -106,28 +99,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @objc func switchMode(notification: NSNotification) {
+        print("switchmode \(notification.name)")
         // TODO: call mode switch to API, get updated device object, update widget
-//        switch notification.name {
-//        case comfortMode:
-//            currentDeviceViewModel?.device.mode = Device.Mode.comfort
-//            self.updateWidget()
-//        case temperatureMode:
-//            currentDeviceViewModel?.device.mode = Device.Mode.temperature
-//            self.updateWidget()
-//        case modeSelection:
-//            let modeSelectionVC = ModeSelection()
-//            add(modeSelectionVC, viewContainer: modeContentView)
-//        case offMode:
-//            currentDeviceViewModel?.device.mode = Device.Mode.off
-//            self.updateWidget()
-//        default:
-//            print("Error: notification.name does not match any of the switch cases.")
-//            break
-//        }
+        switch notification.name {
+        case comfortMode:
+            currentDeviceViewModel!.device.simpleMode = SimpleMode.Comfort
+            print(currentDeviceViewModel!.device.simpleMode)
+            print("comfort success")
+            self.updateWidgetViews()
+        case temperatureMode:
+            currentDeviceViewModel!.device.simpleMode = SimpleMode.Temperature
+            self.updateWidgetViews()
+        case modeSelection:
+            add(ModeSelection(), viewContainer: modeContentView)
+        case offMode:
+            currentDeviceViewModel!.device.simpleMode = SimpleMode.Off
+            self.updateWidgetViews()
+        default:
+            print("Error: notification.name does not match any of the switch cases.")
+            break
+        }
     }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {
-        self.updateWidget()
+        self.updateWidgetViews()
     }
     
     @IBAction func touchSettingsButton(_ sender: UIButton) {
@@ -170,7 +165,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 deviceViewModelIndex -= 1
             }
         }
-        updateWidget()
+        updateWidgetViews()
     }
     
 }

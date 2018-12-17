@@ -119,7 +119,11 @@
                         <viewLayoutGuide key="safeArea" id="mOd-dR-R2E"/>
                     </view>
                     <navigationItem key="navigationItem" id="AL9-G6-H95">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" image="icn_settings_ios_grey" id="ejm-8E-wTm"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="icn_settings_ios_grey" id="ejm-8E-wTm">
+                            <connections>
+                                <action selector="settingsButton:" destination="sxJ-AE-EnB" id="xWb-s1-Gwb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91T-RC-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>

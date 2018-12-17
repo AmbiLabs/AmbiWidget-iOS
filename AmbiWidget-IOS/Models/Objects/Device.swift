@@ -29,34 +29,50 @@ struct Device: Codable {
 	
 	// Get the "simple" mode state of the device from the perspective of the Widget UI.
 	// i.e. Ambi Open API does not specifically give us a "Off" Mode, but further data reading is required.
-	var simpleMode: SimpleMode? {
-		var simpleMode: SimpleMode?
-		
-		guard let applianceControlTarget = status?.applianceControlTarget, let applianceState = status?.applianceState else {
-			return nil
-		}
-		
-		// If device is off
-		if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() == "off") || applianceControlTarget.quantity.lowercased() == "off" {
-			simpleMode = SimpleMode.Off
-		}
-		
-		// If Manual mode
-		if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() != "off") {
-			simpleMode = SimpleMode.Manual
-		}
-		
-		// If Comfort mode
-		else if applianceControlTarget.quantity.lowercased() == "climate" {
-			simpleMode = SimpleMode.Comfort
-		}
-		
-		// If Temperature mode
-		else if applianceControlTarget.quantity.lowercased() == "temperature" {
-			simpleMode = SimpleMode.Temperature
-		}
-		
-		return simpleMode
+    var simpleMode: SimpleMode? {
+        get {
+            var simpleMode: SimpleMode?
+            
+            guard let applianceControlTarget = status?.applianceControlTarget, let applianceState = status?.applianceState else {
+                return nil
+            }
+            
+            // If device is off
+            if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() == "off") || applianceControlTarget.quantity.lowercased() == "off" {
+                simpleMode = SimpleMode.Off
+            }
+            
+            // If Manual mode
+            if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() != "off") {
+                simpleMode = SimpleMode.Manual
+            }
+                
+                // If Comfort mode
+            else if applianceControlTarget.quantity.lowercased() == "climate" {
+                simpleMode = SimpleMode.Comfort
+            }
+                
+                // If Temperature mode
+            else if applianceControlTarget.quantity.lowercased() == "temperature" {
+                simpleMode = SimpleMode.Temperature
+            }
+            
+            return simpleMode
+        }
+        
+        set(newMode) {
+            print("Simple mode is set to \(newMode)")
+            switch newMode! {
+            case .Off:
+                self.status?.applianceControlTarget.quantity = "off"
+            case .Comfort:
+                self.status?.applianceControlTarget.quantity = "climate"
+            case .Temperature:
+                self.status?.applianceControlTarget.quantity = "temperature"
+            default:
+                return
+            }
+        }
 	}
 	
 	var temperature: Double? {

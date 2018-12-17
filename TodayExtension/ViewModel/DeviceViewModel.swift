@@ -18,7 +18,7 @@ class DeviceViewModel {
     }
     
     public var deviceTitleText: String {
-        // Check the user showDeviceLocation preference and make the deviceTitleText here.
+        // TODO: Check the user showDeviceLocation preference and make the deviceTitleText here.
         return device.name
     }
     
@@ -51,9 +51,9 @@ class DeviceViewModel {
     
     public var modeSegmentView: UIViewController {
 		
-		guard let simpleMode = device.simpleMode else {
-			return ModeSelection()
-		}
+        guard let simpleMode = device.simpleMode else {
+            return ModeSelection()
+        }
 		
         switch simpleMode {
         case .Comfort:

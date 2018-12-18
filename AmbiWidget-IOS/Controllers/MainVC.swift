@@ -26,6 +26,16 @@ class MainVC: UIViewController {
 			let vc = self.storyboard?.instantiateViewController(withIdentifier: "auth") as! AuthVC
 			self.present(vc, animated: true, completion: nil)
 		}
+		
+//		// Debug
+//		DeviceManager.API.getDeviceList()
+//		.then { deviceList in
+//			DeviceManager.API.temperatureMode(for: deviceList[0], with: "19")
+//		}.catch { error in
+//			// Show auth view page
+//			let vc = self.storyboard?.instantiateViewController(withIdentifier: "auth") as! AuthVC
+//			self.present(vc, animated: true, completion: nil)
+//		}
 	}
 	
 	// Open Application Settings

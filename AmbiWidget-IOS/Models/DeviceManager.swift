@@ -29,16 +29,18 @@ class DeviceManager {
 		private static let deviceListUrl = "https://api.ambiclimate.com/api/v1/devices"
 		private static let deviceStatusUrl = "https://api.ambiclimate.com/api/v1/device/device_status"
 		private static let comfortFeedbackUrl = "https://api.ambiclimate.com/api/v1/user/feedback"
+		private static let temperatureModeUrl = "https://api.ambiclimate.com/api/v1/device/mode/temperature"
 		private static let powerOffUrl = "https://api.ambiclimate.com/api/v1/device/power/off"
 		
 		private enum DataType {
 			case deviceList
 			case deviceStatus
 			case comfortFeedback
+			case temperatureMode
 			case powerOff
 			
 			// Get the associated URL for type of Data
-			func getUrl(_ accessToken: Token, _ device: Device?, _ feedback: ComfortLevel?) -> URL {
+			func getUrl(_ accessToken: Token, _ device: Device?, _ feedback: ComfortLevel?, _ modeValue: String?) -> URL {
 				switch self {
 				case .deviceList:
 					var urlComp = URLComponents(string: deviceListUrl)!
@@ -65,6 +67,16 @@ class DeviceManager {
 					urlComp.queryItems = queryItems
 					return urlComp.url!
 					
+				case .temperatureMode:
+					var urlComp = URLComponents(string: temperatureModeUrl)!
+					var queryItems = [URLQueryItem]()
+					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
+					queryItems.append(URLQueryItem(name: "room_name", value: device!.name))
+					queryItems.append(URLQueryItem(name: "location_name", value: device!.locationName))
+					queryItems.append(URLQueryItem(name: "value", value: modeValue!))
+					urlComp.queryItems = queryItems
+					return urlComp.url!
+					
 				case .powerOff:
 					var urlComp = URLComponents(string: powerOffUrl)!
 					var queryItems = [URLQueryItem]()
@@ -82,8 +94,8 @@ class DeviceManager {
 		// If the accessToken appears to be invalid it will try to recover itself by
 		// getting a new access token and re-executing the fetch on itself.
 		//
-		private static func fetchData(for dataType: DataType, with accessToken: Token, by device: Device? = nil, feedback: ComfortLevel? = nil, isRetry: Bool = false) -> Promise<(data: Data, response: URLResponse)> {
-			let url = dataType.getUrl(accessToken, device, feedback)
+		private static func fetchData(for dataType: DataType, with accessToken: Token, by device: Device? = nil, feedback: ComfortLevel? = nil, modeValue: String? = nil, isRetry: Bool = false) -> Promise<(data: Data, response: URLResponse)> {
+			let url = dataType.getUrl(accessToken, device, feedback, modeValue)
 			print(">>> [URL] \(url)")
 			
 			return URLSession.shared.dataTask(.promise, with: url)
@@ -242,6 +254,42 @@ class DeviceManager {
 			return TokenManager.getAccessToken()
 				.then { accessToken in
 					DeviceManager.API.fetchData(for: DataType.comfortFeedback, with: accessToken, by: device, feedback: feedback)
+				}.compactMap { result in
+					try decodeData(result.data)
+			}
+		}
+		
+		//
+		// Update Mode
+		//
+		static func temperatureMode(for device: Device, with value: String) -> Promise<Bool> {
+			
+			func decodeData(_ data: Data) throws -> Bool {
+				
+				struct Result: Codable {
+					let status: String?
+					let status_code: Int?
+				}
+				
+				// Decode retrieved data with JSONDecoder
+				let decodedData = try JSONDecoder().decode([Result].self, from: data)
+				print("<<< {temperatute mode} \(decodedData)")
+				
+				// Check for errors in result
+				guard let status = decodedData[0].status else {
+					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
+				}
+				
+				if status == "ok" {
+					return true
+				} else {
+					return false
+				}
+			}
+			
+			return TokenManager.getAccessToken()
+				.then { accessToken in
+					DeviceManager.API.fetchData(for: DataType.temperatureMode, with: accessToken, by: device, modeValue: value)
 				}.compactMap { result in
 					try decodeData(result.data)
 			}

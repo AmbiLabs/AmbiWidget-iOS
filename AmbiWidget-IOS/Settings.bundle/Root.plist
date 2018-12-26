@@ -14,7 +14,7 @@
 			<key>Title</key>
 			<string>Show device location</string>
 			<key>Key</key>
-			<string>show_device_location_preference</string>
+			<string>SHOW_DEVICE_LOCATION_PREFERENCE</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -24,7 +24,23 @@
 			<key>Title</key>
 			<string>Use Fahrenheit instead of Celcius</string>
 			<key>Key</key>
-			<string>use_fahrenheit_preference</string>
+			<string>USE_FAHRENHEIT_PREFERENCE</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Testing</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Reset All App Data</string>
+			<key>Key</key>
+			<string>RESET_APP_KEY</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>

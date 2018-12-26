@@ -10,20 +10,24 @@ import Foundation
 
 class SettingsBundleHelper {
 	
-	struct SettingsBundleKeys {
+	private struct SettingsBundleKeys {
 		static let Reset = "RESET_APP_KEY"
 		static let BuildVersionKey = "build_preference"
 		static let AppVersionKey = "version_preference"
-	}
+	} 
 	
 	class func checkAndExecuteSettings() {
-		if UserDefaults.standard.bool(forKey: SettingsBundleKeys.Reset) {
-			UserDefaults.standard.set(false, forKey: SettingsBundleKeys.Reset)
-			let appDomain: String? = Bundle.main.bundleIdentifier
-			UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-			// reset userDefaults..
-			// CoreDataDataModel().deleteAllData()
-			// delete all other user data here..
+		let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!
+		
+		// If reset key is enabled, reset all data.
+		if userDefaults.bool(forKey: SettingsBundleKeys.Reset) {
+			userDefaults.set(false, forKey: SettingsBundleKeys.Reset)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.accessToken)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.refreshToken)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.deviceList)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.showDeviceLocation)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.useFahrenheit)
+			print("=========[RESET ALL USERDEFAULTS]=========")
 		}
 	}
 	

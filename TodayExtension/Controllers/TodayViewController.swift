@@ -17,8 +17,7 @@ import NotificationCenter
 // DONE 5) Make a file for saving constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-    var deviceViewModels = [DeviceViewModel]()
-    var currentDeviceViewModel: DeviceViewModel?
+    var deviceViewModels: [DeviceViewModel]?
     var deviceViewModelIndex: Int = 0
     
     enum SwitchDirection {
@@ -46,9 +45,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print("viewDidLoad: container size = \(modeContentView.frame.size)")
-//        add(ComfortMode(), viewContainer: modeContentView)
-        
         createObservers()
+        add(ComfortMode(), viewContainer: modeContentView)
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -57,40 +55,59 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        print("widgetPerformUpdate called")
-        updateDeviceViewModelsFromAPI()
-        
+        updateWidget()
         completionHandler(NCUpdateResult.newData)
     }
     
-    public func updateWidgetViews() {
-        print("Updating the widget")
+    func updateWidget() {
+        // Get deviceList from local storage
+        if let localDeviceList = try? DeviceManager.Local.getDeviceList() {
+            // Update deviceViewModesls
+            self.deviceViewModels = localDeviceList.map({return
+                DeviceViewModel(device: $0)})
+        }
+        updateWidgetViews()
         
-        self.currentDeviceViewModel = deviceViewModels[deviceViewModelIndex]
-        self.deviceNameLabel.text = currentDeviceViewModel!.deviceTitleText
-        self.temperatureLabel.text = currentDeviceViewModel!.temperatureLabel
-        self.humidityLabel.text = currentDeviceViewModel!.humidityLabel
-        self.modeIcon.image = currentDeviceViewModel!.modeIcon
-		
-        // Set the initial childViewController for the modeContentView.
-        add(currentDeviceViewModel!.modeSegmentView, viewContainer: modeContentView)
-        print("viewModel mode = \(currentDeviceViewModel!.device.simpleMode)")
+        // Get the device data from the API
+        // Chain dit ff in een promise en dan doe je .then en . done. SUCCESS!
+        DeviceManager.API.getDeviceList()
+        .done { newDeviceList in
+            print("Today View Controller: \(newDeviceList)")
+            for device in newDeviceList {
+                var updatedDevice = device
+                DeviceManager.API.getDeviceStatus(for: device)
+                .done { deviceStatus in
+                    updatedDevice.status = deviceStatus
+                }.catch { error in
+                    print("Error: \(error)")
+                }
+            }
+            self.deviceViewModels = newDeviceList.map({return
+                DeviceViewModel(device: $0)})
+            // Save deviceList to local storage
+            try! DeviceManager.Local.saveDeviceList(deviceList: newDeviceList)
+        }.catch { error in
+            print("Error: \(error)")
+        }
+        updateWidgetViews()
     }
     
-    func updateDeviceViewModelsFromAPI() {
-        // Get the device data from the API
-		DeviceManager.API.getDeviceList()
-		.done { deviceListArray in
-			print("Today View Controller: \(deviceListArray)")
-            
-            self.deviceViewModels = deviceListArray.map({return
-                DeviceViewModel(device: $0)})
-            self.updateWidgetViews()
-		}.catch { error in
-			print("Error: \(error)")
-		}
+    public func updateWidgetViews() {
+        print("Updating widget views")
+        guard let currentDeviceViewModel = deviceViewModels?[deviceViewModelIndex] else {
+            // Show loading screen
+            return
+        }
         
+        self.deviceNameLabel.text = currentDeviceViewModel.deviceTitleText
+        self.temperatureLabel.text = currentDeviceViewModel.temperatureLabel
+        self.humidityLabel.text = currentDeviceViewModel.humidityLabel
+        self.modeIcon.image = currentDeviceViewModel.modeIcon
+		
+        // Set the initial childViewController for the modeContentView.
+        add(currentDeviceViewModel.modeSegmentView, viewContainer: modeContentView)
     }
+
     
     func createObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: modeSelection, object: nil)
@@ -101,19 +118,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @objc func switchMode(notification: NSNotification) {
         print("switchmode \(notification.name)")
         // TODO: call mode switch to API, get updated device object, update widget
+        let currentDeviceViewModel = deviceViewModels![deviceViewModelIndex]
         switch notification.name {
         case comfortMode:
-            currentDeviceViewModel!.device.simpleMode = SimpleMode.Comfort
-            print(currentDeviceViewModel!.device.simpleMode)
+            currentDeviceViewModel.device.simpleMode = SimpleMode.Comfort
             print("comfort success")
             self.updateWidgetViews()
         case temperatureMode:
-            currentDeviceViewModel!.device.simpleMode = SimpleMode.Temperature
+            currentDeviceViewModel.device.simpleMode = SimpleMode.Temperature
             self.updateWidgetViews()
         case modeSelection:
             add(ModeSelection(), viewContainer: modeContentView)
         case offMode:
-            currentDeviceViewModel!.device.simpleMode = SimpleMode.Off
+            currentDeviceViewModel.device.simpleMode = SimpleMode.Off
             self.updateWidgetViews()
         default:
             print("Error: notification.name does not match any of the switch cases.")
@@ -153,14 +170,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func switchDevice(with direction: SwitchDirection) {
         switch direction {
         case .left:
-            if deviceViewModelIndex + 1 == deviceViewModels.endIndex {
+            if deviceViewModelIndex + 1 == deviceViewModels!.endIndex {
                 deviceViewModelIndex = 0
             } else {
                 deviceViewModelIndex += 1
             }
         case .right:
-            if deviceViewModelIndex - 1 < deviceViewModels.startIndex {
-                deviceViewModelIndex = deviceViewModels.endIndex - 1
+            if deviceViewModelIndex - 1 < deviceViewModels!.startIndex {
+                deviceViewModelIndex = deviceViewModels!.endIndex - 1
             } else {
                 deviceViewModelIndex -= 1
             }

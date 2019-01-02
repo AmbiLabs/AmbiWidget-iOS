@@ -48,7 +48,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if activeDisplayMode == .compact {
             self.preferredContentSize = maxSize
         } else if activeDisplayMode == .expanded {
-            self.preferredContentSize = CGSize(width: maxSize.width, height: 200)
+            self.preferredContentSize = CGSize(width: maxSize.width, height: 220)
         }
     }
         
@@ -106,9 +106,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.temperatureLabel.text = currentDeviceViewModel.temperatureLabel
         self.humidityLabel.text = currentDeviceViewModel.humidityLabel
         self.modeIcon.image = currentDeviceViewModel.modeIcon
-		
-        // Set the initial childViewController for the modeContentView.
-        add(currentDeviceViewModel.modeSegmentView, viewContainer: modeContentView)
     }
 
     

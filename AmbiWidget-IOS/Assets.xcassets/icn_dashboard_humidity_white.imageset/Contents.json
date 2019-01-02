@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icn_away_humidity_active_white.pdf"
+      "filename" : "icn_dashboard_humidity_white.pdf"
     }
   ],
   "info" : {
@@ -10,6 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
+    "template-rendering-intent" : "template",
     "preserves-vector-representation" : true
   }
 }

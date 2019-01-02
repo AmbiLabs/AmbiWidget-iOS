@@ -23,12 +23,23 @@ class DeviceViewModel {
     }
     
     public var temperatureLabel: String {
-        // Do fahrenheit / celsius conversions here.
-        return "\(device.temperature)"
+		guard var value = device.temperature else {
+			return "‒"
+		}
+		value = round(value * 10) / 10
+		
+		// Do fahrenheit / celsius conversions here.
+		
+		return "\(value)"
     }
     
     public var humidityLabel: String {
-        return "\(device.humidity) %"
+		guard var value = device.humidity else {
+			return "‒"
+		}
+		value = round(value * 10) / 10
+		print("Humidity: \(value)")
+		return "\(value) %"
     }
     
     public var modeIcon: UIImage {

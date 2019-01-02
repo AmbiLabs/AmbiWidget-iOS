@@ -65,34 +65,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func updateWidget() {
         // Get deviceList from local storage
         if let localDeviceList = try? DeviceManager.Local.getDeviceList() {
-            // Update deviceViewModesls
-            self.deviceViewModels = localDeviceList.map({return
+            // Update deviceViewModels
+            self.deviceViewModels = localDeviceList.map({ return
                 DeviceViewModel(device: $0)})
         }
         updateWidgetViews()
         
-        // Get the device data from the API
-        // Chain dit ff in een promise en dan doe je .then en . done. SUCCESS!
+        // Get new device data from the API
         DeviceManager.API.getDeviceList()
-        .done { newDeviceList in
-            print("Today View Controller: \(newDeviceList)")
-            for device in newDeviceList {
-                var updatedDevice = device
-                DeviceManager.API.getDeviceStatus(for: device)
-                .done { deviceStatus in
-                    updatedDevice.status = deviceStatus
-                }.catch { error in
-                    print("Error: \(error)")
-                }
-            }
-            self.deviceViewModels = newDeviceList.map({return
+		.then { newDeviceList in
+			DeviceManager.API.getDeviceStatus(for: newDeviceList)
+		}.done { updatedDeviceList in
+			print("Today View Controller: updatedDeviceList: \(updatedDeviceList)")
+			
+			// Update deviceViewModels
+            self.deviceViewModels = updatedDeviceList.map({ return
                 DeviceViewModel(device: $0)})
+			
             // Save deviceList to local storage
-            try! DeviceManager.Local.saveDeviceList(deviceList: newDeviceList)
+            try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
+			self.updateWidgetViews()
         }.catch { error in
             print("Error: \(error)")
         }
-        updateWidgetViews()
     }
     
     public func updateWidgetViews() {
@@ -159,7 +154,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 deviceViewModelIndex -= 1
             }
         }
-        updateWidgetViews()
+		
+		// Update view with old local data
+		self.updateWidgetViews()
+		print("Updated view with old (local) device status.")
+		
+		// Async call to update with new data
+		DeviceManager.API.getDeviceStatus(for: deviceViewModels![deviceViewModelIndex].device)
+		.done { deviceStatus in
+			self.deviceViewModels![self.deviceViewModelIndex].device.status = deviceStatus
+			self.updateWidgetViews()
+			print("Updated view with new device status.")
+			
+		}.catch { error in
+			print("Error: \(error)")
+		}
     }
     
 }

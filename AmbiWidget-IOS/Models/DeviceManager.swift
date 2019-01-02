@@ -94,7 +94,7 @@ class DeviceManager {
 		// If the accessToken appears to be invalid it will try to recover itself by
 		// getting a new access token and re-executing the fetch on itself.
 		//
-		private static func fetchData(for dataType: DataType, with accessToken: Token, by device: Device? = nil, feedback: ComfortLevel? = nil, modeValue: String? = nil, isRetry: Bool = false) -> Promise<(data: Data, response: URLResponse)> {
+		private static func fetchData(for dataType: DataType, with accessToken: Token, by device: Device? = nil, byMultiple devices: [Device]? = nil, feedback: ComfortLevel? = nil, modeValue: String? = nil, isRetry: Bool = false) -> Promise<(data: Data, response: URLResponse)> {
 			let url = dataType.getUrl(accessToken, device, feedback, modeValue)
 			print(">>> [URL] \(url)")
 			
@@ -220,6 +220,44 @@ class DeviceManager {
 					DeviceManager.API.fetchData(for: DataType.deviceStatus, with: accessToken, by: device)
 				}.compactMap { result in
 					try decodeData(result.data)
+			}
+		}
+		
+		//
+		// Gets the device status from the open API for multiple devices
+		// Returns an updated array of devices: [Device] (NOT a single deviceStatus instance)
+		//
+		static func getDeviceStatus(for deviceList: [Device]) -> Promise<[Device]> {
+			
+			return TokenManager.getAccessToken()
+				.then { accessToken in
+					
+					return Promise { seal in
+						var updatedDeviceList = [Device]()
+						var amountOfCompleted = 0
+						var error: Error?
+						
+						for device in deviceList {
+							var newDevice = device
+							getDeviceStatus(for: device).done { deviceStatus in
+								newDevice.status = deviceStatus
+							}.ensure {
+								updateDevice(newDevice: newDevice)
+							}.cauterize()
+						}
+						
+						func updateDevice(newDevice: Device) {
+							updatedDeviceList.append(newDevice)
+							amountOfCompleted = amountOfCompleted + 1
+							if amountOfCompleted == deviceList.count {
+								print("!!! Updated \(amountOfCompleted) devices with new status.")
+								seal.resolve(updatedDeviceList, error)
+							}
+						}
+					}
+				}
+				.map { result in
+					return result
 			}
 		}
 		

@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icn_device_grey.pdf",
+      "filename" : "icn_mode_manual.pdf",
       "scale" : "1x"
     },
     {
@@ -19,7 +19,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template",
     "preserves-vector-representation" : true
   }
 }

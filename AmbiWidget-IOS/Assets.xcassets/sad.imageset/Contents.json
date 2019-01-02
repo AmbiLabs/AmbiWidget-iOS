@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icn_device_grey.pdf",
+      "filename" : "sad 1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "sad 2x.png",
       "scale" : "2x"
     },
     {
@@ -19,7 +20,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template",
     "preserves-vector-representation" : true
   }
 }

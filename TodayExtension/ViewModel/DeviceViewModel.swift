@@ -48,22 +48,4 @@ class DeviceViewModel {
             return UIImage(named: "icn_mode_off_grey")!
         }
     }
-    
-    public var modeSegmentView: UIViewController {
-		
-        guard let simpleMode = device.simpleMode else {
-            return ModeSelection()
-        }
-		
-        switch simpleMode {
-        case .Comfort:
-            return ComfortMode()
-        case .Temperature:
-            return TemperatureMode()
-        case .Manual:
-            return ModeSelection()
-        case .Off:
-            return ModeSelection()
-        }
-    }
 }

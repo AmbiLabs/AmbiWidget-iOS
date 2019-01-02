@@ -12,9 +12,6 @@ import NotificationCenter
 // TODO:
 // 1) Fix the layout incorrect size bug
 // 2) Off mode icon is not displayed when setting device to off mode
-// DONE 3) Switch the current device displayed
-// DONE 4) Open settings page on button click
-// DONE 5) Make a file for saving constants
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -44,9 +41,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // Do any additional setup after loading the view from its nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print("viewDidLoad: container size = \(modeContentView.frame.size)")
-        createObservers()
-        add(ComfortMode(), viewContainer: modeContentView)
+        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        if activeDisplayMode == .compact {
+            self.preferredContentSize = maxSize
+        } else if activeDisplayMode == .expanded {
+            self.preferredContentSize = CGSize(width: maxSize.width, height: 200)
+        }
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -109,34 +112,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     
-    func createObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: modeSelection, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: comfortMode, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: temperatureMode, object: nil)
-    }
-    
-    @objc func switchMode(notification: NSNotification) {
-        print("switchmode \(notification.name)")
-        // TODO: call mode switch to API, get updated device object, update widget
-        let currentDeviceViewModel = deviceViewModels![deviceViewModelIndex]
-        switch notification.name {
-        case comfortMode:
-            currentDeviceViewModel.device.simpleMode = SimpleMode.Comfort
-            print("comfort success")
-            self.updateWidgetViews()
-        case temperatureMode:
-            currentDeviceViewModel.device.simpleMode = SimpleMode.Temperature
-            self.updateWidgetViews()
-        case modeSelection:
-            add(ModeSelection(), viewContainer: modeContentView)
-        case offMode:
-            currentDeviceViewModel.device.simpleMode = SimpleMode.Off
-            self.updateWidgetViews()
-        default:
-            print("Error: notification.name does not match any of the switch cases.")
-            break
-        }
-    }
+//    func createObservers() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: modeSelection, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: comfortMode, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: temperatureMode, object: nil)
+//    }
     
     @IBAction func touchRefreshButton(_ sender: UIButton) {
         self.updateWidgetViews()

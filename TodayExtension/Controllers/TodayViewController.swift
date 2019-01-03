@@ -11,6 +11,7 @@ import NotificationCenter
 
 // TODO:
 // 1) Fix deviceViewmodelIndex not saved after widgetPerformUpdate.
+// 2) Fix icons changing to white color.
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -76,6 +77,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             // Something went wrong?
             return
         }
+        print("index \(self.deviceViewModelIndex)")
         
         self.deviceNameLabel.text = currentDeviceViewModel.deviceTitleText
         self.locationNameLabel.text = currentDeviceViewModel.locationNameText
@@ -125,6 +127,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 print("Error: \(error)")
         }
     }
+    
+    @IBAction func switchToComfortMode(_ sender: UIButton) {
+        // Get deviceList from local storage.
+        let localDeviceList = try! DeviceManager.Local.getDeviceList()
+        let currentDevice = localDeviceList[deviceViewModelIndex]
+        
+        // Send comfort mode instruction to the API.
+        DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort).done { success in
+            success ? print("The device has been set to comfort mode.") :
+                print("Failed to set the device to comfort mode.")
+            }.catch { error in
+                print("Error: \(error)")
+        }
+    }
+    
+    
     @IBAction func switchDeviceToOffMode(_ sender: UIButton) {
         // Get deviceList from local storage.
         let localDeviceList = try! DeviceManager.Local.getDeviceList()
@@ -177,8 +195,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
         }
 		
-		// Update view with old local data
-		self.updateWidgetViews()
+		// Update view
+        self.updateWidgetViews()
     }
     
 }

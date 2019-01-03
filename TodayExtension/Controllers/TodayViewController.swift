@@ -10,8 +10,7 @@ import UIKit
 import NotificationCenter
 
 // TODO:
-// 1) Fix the layout incorrect size bug
-// 2) Off mode icon is not displayed when setting device to off mode
+// 1)
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -22,17 +21,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         case right
     }
     
-    @IBOutlet weak var modeContentView: UIView!
     @IBOutlet weak var deviceNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var modeIcon: UIImageView!
-    
-    // Notification names
-    let modeSelection = Notification.Name(rawValue: Constants.modeSelectionNotificationKey)
-    let comfortMode = Notification.Name(rawValue: Constants.comfortNotificationKey)
-    let temperatureMode = Notification.Name(rawValue: Constants.temperatureNotificationKey)
-    let offMode = Notification.Name(rawValue: Constants.offNotificationKey)
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -58,42 +50,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        updateWidget()
-        completionHandler(NCUpdateResult.newData)
-    }
-    
-    func updateWidget() {
-        // Get deviceList from local storage
-        if let localDeviceList = try? DeviceManager.Local.getDeviceList() {
-            // Update deviceViewModels
-            self.deviceViewModels = localDeviceList.map({ return
-                DeviceViewModel(device: $0)})
-        }
         updateWidgetViews()
-        
-        // Get new device data from the API
-        DeviceManager.API.getDeviceList()
-		.then { newDeviceList in
-			DeviceManager.API.getDeviceStatus(for: newDeviceList)
-		}.done { updatedDeviceList in
-			print("Today View Controller: updatedDeviceList: \(updatedDeviceList)")
-			
-			// Update deviceViewModels
-            self.deviceViewModels = updatedDeviceList.map({ return
-                DeviceViewModel(device: $0)})
-			
-            // Save deviceList to local storage
-            try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
-			self.updateWidgetViews()
-        }.catch { error in
-            print("Error: \(error)")
-        }
+        updateLocalDeviceList()
+        completionHandler(NCUpdateResult.newData)
     }
     
     public func updateWidgetViews() {
         print("Updating widget views")
-        guard let currentDeviceViewModel = deviceViewModels?[deviceViewModelIndex] else {
-            // Show loading screen
+        
+        // Get deviceList from local storage.
+        guard let localDeviceList = try? DeviceManager.Local.getDeviceList() else {
+            // TODO: Show loading screen
+            
+            // If local storage is empty.
+            updateLocalDeviceList()
+            return
+        }
+        
+        // Update deviceViewModels from local storage.
+        self.deviceViewModels = localDeviceList.map({ return
+            DeviceViewModel(device: $0)})
+        
+        guard let currentDeviceViewModel = self.deviceViewModels?[deviceViewModelIndex] else {
+            // Something went wrong?
             return
         }
         
@@ -101,30 +80,40 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.temperatureLabel.text = currentDeviceViewModel.temperatureLabel
         self.humidityLabel.text = currentDeviceViewModel.humidityLabel
         self.modeIcon.image = currentDeviceViewModel.modeIcon
-    }
-
-    
-//    func createObservers() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: modeSelection, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: comfortMode, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.switchMode(notification:)), name: temperatureMode, object: nil)
-//    }
-    
-    @IBAction func touchRefreshButton(_ sender: UIButton) {
-        self.updateWidgetViews()
-    }
-    
-    @IBAction func touchSettingsButton(_ sender: UIButton) {
-        print("Settings button clicked")
         
-        let myAppUrl = NSURL(string: "widgetcontainingapp://")!
-        extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
-            if (!success) {
-                // let the user know it failed
-                print("Error: something went wrong when tried opening the app...")
-            }
-        })
+        print("Updated view with local device status.")
     }
+    
+    func updateLocalDeviceList() {
+        print("Updating local device list")
+        // Get new device data from the API
+        DeviceManager.API.getDeviceList()
+            .then { newDeviceList in
+                DeviceManager.API.getDeviceStatus(for: newDeviceList)
+            }.done { updatedDeviceList in
+                print("Today View Controller: updatedDeviceList: \(updatedDeviceList)")
+                
+                // Save deviceList to local storage
+                try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
+                
+                // Update widget views
+                self.updateWidgetViews()
+            }.catch { error in
+                print("Error: \(error)")
+        }
+    }
+    
+//    @IBAction func touchSettingsButton(_ sender: UIButton) {
+//        print("Settings button clicked")
+//
+//        let myAppUrl = NSURL(string: "widgetcontainingapp://")!
+//        extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
+//            if (!success) {
+//                // let the user know it failed
+//                print("Error: something went wrong when tried opening the app...")
+//            }
+//        })
+//    }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {
         var direction: SwitchDirection
@@ -157,18 +146,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		
 		// Update view with old local data
 		self.updateWidgetViews()
-		print("Updated view with old (local) device status.")
-		
-		// Async call to update with new data
-		DeviceManager.API.getDeviceStatus(for: deviceViewModels![deviceViewModelIndex].device)
-		.done { deviceStatus in
-			self.deviceViewModels![self.deviceViewModelIndex].device.status = deviceStatus
-			self.updateWidgetViews()
-			print("Updated view with new device status.")
-			
-		}.catch { error in
-			print("Error: \(error)")
-		}
     }
     
 }

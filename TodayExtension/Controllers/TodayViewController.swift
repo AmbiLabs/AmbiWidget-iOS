@@ -22,6 +22,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBOutlet weak var deviceNameLabel: UILabel!
+    @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var modeIcon: UIImageView!
@@ -77,6 +78,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         
         self.deviceNameLabel.text = currentDeviceViewModel.deviceTitleText
+        self.locationNameLabel.text = currentDeviceViewModel.locationNameText
         self.temperatureLabel.text = currentDeviceViewModel.temperatureLabel
         self.humidityLabel.text = currentDeviceViewModel.humidityLabel
         self.modeIcon.image = currentDeviceViewModel.modeIcon
@@ -101,6 +103,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }.catch { error in
                 print("Error: \(error)")
         }
+    }
+    @IBAction func GiveComfortFeedback(_ sender: UIButton) {
     }
     
 //    @IBAction func touchSettingsButton(_ sender: UIButton) {

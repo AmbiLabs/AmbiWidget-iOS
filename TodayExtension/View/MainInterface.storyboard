@@ -110,9 +110,12 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="la4-35-FSJ" userLabel="Bit warm Stack View">
                                                 <rect key="frame" x="0.0" y="7" width="65" height="101.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-i2-def" userLabel="Bit warm Button">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-i2-def" userLabel="Bit warm Button">
                                                         <rect key="frame" x="0.5" y="0.0" width="64" height="67.5"/>
                                                         <state key="normal" image="icon-abitwarm-2"/>
+                                                        <connections>
+                                                            <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="HQ8-Pa-5Xs"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKe-dJ-Ufk" userLabel="Bit warm Label">
                                                         <rect key="frame" x="16" y="73.5" width="33.5" height="28"/>
@@ -144,6 +147,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
                                                         <rect key="frame" x="0.5" y="0.0" width="64" height="69.5"/>
                                                         <state key="normal" image="icon-abitcold-2"/>
+                                                        <connections>
+                                                            <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="eDt-Pt-Du5"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnu-jt-Ogv" userLabel="Bit cold Label">
                                                         <rect key="frame" x="18.5" y="75.5" width="28" height="26"/>
@@ -242,6 +248,7 @@ mode</string>
                     <connections>
                         <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
                         <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
+                        <outlet property="locationNameLabel" destination="Q0S-HD-4M6" id="PjT-nq-frm"/>
                         <outlet property="modeIcon" destination="tLE-7j-zXa" id="11B-Sm-38D"/>
                         <outlet property="temperatureLabel" destination="sPa-ju-krI" id="8zg-aV-a3P"/>
                     </connections>

@@ -10,16 +10,22 @@ import Foundation
 import UIKit
 
 class DeviceViewModel {
-    // Change this to let later
-    public var device: Device
+    public let device: Device
     
     init(device: Device) {
         self.device = device
     }
     
     public var deviceTitleText: String {
-        // TODO: Check the user showDeviceLocation preference and make the deviceTitleText here.
         return device.name
+    }
+    
+    public var locationNameText: String {
+        guard let value = device.locationName else {
+            return "-"
+        }
+        
+        return value
     }
     
     public var temperatureLabel: String {
@@ -30,7 +36,7 @@ class DeviceViewModel {
 		
 		// Do fahrenheit / celsius conversions here.
 		
-		return "\(value)"
+		return "\(value)°"
     }
     
     public var humidityLabel: String {

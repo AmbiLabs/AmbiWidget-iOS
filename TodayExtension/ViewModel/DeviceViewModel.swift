@@ -45,7 +45,7 @@ class DeviceViewModel {
 		}
 		value = round(value * 10) / 10
 		print("Humidity: \(value)")
-		return "\(value) %"
+		return "\(value)%"
     }
     
     public var modeIcon: UIImage {

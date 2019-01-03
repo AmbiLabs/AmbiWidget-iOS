@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 
 // TODO:
-// 1)
+// 1) Fix deviceViewmodelIndex not saved after widgetPerformUpdate.
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -105,6 +105,37 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     @IBAction func GiveComfortFeedback(_ sender: UIButton) {
+        // Get deviceList from local storage.
+        let localDeviceList = try! DeviceManager.Local.getDeviceList()
+        let currentDevice = localDeviceList[deviceViewModelIndex]
+        
+        var comfortLevel: ComfortLevel?
+        print(sender.tag)
+        if sender.tag == 1 {
+            comfortLevel = .BitWarm
+        } else if sender.tag == 2 {
+            comfortLevel = .BitCold
+        }
+        
+        // Send comfort feedback to the API.
+        DeviceManager.API.giveComfortFeedback(for: currentDevice, with: comfortLevel!).done { success in
+            success ? print("Feedback given: \(comfortLevel!)") :
+                print("Something went wrong while trying to give feedback \(comfortLevel!)")
+            }.catch { error in
+                print("Error: \(error)")
+        }
+    }
+    @IBAction func switchDeviceToOffMode(_ sender: UIButton) {
+        // Get deviceList from local storage.
+        let localDeviceList = try! DeviceManager.Local.getDeviceList()
+        let currentDevice = localDeviceList[deviceViewModelIndex]
+        
+        // Send power off instruction to the API.
+        DeviceManager.API.powerOff(for: currentDevice).done { success in
+            success ? print("The device has been set to off mode") : print("Failed to set device to off mode.")
+            }.catch { error in
+                print("Error: \(error)")
+        }
     }
     
 //    @IBAction func touchSettingsButton(_ sender: UIButton) {
@@ -120,16 +151,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 //    }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {
-        var direction: SwitchDirection
+        var direction: SwitchDirection?
         
         if sender.tag == 6 {
             direction = .left
-            switchDevice(with: direction)
         } else if sender.tag == 7 {
             direction = .right
-            switchDevice(with: direction)
         }
-        
+        switchDevice(with: direction!)
     }
     
     func switchDevice(with direction: SwitchDirection) {

@@ -144,7 +144,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="knH-Iw-9XV" userLabel="Bit cold Stack View">
                                                 <rect key="frame" x="75" y="7" width="65" height="101.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
                                                         <rect key="frame" x="0.5" y="0.0" width="64" height="69.5"/>
                                                         <state key="normal" image="icon-abitcold-2"/>
                                                         <connections>
@@ -197,6 +197,9 @@ mode</string>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
                                                         <rect key="frame" x="0.5" y="0.0" width="64" height="66"/>
                                                         <state key="normal" image="icon-off"/>
+                                                        <connections>
+                                                            <action selector="switchDeviceToOffMode:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="vol-ho-6b1"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO0-ql-491" userLabel="Off mode Label">
                                                         <rect key="frame" x="15.5" y="72" width="34.5" height="29.5"/>

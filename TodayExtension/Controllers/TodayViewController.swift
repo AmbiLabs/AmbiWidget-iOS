@@ -11,7 +11,7 @@ import NotificationCenter
 
 // TODO:
 // 1) Fix deviceViewmodelIndex not saved after widgetPerformUpdate.
-// 2) Fix icons changing to white color.
+// 2) DONE Fix icons changing to white color.
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -28,6 +28,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var modeIcon: UIImageView!
     
+    @IBOutlet weak var buttonRow: UIStackView!
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -40,8 +42,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         if activeDisplayMode == .compact {
+            self.buttonRow.isHidden = true
             self.preferredContentSize = maxSize
         } else if activeDisplayMode == .expanded {
+            self.buttonRow.isHidden = false
             self.preferredContentSize = CGSize(width: maxSize.width, height: 220)
         }
     }

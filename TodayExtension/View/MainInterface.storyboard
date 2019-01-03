@@ -248,10 +248,11 @@ mode</string>
                         <viewLayoutGuide key="safeArea" id="QRD-7a-zf8"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="110"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="240"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="240"/>
                     <connections>
+                        <outlet property="buttonRow" destination="UIh-Dj-xTx" id="EeH-66-Rnz"/>
                         <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
                         <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
                         <outlet property="locationNameLabel" destination="Q0S-HD-4M6" id="PjT-nq-frm"/>

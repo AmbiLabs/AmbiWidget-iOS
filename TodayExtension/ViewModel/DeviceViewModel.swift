@@ -10,16 +10,22 @@ import Foundation
 import UIKit
 
 class DeviceViewModel {
-    // Change this to let later
-    public var device: Device
+    public let device: Device
     
     init(device: Device) {
         self.device = device
     }
     
     public var deviceTitleText: String {
-        // TODO: Check the user showDeviceLocation preference and make the deviceTitleText here.
         return device.name
+    }
+    
+    public var locationNameText: String {
+        guard let value = device.locationName else {
+            return "-"
+        }
+        
+        return value
     }
     
     public var temperatureLabel: String {
@@ -30,7 +36,7 @@ class DeviceViewModel {
 		
 		// Do fahrenheit / celsius conversions here.
 		
-		return "\(value)"
+		return "\(value)°"
     }
     
     public var humidityLabel: String {
@@ -39,7 +45,7 @@ class DeviceViewModel {
 		}
 		value = round(value * 10) / 10
 		print("Humidity: \(value)")
-		return "\(value) %"
+		return "\(value)%"
     }
     
     public var modeIcon: UIImage {
@@ -57,24 +63,6 @@ class DeviceViewModel {
             return UIImage(named: "icn_mode_manual")!
         case .Off:
             return UIImage(named: "icn_mode_off_grey")!
-        }
-    }
-    
-    public var modeSegmentView: UIViewController {
-		
-        guard let simpleMode = device.simpleMode else {
-            return ModeSelection()
-        }
-		
-        switch simpleMode {
-        case .Comfort:
-            return ComfortMode()
-        case .Temperature:
-            return TemperatureMode()
-        case .Manual:
-            return ModeSelection()
-        case .Off:
-            return ModeSelection()
         }
     }
 }

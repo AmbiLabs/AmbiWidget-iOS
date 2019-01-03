@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,23 +19,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqL-c0-cTc">
-                                <rect key="frame" x="16" y="36" width="193.5" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mac_appicon-512" translatesAutoresizingMaskIntoConstraints="NO" id="WxD-Er-NlR">
+                                <rect key="frame" x="67" y="70" width="241" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="SX1-VI-wm8"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication Required" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="oqL-c0-cTc">
+                                <rect key="frame" x="80.5" y="220" width="214" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs permission from the Ambi Climate Cloud to control and read your Ambi devices." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-0x-R8x">
-                                <rect key="frame" x="16" y="64.5" width="343" height="61"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs permission from the Ambi Climate Cloud to control and read your Ambi devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-0x-R8x">
+                                <rect key="frame" x="30" y="253" width="315" height="70"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezv-tb-Ria">
-                                <rect key="frame" x="148.5" y="133.5" width="78" height="33"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <rect key="frame" x="37.5" y="567" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="c8P-qI-LD5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="kcs-Hd-rSQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Authorise">
-                                    <color key="titleColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="authoriseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vPi-uS-4wX"/>
@@ -43,22 +55,28 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Ezv-tb-Ria" firstAttribute="top" secondItem="eUE-0x-R8x" secondAttribute="bottom" constant="8" symbolic="YES" id="1aB-v8-hhN"/>
-                            <constraint firstItem="oqL-c0-cTc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="3jJ-LG-UtF"/>
+                            <constraint firstItem="Ezv-tb-Ria" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-50" id="1aB-v8-hhN"/>
+                            <constraint firstItem="oqL-c0-cTc" firstAttribute="top" secondItem="WxD-Er-NlR" secondAttribute="bottom" constant="50" id="3jJ-LG-UtF"/>
+                            <constraint firstItem="WxD-Er-NlR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dwi-zM-EYr"/>
+                            <constraint firstItem="WxD-Er-NlR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="HOg-NP-AeD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oqL-c0-cTc" secondAttribute="trailing" symbolic="YES" id="Hbw-dc-l1T"/>
+                            <constraint firstItem="eUE-0x-R8x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-30" id="NBM-kP-b6k"/>
                             <constraint firstItem="Ezv-tb-Ria" firstAttribute="centerX" secondItem="eUE-0x-R8x" secondAttribute="centerX" id="P5k-Y9-64p"/>
-                            <constraint firstItem="eUE-0x-R8x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dtg-Ws-jmO"/>
-                            <constraint firstItem="eUE-0x-R8x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="16" id="hsd-Nz-750"/>
+                            <constraint firstItem="WxD-Er-NlR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="VLd-5T-kj9"/>
+                            <constraint firstItem="oqL-c0-cTc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Z88-At-TRW"/>
+                            <constraint firstItem="eUE-0x-R8x" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oZ1-SW-gL7"/>
                             <constraint firstItem="eUE-0x-R8x" firstAttribute="top" secondItem="oqL-c0-cTc" secondAttribute="bottom" constant="8" symbolic="YES" id="u65-8P-QYQ"/>
-                            <constraint firstItem="oqL-c0-cTc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="yJO-uH-D2Q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="6C0-fo-Mbb"/>
+                    <connections>
+                        <outlet property="authoriseButton" destination="Ezv-tb-Ria" id="FZ9-aK-xha"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2116" y="-653"/>
+            <point key="canvasLocation" x="2116" y="-653.52323838080963"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="bey-su-DTe">
@@ -68,58 +86,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Widget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb">
-                                <rect key="frame" x="16" y="80" width="58" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb">
+                                <rect key="frame" x="20" y="84" width="54.5" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With this app you can add an Ambi Widget to your Today View." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH">
-                                <rect key="frame" x="16" y="108.5" width="349" height="41"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH">
+                                <rect key="frame" x="20" y="117" width="335" height="93"/>
+                                <string key="text">With this app you can add an Ambi Widget to your Today View. Ambi Widget allows you to have quick controls on Comfort Mode, Off mode and comfort feedback.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a Widget:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ">
-                                <rect key="frame" x="16" y="177" width="171.5" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a widget?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ">
+                                <rect key="frame" x="20" y="235.5" width="193" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham">
-                                <rect key="frame" x="16" y="205.5" width="268" height="122"/>
-                                <string key="text">1. Press the Home button.
-2. Navigate to the most left screen.
-3. Click on the "Edit" button.
-4. Look for "Ambi Widget".
-5. Press the green (+) button.
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham">
+                                <rect key="frame" x="20" y="268.5" width="302" height="139.5"/>
+                                <string key="text">1. Swipe right over the Home screen or
+    Lock screen
+2. Scroll to the bottom and tap Edit
+3. Look for "Ambi Widget"
+4. Tap the green (+) button
 5. Done! </string>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" red="0.1176470588" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" name="GreyBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="16" id="0RW-Dn-WhJ"/>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="20" id="0RW-Dn-WhJ"/>
                             <constraint firstItem="vGl-w0-ham" firstAttribute="top" secondItem="oew-BC-YVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Bb5-Eo-8lU"/>
                             <constraint firstItem="mOd-dR-R2E" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="w5k-vu-0vb" secondAttribute="trailing" symbolic="YES" id="HCj-VE-rr6"/>
                             <constraint firstItem="WPt-Ej-ETH" firstAttribute="top" secondItem="w5k-vu-0vb" secondAttribute="bottom" constant="8" symbolic="YES" id="Kdq-py-lti"/>
-                            <constraint firstItem="oew-BC-YVJ" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="SA5-De-FaP"/>
-                            <constraint firstItem="w5k-vu-0vb" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="XR9-oN-aGz"/>
+                            <constraint firstItem="oew-BC-YVJ" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="SA5-De-FaP"/>
+                            <constraint firstItem="w5k-vu-0vb" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="XR9-oN-aGz"/>
                             <constraint firstItem="oew-BC-YVJ" firstAttribute="top" secondItem="WPt-Ej-ETH" secondAttribute="baseline" constant="32" id="XzR-wl-5lL"/>
-                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="16" id="dNK-L2-0y1"/>
-                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="hvY-VU-dSR"/>
-                            <constraint firstItem="vGl-w0-ham" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="16" id="jUx-XW-885">
+                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="-20" id="dNK-L2-0y1"/>
+                            <constraint firstItem="WPt-Ej-ETH" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="hvY-VU-dSR"/>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="jUx-XW-885">
                                 <string key="userLabel">1. Press the Home button. 2. Navigate to the most left screen, this the Today View. 3. Click on the "Edit" button. 4. Look for "Ambi Widget" and press the green + button. 5. Done! .leading = Safe Area.leading + 16</string>
                             </constraint>
-                            <constraint firstItem="w5k-vu-0vb" firstAttribute="top" secondItem="mOd-dR-R2E" secondAttribute="top" constant="16" id="p6e-Hl-dGJ"/>
+                            <constraint firstItem="w5k-vu-0vb" firstAttribute="top" secondItem="mOd-dR-R2E" secondAttribute="top" constant="20" id="p6e-Hl-dGJ"/>
                             <constraint firstItem="mOd-dR-R2E" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oew-BC-YVJ" secondAttribute="trailing" symbolic="YES" id="rx3-e0-d1j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mOd-dR-R2E"/>
                     </view>
                     <navigationItem key="navigationItem" id="AL9-G6-H95">
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="icn_settings_ios_grey" id="ejm-8E-wTm">
+                            <color key="tintColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="settingsButton:" destination="sxJ-AE-EnB" id="xWb-s1-Gwb"/>
                             </connections>
@@ -151,5 +171,9 @@
     </scenes>
     <resources>
         <image name="icn_settings_ios_grey" width="44" height="44"/>
+        <image name="mac_appicon-512" width="512" height="512"/>
+        <namedColor name="GreyBlack">
+            <color red="0.25900000333786011" green="0.25900000333786011" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

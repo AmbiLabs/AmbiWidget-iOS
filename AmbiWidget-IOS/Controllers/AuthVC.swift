@@ -10,6 +10,8 @@ import UIKit
 
 class AuthVC: UIViewController {
 	
+	@IBOutlet weak var authoriseButton: UIButton!
+	
 	// Authentication Url & Parameters
 	let authoriseURL = "https://api.ambiclimate.com/oauth2/authorize"
 	let responseType = "code"
@@ -18,6 +20,9 @@ class AuthVC: UIViewController {
         super.viewDidLoad()
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(onAuthCodeReceive(_:)), name: .onAuthCodeReceive, object: nil)
+		
+		// Add border radius to authorise button
+		authoriseButton.layer.cornerRadius = 25
     }
 
 	@IBAction func authoriseButton(_ sender: UIButton) {

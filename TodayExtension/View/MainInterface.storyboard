@@ -154,7 +154,7 @@ cold</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dQr-fO-V8T" userLabel="Comfort mode Stack View">
                                                 <rect key="frame" x="145" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-Ga-XgC" userLabel="Comfort mode Button">
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-Ga-XgC" userLabel="Comfort mode Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-comfort"/>
                                                         <connections>
@@ -174,7 +174,7 @@ mode</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="clX-bd-ccw" userLabel="Off mode Stack View">
                                                 <rect key="frame" x="217.5" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-off"/>
                                                         <connections>
@@ -215,11 +215,16 @@ mode</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="240"/>
                     <connections>
+                        <outlet property="bitColdButton" destination="qmP-V0-ONW" id="seh-Rr-bOq"/>
+                        <outlet property="bitWarmButton" destination="ri7-i2-def" id="aY7-WL-d2U"/>
                         <outlet property="buttonRow" destination="UIh-Dj-xTx" id="EeH-66-Rnz"/>
+                        <outlet property="comfortButton" destination="zmU-Ga-XgC" id="sPa-PY-2lk"/>
                         <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
                         <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
                         <outlet property="locationNameLabel" destination="Q0S-HD-4M6" id="PjT-nq-frm"/>
+                        <outlet property="mainView" destination="Oa6-Q7-XZb" id="9kD-Ti-98b"/>
                         <outlet property="modeIcon" destination="tLE-7j-zXa" id="11B-Sm-38D"/>
+                        <outlet property="offButton" destination="7MW-HP-Fqn" id="tka-gu-Gia"/>
                         <outlet property="temperatureLabel" destination="sPa-ju-krI" id="8zg-aV-a3P"/>
                     </connections>
                 </viewController>

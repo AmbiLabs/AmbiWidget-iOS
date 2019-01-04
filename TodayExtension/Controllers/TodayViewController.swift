@@ -183,6 +183,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
 	}
 	
+	func changeModeIcon(to mode: SimpleMode) {
+		let deviceList = try! DeviceManager.Local.getDeviceList()
+		var updatedDeviceList = deviceList
+		updatedDeviceList[getCurrentDeviceViewModelIndex()].simpleMode = mode
+		try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
+	}
+	
     @IBAction func GiveComfortFeedback(_ sender: UIButton) {
 		
 		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
@@ -199,11 +206,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         
         // Send comfort feedback to the API.
-        DeviceManager.API.giveComfortFeedback(for: currentDevice, with: comfortLevel!).done { success in
-            success ? print("Feedback given: \(comfortLevel!)") :
-                print("Something went wrong while trying to give feedback \(comfortLevel!)")
-            }.catch { error in
-                print("Error: \(error)")
+        DeviceManager.API.giveComfortFeedback(for: currentDevice, with: comfortLevel!)
+		.done { success in
+			if success {
+				print("Feedback given: \(comfortLevel!)")
+				// Set mode icon
+				self.changeModeIcon(to: .Comfort)
+				self.updateWidgetViews()
+			} else {
+				print("Something went wrong while trying to give comfort feedback.")
+			}
+		}.catch { error in
+			print("Error: \(error)")
         }
     }
     
@@ -215,11 +229,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
         
         // Send comfort mode instruction to the API.
-        DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort).done { success in
-            success ? print("The device has been set to comfort mode.") :
-                print("Failed to set the device to comfort mode.")
-            }.catch { error in
-                print("Error: \(error)")
+        DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort)
+		.done { success in
+			if success {
+				print("The device has been set to comfort mode.")
+				// Set mode icon
+				self.changeModeIcon(to: .Comfort)
+				self.updateWidgetViews()
+			} else {
+				print("Failed to set the device to comfort mode.")
+			}
+		}.catch { error in
+			print("Error: \(error)")
         }
     }
     
@@ -232,10 +253,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
         
         // Send power off instruction to the API.
-        DeviceManager.API.powerOff(for: currentDevice).done { success in
-            success ? print("The device has been set to off mode") : print("Failed to set device to off mode.")
-            }.catch { error in
-                print("Error: \(error)")
+        DeviceManager.API.powerOff(for: currentDevice)
+		.done { success in
+			if success {
+				print("The device has been set to off mode.")
+				// Set mode icon
+				self.changeModeIcon(to: .Off)
+				self.updateWidgetViews()
+			} else {
+				print("Failed to set the device to off mode.")
+			}
+		}.catch { error in
+			print("Error: \(error)")
         }
     }
     

@@ -83,9 +83,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Get deviceList from local storage.
         guard let localDeviceList = try? DeviceManager.Local.getDeviceList() else {
-            // TODO: Show loading screen
+            // Show loading screen.
+            mainView.isHidden = true
+            self.loadingViewController.view.isHidden = false
             return
         }
+        
+        // Hide lodading screen.
+        self.mainView.isHidden = false
+        self.loadingViewController.view.isHidden = true
         
         // Update deviceViewModels from local storage.
         self.deviceViewModels = localDeviceList.map({ return
@@ -107,8 +113,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLocalDeviceList() {
         print("Updating local device list")
-        mainView.isHidden = true
-        self.loadingViewController.view.isHidden = false
         
         // Get new device data from the API
         DeviceManager.API.getDeviceList()
@@ -121,9 +125,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 // Update widget views
                 self.updateWidgetViews()
-                self.mainView.isHidden = false
-                self.loadingViewController.view.isHidden = true
-            
             }.catch { error in
                 print("Error: \(error)")
         }

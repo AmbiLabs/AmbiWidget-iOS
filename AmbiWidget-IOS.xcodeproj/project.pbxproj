@@ -53,6 +53,7 @@
 		CAEA2BF921C3573600907EDB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAEA2BF821C3573600907EDB /* Settings.bundle */; };
 		CAEA2BFB21C3863900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
 		CAEA2BFC21C3870900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
+		F107029621DF00D300FDA207 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F107029521DF00D300FDA207 /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,7 @@
 		CAEA2BF821C3573600907EDB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F107029521DF00D300FDA207 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		F21704173721C9BC24A0A410 /* Pods-AmbiWidget-IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOSUITests/Pods-AmbiWidget-IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -317,6 +319,7 @@
 			children = (
 				CA9A97F221C203D20015EB39 /* TodayViewController.swift */,
 				CA9A97EE21C203D10015EB39 /* TodayExtension-Bridging-Header.h */,
+				F107029521DF00D300FDA207 /* LoadingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 			files = (
 				CA9A97F621C203D20015EB39 /* TodayViewController.swift in Sources */,
 				CA9A982B21C229690015EB39 /* TokenManager.swift in Sources */,
+				F107029621DF00D300FDA207 /* LoadingViewController.swift in Sources */,
 				CA9A982921C229690015EB39 /* DeviceStatus.swift in Sources */,
 				CA9A982721C229690015EB39 /* Token.swift in Sources */,
 				CA9A982521C229690015EB39 /* NotificationNames.swift in Sources */,

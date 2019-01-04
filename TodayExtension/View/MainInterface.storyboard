@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,12 +23,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Oa6-Q7-XZb">
                                 <rect key="frame" x="15" y="15" width="290" height="210"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="65C-T0-Y5W" userLabel="Top Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="65C-T0-Y5W" userLabel="Top Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="290" height="78.5"/>
                                         <subviews>
-                                            <button opaque="NO" tag="6" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yp-PJ-cKU" userLabel="Button left">
-                                                <rect key="frame" x="0.0" y="0.0" width="12" height="78.5"/>
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yp-PJ-cKU" userLabel="Button left">
+                                                <rect key="frame" x="0.0" y="0.0" width="29" height="78.5"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="arrow-left">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
@@ -36,10 +38,10 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-Q1-doZ" userLabel="Title/Stats Stack View">
-                                                <rect key="frame" x="51" y="0.0" width="188" height="78.5"/>
+                                                <rect key="frame" x="37" y="0.0" width="216" height="78.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2QI-Qe-9Ed" userLabel="Title row">
-                                                        <rect key="frame" x="36" y="0.0" width="116.5" height="44.5"/>
+                                                        <rect key="frame" x="50" y="0.0" width="116.5" height="44.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH" userLabel="Label device name">
                                                                 <rect key="frame" x="0.0" y="0.0" width="116.5" height="23"/>
@@ -56,7 +58,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-D2-fB2" userLabel="Stats row">
-                                                        <rect key="frame" x="16" y="54.5" width="156" height="24"/>
+                                                        <rect key="frame" x="30" y="54.5" width="156" height="24"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CxF-oT-4EI" userLabel="Temperature Stack View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="52.5" height="24"/>
@@ -95,9 +97,10 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" tag="7" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epJ-44-CAP" userLabel="Button right">
-                                                <rect key="frame" x="278" y="0.0" width="12" height="78.5"/>
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epJ-44-CAP" userLabel="Button right">
+                                                <rect key="frame" x="261" y="0.0" width="29" height="78.5"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="7" maxY="0.0"/>
                                                 <state key="normal" image="arrow-right"/>
                                                 <connections>
                                                     <action selector="touchSwitchDeviceButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="oxh-Kw-Mkm"/>
@@ -105,21 +108,21 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="center" distribution="fillEqually" alignment="center" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIh-Dj-xTx" userLabel="Button's row Stack View">
+                                    <stackView opaque="NO" contentMode="center" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIh-Dj-xTx" userLabel="Button's row Stack View">
                                         <rect key="frame" x="0.0" y="94.5" width="290" height="115.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="la4-35-FSJ" userLabel="Bit warm Stack View">
-                                                <rect key="frame" x="0.0" y="7" width="65" height="101.5"/>
+                                                <rect key="frame" x="0.0" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-i2-def" userLabel="Bit warm Button">
-                                                        <rect key="frame" x="0.5" y="0.0" width="64" height="64"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-abitwarm-2"/>
                                                         <connections>
                                                             <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="HQ8-Pa-5Xs"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKe-dJ-Ufk" userLabel="Bit warm Label">
-                                                        <rect key="frame" x="16" y="70" width="33.5" height="31.5"/>
+                                                        <rect key="frame" x="19.5" y="70" width="33.5" height="31.5"/>
                                                         <string key="text">A bit
 warm</string>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
@@ -129,17 +132,17 @@ warm</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="knH-Iw-9XV" userLabel="Bit cold Stack View">
-                                                <rect key="frame" x="75" y="7" width="65" height="101.5"/>
+                                                <rect key="frame" x="72.5" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
-                                                        <rect key="frame" x="0.5" y="0.0" width="64" height="64"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-abitcold-2"/>
                                                         <connections>
                                                             <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="eDt-Pt-Du5"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnu-jt-Ogv" userLabel="Bit cold Label">
-                                                        <rect key="frame" x="18.5" y="70" width="28" height="31.5"/>
+                                                        <rect key="frame" x="22.5" y="70" width="28" height="31.5"/>
                                                         <string key="text">A bit
 cold</string>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
@@ -149,17 +152,17 @@ cold</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dQr-fO-V8T" userLabel="Comfort mode Stack View">
-                                                <rect key="frame" x="150" y="7" width="65" height="101.5"/>
+                                                <rect key="frame" x="145" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-Ga-XgC" userLabel="Comfort mode Button">
-                                                        <rect key="frame" x="0.5" y="0.0" width="64" height="64"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-comfort"/>
                                                         <connections>
                                                             <action selector="switchToComfortMode:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="tbf-0b-DWs"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tny-Ma-LnL" userLabel="Comfort mode Label">
-                                                        <rect key="frame" x="5.5" y="70" width="54" height="31.5"/>
+                                                        <rect key="frame" x="9.5" y="70" width="54" height="31.5"/>
                                                         <string key="text">Comfort 
 mode</string>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
@@ -169,17 +172,17 @@ mode</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="clX-bd-ccw" userLabel="Off mode Stack View">
-                                                <rect key="frame" x="225" y="7" width="65" height="101.5"/>
+                                                <rect key="frame" x="217.5" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
-                                                        <rect key="frame" x="0.5" y="0.0" width="64" height="64"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-off"/>
                                                         <connections>
                                                             <action selector="switchDeviceToOffMode:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="vol-ho-6b1"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO0-ql-491" userLabel="Off mode Label">
-                                                        <rect key="frame" x="15.5" y="70" width="34.5" height="31.5"/>
+                                                        <rect key="frame" x="19" y="70" width="34.5" height="31.5"/>
                                                         <string key="text">Off
 mode</string>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>

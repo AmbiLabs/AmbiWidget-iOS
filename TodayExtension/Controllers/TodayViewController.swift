@@ -75,6 +75,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's an update, use NCUpdateResult.NewData
 		guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
 			// Show auth button and view
+            mainView.isHidden = true
+            let authOverlay = AuthOverlayViewController()
+            authOverlay.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+
+            add(authOverlay)
+            
 			return
 		}
 		

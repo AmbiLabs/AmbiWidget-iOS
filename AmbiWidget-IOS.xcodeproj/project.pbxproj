@@ -55,6 +55,8 @@
 		CAEA2BFB21C3863900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
 		CAEA2BFC21C3870900907EDB /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */; };
 		F107029621DF00D300FDA207 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F107029521DF00D300FDA207 /* LoadingViewController.swift */; };
+		F107029D21DF653F00FDA207 /* AuthOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */; };
+		F107029E21DF653F00FDA207 /* AuthOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +160,8 @@
 		CAEA2BFA21C3863900907EDB /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F107029521DF00D300FDA207 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOverlayViewController.swift; sourceTree = "<group>"; };
+		F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthOverlayViewController.xib; sourceTree = "<group>"; };
 		F21704173721C9BC24A0A410 /* Pods-AmbiWidget-IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOSUITests/Pods-AmbiWidget-IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +326,7 @@
 				CA9A97F221C203D20015EB39 /* TodayViewController.swift */,
 				CA9A97EE21C203D10015EB39 /* TodayExtension-Bridging-Header.h */,
 				F107029521DF00D300FDA207 /* LoadingViewController.swift */,
+				F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 		CA9A97FC21C204080015EB39 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */,
 				CA9A980021C204190015EB39 /* MainInterface.storyboard */,
 			);
 			path = View;
@@ -565,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA9A980F21C206100015EB39 /* Assets.xcassets in Resources */,
+				F107029E21DF653F00FDA207 /* AuthOverlayViewController.xib in Resources */,
 				CA9A980421C204190015EB39 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +733,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F107029D21DF653F00FDA207 /* AuthOverlayViewController.swift in Sources */,
 				CA9A97F621C203D20015EB39 /* TodayViewController.swift in Sources */,
 				CA9A982B21C229690015EB39 /* TokenManager.swift in Sources */,
 				F107029621DF00D300FDA207 /* LoadingViewController.swift in Sources */,

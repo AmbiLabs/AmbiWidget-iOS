@@ -94,6 +94,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLocalDeviceList() {
         print("Updating local device list")
+        
         // Get new device data from the API
         DeviceManager.API.getDeviceList()
             .then { newDeviceList in
@@ -206,9 +207,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 }
 
 extension UIViewController {
-    func add(_ child: UIViewController, viewContainer: UIView) {
+    func add(_ child: UIViewController) {
         addChild(child)
-        viewContainer.addSubview(child.view)
+        view.addSubview(child.view)
         child.didMove(toParent: self)
     }
     func remove() {

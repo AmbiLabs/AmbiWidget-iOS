@@ -10,8 +10,7 @@ import UIKit
 import NotificationCenter
 
 // TODO:
-// 1) Fix deviceViewmodelIndex not saved after widgetPerformUpdate.
-// 2) DONE Fix icons changing to white color.
+// 1)
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
@@ -34,8 +33,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var modeIcon: UIImageView!
+    @IBOutlet weak var bitWarmButton: UIButton!
+    @IBOutlet weak var bitColdButton: UIButton!
+    @IBOutlet weak var comfortButton: UIButton!
+    @IBOutlet weak var offButton: UIButton!
     
     @IBOutlet weak var buttonRow: UIStackView!
+    @IBOutlet weak var mainView: UIStackView!
+    
+    var loadingViewController = LoadingViewController()
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -45,6 +51,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        
+        
+        add(loadingViewController)
+        loadingViewController.view.isHidden = true
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
@@ -97,6 +107,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLocalDeviceList() {
         print("Updating local device list")
+        mainView.isHidden = true
+        self.loadingViewController.view.isHidden = false
         
         // Get new device data from the API
         DeviceManager.API.getDeviceList()
@@ -109,6 +121,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 
                 // Update widget views
                 self.updateWidgetViews()
+                self.mainView.isHidden = false
+                self.loadingViewController.view.isHidden = true
+            
             }.catch { error in
                 print("Error: \(error)")
         }
@@ -185,17 +200,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	}
 	
     @IBAction func GiveComfortFeedback(_ sender: UIButton) {
-		
+        // Get the current device viewModel.
 		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
 			print("Could not give comfort feedback, currentDeviceViewModel not found")
 			return
 		}
         
         var comfortLevel: ComfortLevel?
-        print(sender.tag)
         if sender.tag == 1 {
+            // Show loading indicator.
+            bitWarmButton.loadingIndicator(show: true)
             comfortLevel = .BitWarm
         } else if sender.tag == 2 {
+            // Show loading indicator.
+            bitColdButton.loadingIndicator(show: true)
             comfortLevel = .BitCold
         }
         
@@ -203,13 +221,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DeviceManager.API.giveComfortFeedback(for: currentDevice, with: comfortLevel!).done { success in
             success ? print("Feedback given: \(comfortLevel!)") :
                 print("Something went wrong while trying to give feedback \(comfortLevel!)")
+            
+            // Hide loading indicator.
+            comfortLevel == .BitWarm ? self.bitWarmButton.loadingIndicator(show: false) : self.bitColdButton.loadingIndicator(show: false)
+            
             }.catch { error in
                 print("Error: \(error)")
         }
     }
     
     @IBAction func switchToComfortMode(_ sender: UIButton) {
-		
+		// Show loading indicator.
+        self.comfortButton.loadingIndicator(show: true)
+        
 		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
 			print("Could not give comfort feedback, currentDeviceViewModel not found")
 			return
@@ -219,6 +243,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort).done { success in
             success ? print("The device has been set to comfort mode.") :
                 print("Failed to set the device to comfort mode.")
+            
+            // Hide loading indicator.
+            self.comfortButton.loadingIndicator(show: false)
             }.catch { error in
                 print("Error: \(error)")
         }
@@ -226,7 +253,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     @IBAction func switchDeviceToOffMode(_ sender: UIButton) {
-		
+		// Show loading indicator.
+        self.offButton.loadingIndicator(show: true)
+        
 		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
 			print("Could not give comfort feedback, currentDeviceViewModel not found")
 			return
@@ -235,6 +264,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Send power off instruction to the API.
         DeviceManager.API.powerOff(for: currentDevice).done { success in
             success ? print("The device has been set to off mode") : print("Failed to set device to off mode.")
+            
+            // Hide loading indicator.
+            self.offButton.loadingIndicator(show: false)
             }.catch { error in
                 print("Error: \(error)")
         }
@@ -305,5 +337,56 @@ extension UIViewController {
         willMove(toParent: nil)
         removeFromParent()
         view.removeFromSuperview()
+    }
+}
+
+extension UIButton {
+    func loadingIndicator(show: Bool) {
+        if show {
+            let indicator = UIActivityIndicatorView()
+            let buttonHeight = self.bounds.size.height
+            let buttonWidth = self.bounds.size.width
+            indicator.center = CGPoint(x: buttonWidth/2, y: buttonHeight/2)
+            indicator.style = .whiteLarge
+            self.addSubview(indicator)
+            indicator.startAnimating()
+            
+            // Change background image.
+            switch self.tag {
+            case 1:
+                self.setImage(UIImage(named: "icon-abitwarm-2-bg"), for: UIControl.State.normal)
+            case 2:
+                self.setImage(UIImage(named: "icon-abitcold-2-bg"), for: UIControl.State.normal)
+            case 3:
+                self.setImage(UIImage(named: "icon-comfort-bg"), for: UIControl.State.normal)
+            case 4:
+                self.setImage(UIImage(named: "icon-off-bg"), for: UIControl.State.normal)
+            default:
+                print("ERRR Something went wrong")
+                return
+            }
+        } else {
+            for view in self.subviews {
+                if let indicator = view as? UIActivityIndicatorView {
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
+                    
+                    // Change background image.
+                    switch self.tag {
+                    case 1:
+                        self.setImage(UIImage(named: "icon-abitwarm-2"), for: UIControl.State.normal)
+                    case 2:
+                        self.setImage(UIImage(named: "icon-abitcold-2"), for: UIControl.State.normal)
+                    case 3:
+                        self.setImage(UIImage(named: "icon-comfort"), for: UIControl.State.normal)
+                    case 4:
+                        self.setImage(UIImage(named: "icon-off"), for: UIControl.State.normal)
+                    default:
+                        print("ERRR Something went wrong")
+                        return
+                    }
+                }
+            }
+        }
     }
 }

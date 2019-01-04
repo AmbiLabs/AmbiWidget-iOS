@@ -20,7 +20,7 @@ class MainVC: UIViewController {
 	
 	@objc func viewDidBecomeActive() {
 		// Check if refresh token is set
-		TokenManager.loadTokenFromUserDefaults(with: .RefreshToken)
+		TokenManager.loadTokenFromUserDefaultsAsPromise(with: .RefreshToken)
 		.catch { error in
 			// Show auth view page
 			let vc = self.storyboard?.instantiateViewController(withIdentifier: "auth") as! AuthVC

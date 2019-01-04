@@ -73,6 +73,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+		guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
+			// Show auth button and view
+			return
+		}
+		
         updateWidgetViews()
         updateLocalDeviceList()
         completionHandler(NCUpdateResult.newData)

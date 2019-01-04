@@ -153,7 +153,7 @@ class TokenManager {
 		}
 		
 		return firstly {
-			TokenManager.loadTokenFromUserDefaults(with: TokenType.RefreshToken)
+			TokenManager.loadTokenFromUserDefaultsAsPromise(with: TokenType.RefreshToken)
 		}.then { refreshToken in
 			fetchAccessTokenData(refreshToken: refreshToken!)// This is force-unwraped becaue loadTokenFromUserDefaults() should never actually return a nil token, but throw errors instead. And yes it MUST be an optional because Promise resolving needs a (result, err) as parameter. Meaning there is always a result, even when errors are handled.
 		}.compactMap { result in
@@ -183,7 +183,7 @@ class TokenManager {
 			}
 		}
 		
-		return TokenManager.loadTokenFromUserDefaults(with: TokenType.AccessToken)
+		return TokenManager.loadTokenFromUserDefaultsAsPromise(with: TokenType.AccessToken)
 			.then { token in
 				checkIfExpired(token)
 			}.recover { error in
@@ -207,7 +207,7 @@ class TokenManager {
 	// Loads a Token from userDefaults based on it's type
 	// throws errors if token could not be loaded (i.e doesn't exist or corruption error)
 	//
-	static func loadTokenFromUserDefaults(with tokenType: TokenType) -> Promise<Token?> {
+	static func loadTokenFromUserDefaultsAsPromise(with tokenType: TokenType) -> Promise<Token?> {
 		return Promise { seal in
 			var token: Token?
 			var err: Error?
@@ -236,6 +236,37 @@ class TokenManager {
 			}
 			seal.resolve(token, err)
 		}
+	}
+	
+	//
+	// Loads a Token from userDefaults based on it's type
+	// throws errors if token could not be loaded (i.e doesn't exist or corruption error)
+	//
+	static func loadTokenFromUserDefaults(with tokenType: TokenType) throws -> Token? {
+		var token: Token?
+		do {
+			// Load token from UserDefaults as Json, if unable to load, return nil for Token?
+			guard let tokenAsJson = UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.string(forKey: tokenType.defaultsKey) else {
+				throw TokenManagerError.tokenNotExist(errorMessage: "Token of type '\(tokenType)' does not exist.")
+			}
+			
+			// Encode jsonString to Data
+			guard let data = tokenAsJson.data(using: .utf8) else {
+				throw TokenManagerError.dataEncodingError(errorMessage: "Could not encode json \(tokenAsJson) to Data")
+			}
+			
+			// Decode the Data to a Token
+			token = try JSONDecoder().decode(Token.self, from: data)
+			
+			print("Loaded '\(tokenType)': '\(token?.code)'")
+		} catch {
+			// If there is ANY error loading Token, delete the token from user defaults...
+			deleteTokenFromUserDefaults(with: tokenType)
+			
+			// ...and return a generalised error.
+			throw TokenManagerError.tokenNotLoadable(errorMessage: "[\(self)] Error loading \(tokenType), deleted (json) string in UserDefaults.")
+		}
+		return token
 	}
 	
 	static func deleteTokenFromUserDefaults(with tokenType: TokenType) {

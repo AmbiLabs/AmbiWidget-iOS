@@ -17,10 +17,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
 	var currentDeviceId: String? {
 		get {
-			return UserDefaults(suiteName: UserDefaultsKeys.currentDeviceId)!.string(forKey: UserDefaultsKeys.currentDeviceId)
+			return UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.string(forKey: UserDefaultsKeys.currentDeviceId)
 		}
 		set(newValue) {
-			UserDefaults(suiteName: UserDefaultsKeys.currentDeviceId)!.set(newValue, forKey: UserDefaultsKeys.currentDeviceId)
+			UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.set(newValue, forKey: UserDefaultsKeys.currentDeviceId)
 		}
 	}
     

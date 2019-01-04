@@ -21,6 +21,7 @@
 		7815DFDAFF2CE9D460FBA19D /* Pods_TodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B11F6B95E611C936E4EC2 /* Pods_TodayExtension.framework */; };
 		95F7F9F80293F957796A681E /* Pods_AmbiWidget_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */; };
 		C3CDED83F960EA64312CA57D /* Pods_AmbiWidget_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9A981621C2100B0015EB39 /* Pods_AmbiWidget_IOS.framework */; };
+		CA3FC16821DF39490000BC09 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3FC16721DF39490000BC09 /* Utils.swift */; };
 		CA4C20B121B6758200A23C2A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4C20B021B6758200A23C2A /* Device.swift */; };
 		CA4EEF1D21ACEA7B00B33294 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */; };
 		CA4EEF2121AD1F4500B33294 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4EEF2021AD1F4500B33294 /* Token.swift */; };
@@ -130,6 +131,7 @@
 		98B96F60531ACCD13CAA46D4 /* Pods_AmbiWidget_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbiWidget_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4F2326ED7F65267E65F364 /* Pods-AmbiWidget-IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOS/Pods-AmbiWidget-IOS.release.xcconfig"; sourceTree = "<group>"; };
 		B457B6946712C40C216B6C45 /* Pods_AmbiWidget_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AmbiWidget_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA3FC16721DF39490000BC09 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CA4C20B021B6758200A23C2A /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		CA4EEF1C21ACEA7B00B33294 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		CA4EEF2021AD1F4500B33294 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				CA9A980621C2043B0015EB39 /* DeviceViewModel.swift */,
+				CA3FC16721DF39490000BC09 /* Utils.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				CAEA2BFC21C3870900907EDB /* SettingsBundleHelper.swift in Sources */,
 				CA9A981B21C2284A0015EB39 /* DeviceManager.swift in Sources */,
 				CA9A982A21C229690015EB39 /* ErrorHelper.swift in Sources */,
+				CA3FC16821DF39490000BC09 /* Utils.swift in Sources */,
 				CA9A982421C229690015EB39 /* APISettings.swift in Sources */,
 				CA9A982821C229690015EB39 /* Device.swift in Sources */,
 				CA9A97FA21C204000015EB39 /* User.swift in Sources */,

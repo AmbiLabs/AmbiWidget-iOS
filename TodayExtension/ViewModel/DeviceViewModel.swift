@@ -35,8 +35,12 @@ class DeviceViewModel {
 		value = round(value * 10) / 10
 		
 		// Do fahrenheit / celsius conversions here.
+		if UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.bool(forKey: UserDefaultsKeys.useFahrenheit) {
+			value = round(Utils.temperatureInFahrenheit(celcius: value) * 10) / 10
+		}
 		
 		return "\(value)°"
+		
     }
     
     public var humidityLabel: String {

@@ -12,17 +12,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Show device location</string>
-			<key>Key</key>
-			<string>SHOW_DEVICE_LOCATION_PREFERENCE</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Use Fahrenheit instead of Celcius</string>
+			<string>Use Fahrenheit</string>
 			<key>Key</key>
 			<string>USE_FAHRENHEIT_PREFERENCE</string>
 			<key>DefaultValue</key>

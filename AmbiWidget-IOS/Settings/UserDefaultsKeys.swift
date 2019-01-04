@@ -11,6 +11,7 @@ struct UserDefaultsKeys {
 	static let refreshToken = "REFRESH_TOKEN"
 	static let accessToken = "ACCESS_TOKEN"
 	static let deviceList = "DEVICE_LIST"
+	static let currentDeviceId = "SELECTED_DEVICE_ID"
 	
 	// Preferences
 	static let showDeviceLocation = "SHOW_DEVICE_LOCATION_PREFERENCE"

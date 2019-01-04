@@ -27,6 +27,7 @@ class SettingsBundleHelper {
 			userDefaults.removeObject(forKey: UserDefaultsKeys.deviceList)
 			userDefaults.removeObject(forKey: UserDefaultsKeys.showDeviceLocation)
 			userDefaults.removeObject(forKey: UserDefaultsKeys.useFahrenheit)
+			userDefaults.removeObject(forKey: UserDefaultsKeys.currentDeviceId)
 			print("=========[RESET ALL USERDEFAULTS]=========")
 		}
 	}

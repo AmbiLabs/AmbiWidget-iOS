@@ -15,7 +15,14 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
-    var deviceViewModelIndex: Int = 0
+	var currentDeviceId: String? {
+		get {
+			return UserDefaults(suiteName: UserDefaultsKeys.currentDeviceId)!.string(forKey: UserDefaultsKeys.currentDeviceId)
+		}
+		set(newValue) {
+			UserDefaults(suiteName: UserDefaultsKeys.currentDeviceId)!.set(newValue, forKey: UserDefaultsKeys.currentDeviceId)
+		}
+	}
     
     enum SwitchDirection {
         case left
@@ -67,21 +74,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Get deviceList from local storage.
         guard let localDeviceList = try? DeviceManager.Local.getDeviceList() else {
             // TODO: Show loading screen
-            
-            // If local storage is empty.
-            updateLocalDeviceList()
             return
         }
         
         // Update deviceViewModels from local storage.
         self.deviceViewModels = localDeviceList.map({ return
             DeviceViewModel(device: $0)})
-        
-        guard let currentDeviceViewModel = self.deviceViewModels?[deviceViewModelIndex] else {
-            // Something went wrong?
-            return
-        }
-        print("index \(self.deviceViewModelIndex)")
+		
+		// If no current device view model is set AND no default could be set
+		guard let currentDeviceViewModel = getCurrentDeviceViewModel() else {
+			return
+		}
         
         self.deviceNameLabel.text = currentDeviceViewModel.deviceTitleText
         self.locationNameLabel.text = currentDeviceViewModel.locationNameText
@@ -100,7 +103,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             .then { newDeviceList in
                 DeviceManager.API.getDeviceStatus(for: newDeviceList)
             }.done { updatedDeviceList in
-                print("Today View Controller: updatedDeviceList: \(updatedDeviceList)")
                 
                 // Save deviceList to local storage
                 try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
@@ -111,10 +113,83 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 print("Error: \(error)")
         }
     }
+	
+	//
+	// Gets the current device view model based on the currentDeviceId
+	// will look for the current device in [deviceViewModels]
+	//
+	func getCurrentDeviceViewModel() -> DeviceViewModel? {
+		var deviceViewModel: DeviceViewModel?
+		
+		// If no deviceViewModels exist, return nil
+		if deviceViewModels == nil { return nil }
+		if deviceViewModels!.count < 1 { return nil }
+		
+		// Look for current device view model based on id
+		for i in 0..<self.deviceViewModels!.count {
+			if self.deviceViewModels![i].device.id == currentDeviceId {
+				deviceViewModel = self.deviceViewModels![i]
+			}
+		}
+		
+		if deviceViewModel == nil {
+			deviceViewModel = deviceViewModels![0]
+			currentDeviceId = deviceViewModels![0].device.id
+			print("currentDeviceViewModel not found, using default index 0")
+		}
+		
+		return deviceViewModel
+	}
+	
+	func getCurrentDeviceViewModelIndex() -> Int {
+		var index: Int = 0
+		for i in 0..<self.deviceViewModels!.count {
+			if self.deviceViewModels![i].device.id == currentDeviceId {
+				index = i
+			}
+		}
+		return index
+	}
+	
+	func updateCurrentDevice() {
+		print("Updating current device list")
+		
+		guard let currentDeviceViewModel = getCurrentDeviceViewModel() else {
+			print("Could not update current device, currentDeviceViewModel not found")
+			return
+		}
+		
+		// Get new device data from the API
+		DeviceManager.API.getDeviceStatus(for: currentDeviceViewModel.device)
+		.done { newDeviceSatus in
+			
+			// Get current deviceList
+			let deviceList = try! DeviceManager.Local.getDeviceList()
+			
+			// Update devicelist with new device status data
+			var updatedDeviceList = deviceList
+			for i in 0..<deviceList.count {
+				if deviceList[i].id == currentDeviceViewModel.device.id {
+					updatedDeviceList[i].status = newDeviceSatus
+				}
+			}
+	
+			// Save deviceList to local storage
+			try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
+	
+			// Update widget views
+			self.updateWidgetViews()
+		}.catch { error in
+			print("Error: \(error)")
+		}
+	}
+	
     @IBAction func GiveComfortFeedback(_ sender: UIButton) {
-        // Get deviceList from local storage.
-        let localDeviceList = try! DeviceManager.Local.getDeviceList()
-        let currentDevice = localDeviceList[deviceViewModelIndex]
+		
+		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
+			print("Could not give comfort feedback, currentDeviceViewModel not found")
+			return
+		}
         
         var comfortLevel: ComfortLevel?
         print(sender.tag)
@@ -134,9 +209,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func switchToComfortMode(_ sender: UIButton) {
-        // Get deviceList from local storage.
-        let localDeviceList = try! DeviceManager.Local.getDeviceList()
-        let currentDevice = localDeviceList[deviceViewModelIndex]
+		
+		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
+			print("Could not give comfort feedback, currentDeviceViewModel not found")
+			return
+		}
         
         // Send comfort mode instruction to the API.
         DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort).done { success in
@@ -149,9 +226,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     @IBAction func switchDeviceToOffMode(_ sender: UIButton) {
-        // Get deviceList from local storage.
-        let localDeviceList = try! DeviceManager.Local.getDeviceList()
-        let currentDevice = localDeviceList[deviceViewModelIndex]
+		
+		guard let currentDevice = getCurrentDeviceViewModel()?.device else {
+			print("Could not give comfort feedback, currentDeviceViewModel not found")
+			return
+		}
         
         // Send power off instruction to the API.
         DeviceManager.API.powerOff(for: currentDevice).done { success in
@@ -160,18 +239,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 print("Error: \(error)")
         }
     }
-    
-//    @IBAction func touchSettingsButton(_ sender: UIButton) {
-//        print("Settings button clicked")
-//
-//        let myAppUrl = NSURL(string: "widgetcontainingapp://")!
-//        extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
-//            if (!success) {
-//                // let the user know it failed
-//                print("Error: something went wrong when tried opening the app...")
-//            }
-//        })
-//    }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {
         var direction: SwitchDirection?
@@ -185,23 +252,42 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func switchDevice(with direction: SwitchDirection) {
-        switch direction {
-        case .left:
-            if deviceViewModelIndex + 1 == deviceViewModels!.endIndex {
-                deviceViewModelIndex = 0
-            } else {
-                deviceViewModelIndex += 1
-            }
-        case .right:
-            if deviceViewModelIndex - 1 < deviceViewModels!.startIndex {
-                deviceViewModelIndex = deviceViewModels!.endIndex - 1
-            } else {
-                deviceViewModelIndex -= 1
-            }
-        }
+		let currentIndex = getCurrentDeviceViewModelIndex()
+		var newIndex = currentIndex
 		
-		// Update view
+		print("currentIndex: \(currentIndex)")
+		
+		// If no deviceViewModels exist, return nil
+		if deviceViewModels == nil { return }
+		if deviceViewModels!.count < 1 { return }
+		
+        switch direction {
+		case .left:
+			if currentIndex + 1 == deviceViewModels!.endIndex {
+				newIndex = 0
+			} else {
+				newIndex += 1
+			}
+		case .right:
+			if currentIndex - 1 < deviceViewModels!.startIndex {
+				newIndex = deviceViewModels!.endIndex - 1
+			} else {
+				newIndex -= 1
+			}
+		}
+		
+		print("newIndex: \(newIndex)")
+		
+		// Update local devices
+		var deviceList = try! DeviceManager.Local.getDeviceList()
+		currentDeviceId = deviceList[newIndex].id
+		try! DeviceManager.Local.saveDeviceList(deviceList: deviceList)
+		
+		// Update view (with local data)
         self.updateWidgetViews()
+		
+		// Update current shown device with new status data and update view again
+		self.updateCurrentDevice()
     }
     
 }

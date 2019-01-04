@@ -427,7 +427,7 @@ class DeviceManager {
 			let data = try JSONEncoder().encode(deviceList)
 			let deviceListAsJson = String(data: data, encoding: .utf8)!
 			UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.set(deviceListAsJson, forKey: UserDefaultsKeys.deviceList)
-			print("Saved device list to UserDefaults: \(deviceList)")
+			print("Saved device list (\(deviceList.count)) to UserDefaults")
 		}
 		
 		//

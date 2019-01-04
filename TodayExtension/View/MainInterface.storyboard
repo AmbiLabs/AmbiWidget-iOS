@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,13 +46,13 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH" userLabel="Label device name">
                                                                 <rect key="frame" x="0.0" y="0.0" width="116.5" height="23"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="DarkGrey"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="59" translatesAutoresizingMaskIntoConstraints="NO" id="Q0S-HD-4M6" userLabel="Location name">
                                                                 <rect key="frame" x="27" y="25" width="62" height="19.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="DarkGrey"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -64,12 +65,12 @@
                                                                 <subviews>
                                                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_dashboard_temperature_white" translatesAutoresizingMaskIntoConstraints="NO" id="fB5-3U-xJx" userLabel="Icon temperature">
                                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="24"/>
-                                                                        <color key="tintColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <color key="tintColor" name="DarkGrey"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPa-ju-krI" userLabel="Label temperature">
                                                                         <rect key="frame" x="21" y="0.0" width="31.5" height="24"/>
                                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="DarkGrey"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -79,12 +80,12 @@
                                                                 <subviews>
                                                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_dashboard_humidity_white" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIL-rF-Pjz" userLabel="Icon humidity">
                                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="24"/>
-                                                                        <color key="tintColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <color key="tintColor" name="DarkGrey"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="81.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-gV-Tyc" userLabel="Label humidity">
                                                                         <rect key="frame" x="21" y="0.0" width="32.5" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="DarkGrey"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -114,32 +115,18 @@
                                                 <rect key="frame" x="0.0" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-i2-def" userLabel="Bit warm Button">
-                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="67.5"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-abitwarm-2"/>
                                                         <connections>
                                                             <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="HQ8-Pa-5Xs"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKe-dJ-Ufk" userLabel="Bit warm Label">
-                                                        <rect key="frame" x="19.5" y="73.5" width="33.5" height="28"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">A bit
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="warm">
-                                                                <attributes>
-                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" lineHeightMultiple="0.80000000000000004" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKe-dJ-Ufk" userLabel="Bit warm Label">
+                                                        <rect key="frame" x="19.5" y="70" width="33.5" height="31.5"/>
+                                                        <string key="text">A bit
+warm</string>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                                        <color key="textColor" name="DarkGrey"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -148,25 +135,18 @@
                                                 <rect key="frame" x="72.5" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
-                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="69.5"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-abitcold-2"/>
                                                         <connections>
                                                             <action selector="GiveComfortFeedback:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="eDt-Pt-Du5"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnu-jt-Ogv" userLabel="Bit cold Label">
-                                                        <rect key="frame" x="22.5" y="75.5" width="28" height="26"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">A bit
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnu-jt-Ogv" userLabel="Bit cold Label">
+                                                        <rect key="frame" x="22.5" y="70" width="28" height="31.5"/>
+                                                        <string key="text">A bit
 cold</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <font key="NSFont" metaFont="system"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" lineHeightMultiple="0.80000000000000004" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                                        <color key="textColor" name="DarkGrey"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -181,18 +161,12 @@ cold</string>
                                                             <action selector="switchToComfortMode:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="tbf-0b-DWs"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tny-Ma-LnL" userLabel="Comfort mode Label">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tny-Ma-LnL" userLabel="Comfort mode Label">
                                                         <rect key="frame" x="9.5" y="70" width="54" height="31.5"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">Comfort 
+                                                        <string key="text">Comfort 
 mode</string>
-                                                                <attributes>
-                                                                    <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                                        <color key="textColor" name="DarkGrey"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -201,32 +175,18 @@ mode</string>
                                                 <rect key="frame" x="217.5" y="7" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
-                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="66"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
                                                         <state key="normal" image="icon-off"/>
                                                         <connections>
                                                             <action selector="switchDeviceToOffMode:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="vol-ho-6b1"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO0-ql-491" userLabel="Off mode Label">
-                                                        <rect key="frame" x="19" y="72" width="34.5" height="29.5"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">Off
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <font key="NSFont" metaFont="system"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="mode">
-                                                                <attributes>
-                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <font key="NSFont" metaFont="system"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" lineHeightMultiple="0.90000000000000002" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO0-ql-491" userLabel="Off mode Label">
+                                                        <rect key="frame" x="19" y="70" width="34.5" height="31.5"/>
+                                                        <string key="text">Off
+mode</string>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                                        <color key="textColor" name="DarkGrey"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -278,5 +238,8 @@ mode</string>
         <image name="icon-abitwarm-2" width="64" height="64"/>
         <image name="icon-comfort" width="64" height="64"/>
         <image name="icon-off" width="64" height="64"/>
+        <namedColor name="DarkGrey">
+            <color red="0.12941176470588237" green="0.12941176470588237" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -44,7 +44,6 @@ class DeviceViewModel {
 			return "‒"
 		}
 		value = round(value * 10) / 10
-		print("Humidity: \(value)")
 		return "\(value)%"
     }
     

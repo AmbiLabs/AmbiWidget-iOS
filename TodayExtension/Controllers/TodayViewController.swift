@@ -41,8 +41,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var buttonRow: UIStackView!
     @IBOutlet weak var mainView: UIStackView!
     
-    var loadingViewController = LoadingViewController()
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -51,10 +49,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-        
-        
-        add(loadingViewController)
-        loadingViewController.view.isHidden = true
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
@@ -65,6 +59,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.buttonRow.isHidden = false
             self.preferredContentSize = CGSize(width: maxSize.width, height: 220)
         }
+		
+		for child in children {
+			if child is AuthOverlayViewController {
+				
+			}
+		}
+		
+		print("Children: \(children)")
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -96,13 +98,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         guard let localDeviceList = try? DeviceManager.Local.getDeviceList() else {
             // Show loading screen.
             mainView.isHidden = true
-            self.loadingViewController.view.isHidden = false
+			add(LoadingViewController())
             return
         }
         
         // Hide lodading screen.
         self.mainView.isHidden = false
-        self.loadingViewController.view.isHidden = true
         
         // Update deviceViewModels from local storage.
         self.deviceViewModels = localDeviceList.map({ return
@@ -139,8 +140,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}.catch { error in
 			switch error {
 			case DeviceManagerError.noDevicesForAccount:
+				
+				// Remove loading animation
+				for child in self.children {
+					if child is LoadingViewController {
+						child.remove()
+					}
+				}
+				
 				// Show no devices overlay
-				print("TODO: Show no devices overlay.")
+				self.mainView.isHidden = true
+				let noDevicesOverlay = NoDevicesViewController()
+				noDevicesOverlay.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+				self.add(noDevicesOverlay)
+				
 			default:
 				print("Error: \(error)")
 			}

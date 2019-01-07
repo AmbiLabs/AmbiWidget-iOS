@@ -33,7 +33,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ga3-nv-wfh">
                             <rect key="frame" x="82.5" y="53.5" width="150" height="40"/>
-                            <color key="backgroundColor" red="0.30980392159999998" green="0.73333333329999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.43137254901960786" green="0.72156862745098038" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="TDu-7Z-1cx"/>
                                 <constraint firstAttribute="width" constant="150" id="UrL-Dn-l3m"/>

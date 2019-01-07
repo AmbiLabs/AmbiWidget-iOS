@@ -57,6 +57,8 @@
 		F107029621DF00D300FDA207 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F107029521DF00D300FDA207 /* LoadingViewController.swift */; };
 		F107029D21DF653F00FDA207 /* AuthOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */; };
 		F107029E21DF653F00FDA207 /* AuthOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */; };
+		F1FE7BF021E2FC3B00530492 /* NoDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FE7BEE21E2FC3B00530492 /* NoDevicesViewController.swift */; };
+		F1FE7BF121E2FC3B00530492 /* NoDevicesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FE7BEF21E2FC3B00530492 /* NoDevicesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +164,8 @@
 		F107029521DF00D300FDA207 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthOverlayViewController.swift; sourceTree = "<group>"; };
 		F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthOverlayViewController.xib; sourceTree = "<group>"; };
+		F1FE7BEE21E2FC3B00530492 /* NoDevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDevicesViewController.swift; sourceTree = "<group>"; };
+		F1FE7BEF21E2FC3B00530492 /* NoDevicesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoDevicesViewController.xib; sourceTree = "<group>"; };
 		F21704173721C9BC24A0A410 /* Pods-AmbiWidget-IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmbiWidget-IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmbiWidget-IOSUITests/Pods-AmbiWidget-IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,6 +331,7 @@
 				CA9A97EE21C203D10015EB39 /* TodayExtension-Bridging-Header.h */,
 				F107029521DF00D300FDA207 /* LoadingViewController.swift */,
 				F107029B21DF653F00FDA207 /* AuthOverlayViewController.swift */,
+				F1FE7BEE21E2FC3B00530492 /* NoDevicesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			children = (
 				F107029C21DF653F00FDA207 /* AuthOverlayViewController.xib */,
 				CA9A980021C204190015EB39 /* MainInterface.storyboard */,
+				F1FE7BEF21E2FC3B00530492 /* NoDevicesViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -573,6 +579,7 @@
 				CA9A980F21C206100015EB39 /* Assets.xcassets in Resources */,
 				F107029E21DF653F00FDA207 /* AuthOverlayViewController.xib in Resources */,
 				CA9A980421C204190015EB39 /* MainInterface.storyboard in Resources */,
+				F1FE7BF121E2FC3B00530492 /* NoDevicesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +759,7 @@
 				CA9A980721C2043B0015EB39 /* DeviceViewModel.swift in Sources */,
 				CA9A982E21C229690015EB39 /* AppDelegate.swift in Sources */,
 				CA9A980B21C204520015EB39 /* Constants.swift in Sources */,
+				F1FE7BF021E2FC3B00530492 /* NoDevicesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +930,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = "AmbiWidget-IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -947,6 +956,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = FU262YG83M;
 				INFOPLIST_FILE = "AmbiWidget-IOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

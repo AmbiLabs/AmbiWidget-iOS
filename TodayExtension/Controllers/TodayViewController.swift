@@ -59,6 +59,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         if activeDisplayMode == .compact {
+            
             self.buttonRow.isHidden = true
             self.preferredContentSize = maxSize
         } else if activeDisplayMode == .expanded {

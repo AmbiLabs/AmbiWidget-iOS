@@ -20,8 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bPL-mJ-smH">
-                    <rect key="frame" x="30" y="285.5" width="315" height="96"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bPL-mJ-smH">
+                    <rect key="frame" x="30" y="313" width="315" height="41"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No devices found for this account. Add a device in the Ambi Climate app and retry. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIg-9q-9oD" userLabel="No devices Label">
                             <rect key="frame" x="0.0" y="0.0" width="315" height="41"/>
@@ -29,18 +29,6 @@
                             <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjS-C4-JHA" userLabel="Retry Button">
-                            <rect key="frame" x="82.5" y="56" width="150" height="40"/>
-                            <color key="backgroundColor" red="0.43137254899999999" green="0.72156862749999995" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="At3-af-lyX"/>
-                                <constraint firstAttribute="width" constant="150" id="bdB-43-A43"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Retry">
-                                <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            </state>
-                        </button>
                     </subviews>
                 </stackView>
             </subviews>

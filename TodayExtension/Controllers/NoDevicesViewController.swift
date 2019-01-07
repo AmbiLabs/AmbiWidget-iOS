@@ -10,21 +10,17 @@ import UIKit
 
 class NoDevicesViewController: UIViewController {
 
+    @IBOutlet weak var retryButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Add border radius to authorise button
+        retryButton.layer.cornerRadius = 20
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func touchRetryButton(_ sender: UIButton) {
+        // Reload the widget.
+        
     }
-    */
-
 }

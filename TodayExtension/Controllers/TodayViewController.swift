@@ -128,17 +128,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Get new device data from the API
         DeviceManager.API.getDeviceList()
-            .then { newDeviceList in
-                DeviceManager.API.getDeviceStatus(for: newDeviceList)
-            }.done { updatedDeviceList in
-                
-                // Save deviceList to local storage
-                try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
-                
-                // Update widget views
-                self.updateWidgetViews()
-            }.catch { error in
-                print("Error: \(error)")
+		.then { newDeviceList in
+			DeviceManager.API.getDeviceStatus(for: newDeviceList)
+		}.done { updatedDeviceList in
+			
+			// Save deviceList to local storage
+			try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
+			
+			// Update widget views
+			self.updateWidgetViews()
+		}.catch { error in
+			switch error {
+			case DeviceManagerError.noDevicesForAccount:
+				// Show no devices overlay
+				print("TODO: Show no devices overlay.")
+			default:
+				print("Error: \(error)")
+			}
         }
     }
 	

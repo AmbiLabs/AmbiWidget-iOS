@@ -16,6 +16,7 @@ enum DeviceManagerError: Error {
 	case noDeviceStatusInResult(errorMessage: String)
 	case noDataInResult(errorMessage: String)
 	case noDeviceListInUserDefaults(errorMessage: String)
+	case noDevicesForAccount(errorMessage: String)
 	case jsonEncodingError(errorMessage: String)
 }
 
@@ -171,6 +172,11 @@ class DeviceManager {
 				// Create Array of Devices from result data
 				for device in rawDeviceList {
 					deviceList.append(Device(id: device.device_id, name: device.room_name, locationName: device.location_name))
+				}
+				
+				// If device list is empty, throw error. (We need atleast 1 device)
+				if deviceList.count < 1 {
+					throw DeviceManagerError.noDevicesForAccount(errorMessage: "No devices found for this account.")
 				}
 				
 				return deviceList

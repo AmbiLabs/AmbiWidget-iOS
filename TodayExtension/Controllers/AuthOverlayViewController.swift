@@ -10,6 +10,8 @@ import UIKit
 
 class AuthOverlayViewController: UIViewController {
     
+    @IBOutlet weak var authLabel: UILabel!
+    
     // Authentication Url & Parameters
     let authoriseURL = "https://api.ambiclimate.com/oauth2/authorize"
     let responseType = "code"

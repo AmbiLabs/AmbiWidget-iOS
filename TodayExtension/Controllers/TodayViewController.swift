@@ -52,23 +52,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+		
         if activeDisplayMode == .compact {
-            
+			hideAuthOverlayLabel(true)
             self.buttonRow.isHidden = true
             self.preferredContentSize = maxSize
-        } else if activeDisplayMode == .expanded {
+        }
+		else if activeDisplayMode == .expanded {
+			hideAuthOverlayLabel(false)
             self.buttonRow.isHidden = false
             self.preferredContentSize = CGSize(width: maxSize.width, height: 220)
         }
-		
+    }
+	
+	func hideAuthOverlayLabel(_ value: Bool) {
 		for child in children {
 			if child is AuthOverlayViewController {
-				
+				let realChild = child as! AuthOverlayViewController
+				realChild.authLabel.isHidden = value
 			}
 		}
-		
-		print("Children: \(children)")
-    }
+	}
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
@@ -81,9 +85,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             mainView.isHidden = true
             let authOverlay = AuthOverlayViewController()
             authOverlay.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-
             add(authOverlay)
-            
+			print(self.extensionContext!.widgetActiveDisplayMode)
+			if self.extensionContext!.widgetActiveDisplayMode == .compact {
+				hideAuthOverlayLabel(true)
+			} else {
+				hideAuthOverlayLabel(false)
+			}
 			return
 		}
 		

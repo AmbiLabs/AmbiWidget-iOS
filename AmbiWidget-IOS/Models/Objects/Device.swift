@@ -18,7 +18,7 @@ enum SimpleMode {
 struct Device: Codable {
 	let id: String
 	let name: String
-	let locationName: String?
+	let locationName: String
 	var status: DeviceStatus? = nil
 	
 	init(id: String, name: String, locationName: String) {

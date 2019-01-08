@@ -40,7 +40,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet weak var buttonRow: UIStackView!
     @IBOutlet weak var mainView: UIStackView!
-    
+	
+	@IBOutlet weak var iconHumidity: UIImageView!
+	@IBOutlet weak var iconTemperature: UIImageView!
+	
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -50,6 +53,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		iconHumidity.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+		iconTemperature.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+	}
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
 		
@@ -275,11 +284,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			} else {
 				print("Something went wrong while trying to give comfort feedback.")
 			}
-            // Hide loading indicator.
-            comfortLevel == .BitWarm ? self.bitWarmButton.loadingIndicator(show: false) : self.bitColdButton.loadingIndicator(show: false)
 		}.catch { error in
 			print("Error: \(error)")
-        }
+		}.finally {
+			// Hide loading indicator.
+			comfortLevel == .BitWarm ? self.bitWarmButton.loadingIndicator(show: false) : self.bitColdButton.loadingIndicator(show: false)
+		}
     }
     
     @IBAction func switchToComfortMode(_ sender: UIButton) {
@@ -302,11 +312,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			} else {
 				print("Failed to set the device to comfort mode.")
 			}
-            // Hide loading indicator.
-            self.comfortButton.loadingIndicator(show: false)
 		}.catch { error in
 			print("Error: \(error)")
-        }
+		}.finally {
+			// Hide loading indicator.
+			self.comfortButton.loadingIndicator(show: false)
+		}
     }
     
     
@@ -330,11 +341,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			} else {
 				print("Failed to set the device to off mode.")
 			}
-            // Hide loading indicator.
-            self.offButton.loadingIndicator(show: false)
 		}.catch { error in
 			print("Error: \(error)")
-        }
+		}.finally {
+			// Hide loading indicator.
+			self.offButton.loadingIndicator(show: false)
+		}
     }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {

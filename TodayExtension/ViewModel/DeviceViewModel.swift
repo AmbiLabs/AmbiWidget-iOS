@@ -21,11 +21,7 @@ class DeviceViewModel {
     }
     
     public var locationNameText: String {
-        guard let value = device.locationName else {
-            return "-"
-        }
-        
-        return value
+        return device.locationName
     }
     
     public var temperatureLabel: String {

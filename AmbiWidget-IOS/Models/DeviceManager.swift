@@ -46,57 +46,45 @@ class DeviceManager {
 			func getUrl(_ accessToken: Token, _ device: Device?, _ feedback: ComfortLevel?, _ modeValue: String?) -> URL {
 				switch self {
 				case .deviceList:
-					var urlComp = URLComponents(string: deviceListUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = deviceListUrl
+					let queryParams = [("access_token", accessToken.code)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .deviceStatus:
-					var urlComp = URLComponents(string: deviceStatusUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					queryItems.append(URLQueryItem(name: "device_id", value: device!.id))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = deviceStatusUrl
+					let queryParams = [("access_token", accessToken.code),
+									   ("device_id", device!.id)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .comfortFeedback:
-					var urlComp = URLComponents(string: comfortFeedbackUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					queryItems.append(URLQueryItem(name: "room_name", value: device!.name))
-					queryItems.append(URLQueryItem(name: "location_name", value: device!.locationName))
-					queryItems.append(URLQueryItem(name: "value", value: feedback!.rawValue))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = comfortFeedbackUrl
+					let queryParams = [("access_token", accessToken.code),
+									   ("room_name", device!.name),
+									   ("location_name", device!.locationName),
+									   ("value", feedback!.rawValue)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .temperatureMode:
-					var urlComp = URLComponents(string: temperatureModeUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					queryItems.append(URLQueryItem(name: "room_name", value: device!.name))
-					queryItems.append(URLQueryItem(name: "location_name", value: device!.locationName))
-					queryItems.append(URLQueryItem(name: "value", value: modeValue!))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = temperatureModeUrl
+					let queryParams = [("access_token", accessToken.code),
+									   ("room_name", device!.name),
+									   ("location_name", device!.locationName),
+									   ("value", modeValue!)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .powerOff:
-					var urlComp = URLComponents(string: powerOffUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					queryItems.append(URLQueryItem(name: "room_name", value: device!.name))
-					queryItems.append(URLQueryItem(name: "location_name", value: device!.locationName))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = powerOffUrl
+					let queryParams = [("access_token", accessToken.code),
+									   ("room_name", device!.name),
+									   ("location_name", device!.locationName)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .setComfortMode:
-					var urlComp = URLComponents(string: setComfortModeUrl)!
-					var queryItems = [URLQueryItem]()
-					queryItems.append(URLQueryItem(name: "access_token", value: accessToken.code))
-					queryItems.append(URLQueryItem(name: "room_name", value: device!.name))
-					queryItems.append(URLQueryItem(name: "location_name", value: device!.locationName))
-					urlComp.queryItems = queryItems
-					return urlComp.url!
+					let baseUrl = setComfortModeUrl
+					let queryParams = [("access_token", accessToken.code),
+									   ("room_name", device!.name),
+									   ("location_name", device!.locationName)]
+					return URL(baseUrl: baseUrl, queryParams: queryParams)
 				}
 			}
 		}
@@ -282,6 +270,7 @@ class DeviceManager {
 		// Give comfort feedback to the AI
 		//
 		static func giveComfortFeedback(for device: Device, with feedback: ComfortLevel) -> Promise<Bool> {
+			print("feedback: \(feedback)")
 			
 			func decodeData(_ data: Data) throws -> Bool {
 				
@@ -407,7 +396,10 @@ class DeviceManager {
 					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
 				}
 				
-				if status == "ok" {
+				// If status is 'device offline' it means the server could not reach the Ambi Device,
+				// however the appliance target is still set to off mode. Therefore OUR request for off is still a success.
+				// TODO: Maybe show the user that their device is not actually in OFF mode now, because it couldn't be reached
+				if status == "ok" || status == "device offline" {
 					return true
 				} else {
 					return false

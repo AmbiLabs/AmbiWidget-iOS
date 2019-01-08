@@ -23,10 +23,10 @@
                                 <rect key="frame" x="15" y="15" width="290" height="190"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="65C-T0-Y5W" userLabel="Top Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="72.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="67.5"/>
                                         <subviews>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yp-PJ-cKU" userLabel="Button left">
-                                                <rect key="frame" x="0.0" y="0.0" width="29" height="72.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="29" height="67.5"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="arrow-left">
@@ -36,20 +36,20 @@
                                                     <action selector="touchSwitchDeviceButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="Sx9-mI-wO3"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-Q1-doZ" userLabel="Title/Stats Stack View">
-                                                <rect key="frame" x="37" y="0.0" width="216" height="72.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-Q1-doZ" userLabel="Title/Stats Stack View">
+                                                <rect key="frame" x="37" y="0.0" width="216" height="67.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2QI-Qe-9Ed" userLabel="Title row">
-                                                        <rect key="frame" x="50" y="0.0" width="116.5" height="38.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="2QI-Qe-9Ed" userLabel="Title row">
+                                                        <rect key="frame" x="50" y="0.0" width="116.5" height="40.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH" userLabel="Label device name">
-                                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="499" text="Device name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Pf-tuH" userLabel="Label device name">
+                                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="23"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                                 <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="59" translatesAutoresizingMaskIntoConstraints="NO" id="Q0S-HD-4M6" userLabel="Location name">
-                                                                <rect key="frame" x="27" y="19" width="62" height="19.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="59" translatesAutoresizingMaskIntoConstraints="NO" id="Q0S-HD-4M6" userLabel="Location name">
+                                                                <rect key="frame" x="27" y="21" width="62" height="19.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -57,16 +57,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-D2-fB2" userLabel="Stats row">
-                                                        <rect key="frame" x="30" y="48.5" width="156" height="24"/>
+                                                        <rect key="frame" x="30" y="43.5" width="156" height="24"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CxF-oT-4EI" userLabel="Temperature Stack View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="52.5" height="24"/>
                                                                 <subviews>
-                                                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_dashboard_temperature_white" translatesAutoresizingMaskIntoConstraints="NO" id="fB5-3U-xJx" userLabel="Icon temperature">
+                                                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="icn_dashboard_temperature_white" translatesAutoresizingMaskIntoConstraints="NO" id="fB5-3U-xJx" userLabel="Icon temperature">
                                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="24"/>
                                                                         <color key="tintColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPa-ju-krI" userLabel="Label temperature">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" text="24.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPa-ju-krI" userLabel="Label temperature">
                                                                         <rect key="frame" x="21" y="0.0" width="31.5" height="24"/>
                                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                                         <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,11 +77,11 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-Px-SlR" userLabel="Humidity Stack View">
                                                                 <rect key="frame" x="67.5" y="0.0" width="53.5" height="24"/>
                                                                 <subviews>
-                                                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_dashboard_humidity_white" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIL-rF-Pjz" userLabel="Icon humidity">
+                                                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="icn_dashboard_humidity_white" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIL-rF-Pjz" userLabel="Icon humidity">
                                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="24"/>
                                                                         <color key="tintColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="81.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-gV-Tyc" userLabel="Label humidity">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" text="81.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-gV-Tyc" userLabel="Label humidity">
                                                                         <rect key="frame" x="21" y="0.0" width="32.5" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -97,7 +97,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epJ-44-CAP" userLabel="Button right">
-                                                <rect key="frame" x="261" y="0.0" width="29" height="72.5"/>
+                                                <rect key="frame" x="261" y="0.0" width="29" height="67.5"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="7" maxY="0.0"/>
                                                 <state key="normal" image="arrow-right"/>
@@ -108,10 +108,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="center" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIh-Dj-xTx" userLabel="Button's row Stack View">
-                                        <rect key="frame" x="0.0" y="88.5" width="290" height="101.5"/>
+                                        <rect key="frame" x="0.0" y="83.5" width="290" height="106.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="la4-35-FSJ" userLabel="Bit warm Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="72.5" height="101.5"/>
+                                                <rect key="frame" x="0.0" y="2.5" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-i2-def" userLabel="Bit warm Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
@@ -131,7 +131,7 @@ warm</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="knH-Iw-9XV" userLabel="Bit cold Stack View">
-                                                <rect key="frame" x="72.5" y="0.0" width="72.5" height="101.5"/>
+                                                <rect key="frame" x="72.5" y="2.5" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-V0-ONW" userLabel="Bit cold Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
@@ -151,7 +151,7 @@ cold</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dQr-fO-V8T" userLabel="Comfort mode Stack View">
-                                                <rect key="frame" x="145" y="0.0" width="72.5" height="101.5"/>
+                                                <rect key="frame" x="145" y="2.5" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-Ga-XgC" userLabel="Comfort mode Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
@@ -171,7 +171,7 @@ mode</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="clX-bd-ccw" userLabel="Off mode Stack View">
-                                                <rect key="frame" x="217.5" y="0.0" width="72.5" height="101.5"/>
+                                                <rect key="frame" x="217.5" y="2.5" width="72.5" height="101.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-HP-Fqn" userLabel="Off mode Button">
                                                         <rect key="frame" x="4.5" y="0.0" width="64" height="64"/>
@@ -220,6 +220,8 @@ mode</string>
                         <outlet property="comfortButton" destination="zmU-Ga-XgC" id="sPa-PY-2lk"/>
                         <outlet property="deviceNameLabel" destination="ofb-Pf-tuH" id="f0q-P9-yzJ"/>
                         <outlet property="humidityLabel" destination="9oj-gV-Tyc" id="RCv-Zh-6dT"/>
+                        <outlet property="iconHumidity" destination="XIL-rF-Pjz" id="Rd8-nd-yo2"/>
+                        <outlet property="iconTemperature" destination="fB5-3U-xJx" id="ZAs-xT-e2l"/>
                         <outlet property="locationNameLabel" destination="Q0S-HD-4M6" id="PjT-nq-frm"/>
                         <outlet property="mainView" destination="Oa6-Q7-XZb" id="9kD-Ti-98b"/>
                         <outlet property="modeIcon" destination="tLE-7j-zXa" id="11B-Sm-38D"/>

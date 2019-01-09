@@ -13,15 +13,16 @@ import Foundation
 //
 extension URL {
 	
-	init(baseUrl: String, queryParams: [(key: String, value: String)]?) {
+	init(baseUrl: String, queryParams: [String: String]?) {
 		
 		var encodedUrlString = baseUrl
 		
 		if queryParams != nil, queryParams!.count > 0 {
 			
-			for i in 0..<queryParams!.count {
-				if i == 0 { encodedUrlString += "?" } else { encodedUrlString += "&" }
-				encodedUrlString += "\(queryParams![i].key)=\(queryParams![i].value.encoded())"
+			var i = 0
+			for (key, value) in queryParams! {
+				i += 1; if i == 1 { encodedUrlString += "?" } else { encodedUrlString += "&" }
+				encodedUrlString += "\(key)=\(value.encoded())"
 			}
 		}
 		

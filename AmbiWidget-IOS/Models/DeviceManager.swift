@@ -47,43 +47,43 @@ class DeviceManager {
 				switch self {
 				case .deviceList:
 					let baseUrl = deviceListUrl
-					let queryParams = [("access_token", accessToken.code)]
+					let queryParams = ["access_token": accessToken.code]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .deviceStatus:
 					let baseUrl = deviceStatusUrl
-					let queryParams = [("access_token", accessToken.code),
-									   ("device_id", device!.id)]
+					let queryParams = ["access_token": accessToken.code,
+									   "device_id": device!.id]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .comfortFeedback:
 					let baseUrl = comfortFeedbackUrl
-					let queryParams = [("access_token", accessToken.code),
-									   ("room_name", device!.name),
-									   ("location_name", device!.locationName),
-									   ("value", feedback!.rawValue)]
+					let queryParams = ["access_token": accessToken.code,
+									   "room_name": device!.name,
+									   "location_name": device!.locationName,
+									   "value": feedback!.rawValue]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .temperatureMode:
 					let baseUrl = temperatureModeUrl
-					let queryParams = [("access_token", accessToken.code),
-									   ("room_name", device!.name),
-									   ("location_name", device!.locationName),
-									   ("value", modeValue!)]
+					let queryParams = ["access_token": accessToken.code,
+									   "room_name": device!.name,
+									   "location_name": device!.locationName,
+									   "value": modeValue!]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .powerOff:
 					let baseUrl = powerOffUrl
-					let queryParams = [("access_token", accessToken.code),
-									   ("room_name", device!.name),
-									   ("location_name", device!.locationName)]
+					let queryParams = ["access_token": accessToken.code,
+									   "room_name": device!.name,
+									   "location_name": device!.locationName]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 					
 				case .setComfortMode:
 					let baseUrl = setComfortModeUrl
-					let queryParams = [("access_token", accessToken.code),
-									   ("room_name", device!.name),
-									   ("location_name", device!.locationName)]
+					let queryParams = ["access_token": accessToken.code,
+									   "room_name": device!.name,
+									   "location_name": device!.locationName]
 					return URL(baseUrl: baseUrl, queryParams: queryParams)
 				}
 			}

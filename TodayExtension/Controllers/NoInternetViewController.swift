@@ -8,4 +8,18 @@
 
 import UIKit
 
-class NoInternetViewController: UIViewController {}
+class NoInternetViewController: UIViewController {
+    
+    @IBOutlet weak var retryButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Add border radius to authorise button
+        retryButton.layer.cornerRadius = 20
+    }
+    
+    @IBAction func retryLoadingWidget(_ sender: UIButton) {
+        TodayViewController().updateWidget()
+    }
+}

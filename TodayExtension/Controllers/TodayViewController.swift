@@ -69,12 +69,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+        print("View will appear")
 		
 		// Set button image view
-		buttonSwitchLeft.imageView!.contentMode = .scaleAspectFit
-		buttonSwitchLeft.imageEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
-		buttonSwitchRight.imageView!.contentMode = .scaleAspectFit
-		buttonSwitchRight.imageEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+        buttonSwitchLeft.imageView!.contentMode = .scaleAspectFit
+        buttonSwitchLeft.imageEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -20, right: -20)
+        buttonSwitchRight.imageView!.contentMode = .scaleAspectFit
+        buttonSwitchRight.imageEdgeInsets = UIEdgeInsets(top: -20, left: -20, bottom: -20, right: -20)
 		
 		// Set tint colors of icons, because storyboard has bug
 		let darkGreyColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
@@ -115,15 +116,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	//
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
 		
-		// If the refresh token does not exist, show authentication overlay with button to containing app.
-		guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
-			addOverlay(.AuthOverlay)
-			return
-		}
-		
+		updateWidget()
+        completionHandler(NCUpdateResult.newData)
+    }
+    
+    //
+    // Performs an update on the widget.
+    //
+    func updateWidget() {
+        // If the refresh token does not exist, show authentication overlay with button to containing app.
+        guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
+            addOverlay(.AuthOverlay)
+            return
+        }
+        
         self.updateMainView()
         self.updateLocalDeviceList()
-        completionHandler(NCUpdateResult.newData)
     }
 	
 	//

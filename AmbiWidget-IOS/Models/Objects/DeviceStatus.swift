@@ -32,5 +32,6 @@ struct DeviceStatus: Codable {
 	var applianceControlTarget: ApplianceControlTarget
 	var applianceState: ApplianceState
 	let comfortPrediction: ComfortPrediction
+	let deviceOnline: Bool
 	let sensorData: SensorData
 }

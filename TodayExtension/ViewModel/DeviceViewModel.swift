@@ -50,6 +50,11 @@ class DeviceViewModel {
     public var modeIcon: UIImage? {
 		print("modeIcon getter: simpleMode = \(device.simpleMode)")
 		
+		// If device is offline, return disconnected device icon
+		if let deviceOnline = device.status?.deviceOnline, !deviceOnline {
+			return UIImage(named: "icn_cloud_disconnected")
+		}
+		
 		guard let simpleMode = device.simpleMode else {
 			return nil
 		}

@@ -190,6 +190,7 @@ class DeviceManager {
 					let appliance_control_target: DeviceStatus.ApplianceControlTarget?
 					let appliance_state: DeviceStatus.ApplianceState?
 					let comfort_prediction: DeviceStatus.ComfortPrediction?
+					let device_online: Bool?
 					let sensor_data: DeviceStatus.SensorData?
 					let error: String?
 				}
@@ -207,6 +208,7 @@ class DeviceManager {
 				guard let applianceControlTarget = decodedData.appliance_control_target,
 					let applianceState = decodedData.appliance_state,
 					let comfortPrediction = decodedData.comfort_prediction,
+					let deviceOnline = decodedData.device_online,
 					let sensorData = decodedData.sensor_data
 					else {
 						throw DeviceManagerError.noDeviceStatusInResult(errorMessage: "DeviceStatus result is not complete.")
@@ -216,6 +218,7 @@ class DeviceManager {
 					applianceControlTarget: applianceControlTarget,
 					applianceState: applianceState,
 					comfortPrediction: comfortPrediction,
+					deviceOnline: deviceOnline,
 					sensorData: sensorData
 				)
 			}

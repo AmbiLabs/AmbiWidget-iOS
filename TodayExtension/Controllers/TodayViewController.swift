@@ -9,9 +9,6 @@
 import UIKit
 import NotificationCenter
 
-// TODO:
-// 1)
-
 class TodayViewController: UIViewController, NCWidgetProviding {
     var deviceViewModels: [DeviceViewModel]?
 	var currentDeviceId: String? {
@@ -20,6 +17,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
 		set(newValue) {
 			UserDefaults(suiteName: UserDefaultsKeys.appGroupName)!.set(newValue, forKey: UserDefaultsKeys.currentDeviceId)
+		}
+	}
+	
+	enum Overlay {
+		case AuthOverlay
+		case NoDevicesOverlay
+		case LoadingOverlay
+		case NoInternetOverlay
+		
+		var viewController: UIViewController {
+			switch self {
+			case .AuthOverlay:
+				return AuthOverlayViewController()
+			case .NoDevicesOverlay:
+				return NoDevicesViewController()
+			case .NoInternetOverlay:
+				return NoInternetViewController()
+			case .LoadingOverlay:
+				return LoadingViewController()
+			}
 		}
 	}
     
@@ -37,16 +54,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var bitColdButton: UIButton!
     @IBOutlet weak var comfortButton: UIButton!
     @IBOutlet weak var offButton: UIButton!
-    
     @IBOutlet weak var buttonRow: UIStackView!
     @IBOutlet weak var mainView: UIStackView!
-	
 	@IBOutlet weak var iconHumidity: UIImageView!
 	@IBOutlet weak var iconTemperature: UIImageView!
-	
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+	@IBOutlet weak var buttonSwitchLeft: UIButton!
+	@IBOutlet weak var buttonSwitchRight: UIButton!
     
     // Do any additional setup after loading the view from its nib.
     override func viewDidLoad() {
@@ -56,11 +69,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		iconHumidity.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
-		iconTemperature.tintColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+		
+		// Set button image view
+		buttonSwitchLeft.imageView!.contentMode = .scaleAspectFit
+		buttonSwitchLeft.imageEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+		buttonSwitchRight.imageView!.contentMode = .scaleAspectFit
+		buttonSwitchRight.imageEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+		
+		// Set tint colors of icons, because storyboard has bug
+		let darkGreyColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+		iconHumidity.tintColor = darkGreyColor
+		iconTemperature.tintColor = darkGreyColor
+		buttonSwitchLeft.tintColor = darkGreyColor
+		buttonSwitchRight.tintColor = darkGreyColor
 	}
-    
+	
+	//
+	// Called when the user changes the displayMode (show less/more button)
+	//
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+		
+		func hideAuthOverlayLabel(_ value: Bool) {
+			for child in children {
+				if child is AuthOverlayViewController {
+					let realChild = child as! AuthOverlayViewController
+					realChild.authLabel.isHidden = value
+				}
+			}
+		}
 		
         if activeDisplayMode == .compact {
 			hideAuthOverlayLabel(true)
@@ -74,60 +110,86 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 	
-	func hideAuthOverlayLabel(_ value: Bool) {
-		for child in children {
-			if child is AuthOverlayViewController {
-				let realChild = child as! AuthOverlayViewController
-				realChild.authLabel.isHidden = value
-			}
-		}
-	}
-        
+	//
+	// Called when the widget needs to update according to iOS.
+	//
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
+		
+		// If the refresh token does not exist, show authentication overlay with button to containing app.
 		guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
-			// Show auth button and view
-            mainView.isHidden = true
-            let authOverlay = AuthOverlayViewController()
-            authOverlay.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-            add(authOverlay)
-			print(self.extensionContext!.widgetActiveDisplayMode)
-			if self.extensionContext!.widgetActiveDisplayMode == .compact {
-				hideAuthOverlayLabel(true)
-			} else {
-				hideAuthOverlayLabel(false)
-			}
+			addOverlay(.AuthOverlay)
 			return
 		}
 		
-        updateWidgetViews()
-        updateLocalDeviceList()
+        self.updateMainView()
+        self.updateLocalDeviceList()
         completionHandler(NCUpdateResult.newData)
     }
-    
-    public func updateWidgetViews() {
-        print("Updating widget views")
+	
+	//
+	// Adds an overlay (child view) to the mainView.
+	// This overlaps and hides the mainView.
+	//
+	func addOverlay(_ overlayType: Overlay) {
+		mainView.isHidden = true
+		let overlayViewController = overlayType.viewController
+		overlayViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+		add(overlayViewController)
+		
+		// Hide or show elements based on available space
+		// If compact
+		if self.extensionContext!.widgetActiveDisplayMode == .compact {
+			// Hide Auth Overlay's label (text)
+			if overlayType == Overlay.AuthOverlay { (overlayViewController as! AuthOverlayViewController).authLabel.isHidden = true }
+		}
+		// If expanded
+		else {
+			// Show Auth Overlay's label (text)
+			if overlayType == Overlay.AuthOverlay { (overlayViewController as! AuthOverlayViewController).authLabel.isHidden = false }
+		}
+	}
+	
+	//
+	// Removes all child view 'loading view(Controller)' from the mainView.
+	//
+	func removeOverlay(_ overlay: Overlay) {
+		
+		for child in self.children {
+			switch overlay {
+			case .AuthOverlay:
+				if child is AuthOverlayViewController { child.remove() }
+			case .NoDevicesOverlay:
+				if child is NoDevicesViewController { child.remove() }
+			case .NoInternetOverlay:
+				if child is NoInternetViewController { child.remove() }
+			case .LoadingOverlay:
+				if child is LoadingViewController { child.remove() }
+			}
+		}
+		
+		// Show mainView again if no childs (overlays) exist
+		if children.count < 1 {
+			mainView.isHidden = false
+		}
+	}
+	
+	//
+	// Updates the main interface view with the relative data from
+	// the local device list.
+	//
+    public func updateMainView() {
+		print("updateWidgetViews() # children:\(children)")
         
-        // Get deviceList from local storage.
+        // Get deviceList from local storage. If not existing, stop.
         guard let localDeviceList = try? DeviceManager.Local.getDeviceList() else {
-            // Show loading screen.
-            mainView.isHidden = true
-			add(LoadingViewController())
             return
         }
-        
-        // Hide lodading screen.
-        self.mainView.isHidden = false
         
         // Update deviceViewModels from local storage.
         self.deviceViewModels = localDeviceList.map({ return
             DeviceViewModel(device: $0)})
 		
-		// If no current device view model is set AND no default could be set
+		// If no current device view model is set AND no default could be set, stop.
 		guard let currentDeviceViewModel = getCurrentDeviceViewModel() else {
 			return
 		}
@@ -140,9 +202,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         print("Updated view with local device status.")
     }
-    
+	
+	
+	func noInternetErrorHandler(_ error: Error) -> Bool {
+		// Check if no internet connection error
+		if let err = error as? URLError, err.code  == URLError.Code.notConnectedToInternet {
+			// Show no devices overlay
+			self.addOverlay(.NoInternetOverlay)
+			return true
+		}
+		return false
+	}
+	
+	//
+	// Updates the local device list with new data from API
+	//
     func updateLocalDeviceList() {
         print("Updating local device list")
+		
+		// If no existing data exist, show loading view
+		if (try? DeviceManager.Local.getDeviceList()) == nil {
+			self.addOverlay(.LoadingOverlay)
+			print("added loadingOverlay # children:\(children)")
+		}
         
         // Get new device data from the API
         DeviceManager.API.getDeviceList()
@@ -153,29 +235,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			// Save deviceList to local storage
 			try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
 			
-			// Update widget views
-			self.updateWidgetViews()
+			// Update mainView to show the new data
+			self.updateMainView()
 		}.catch { error in
 			switch error {
 			case DeviceManagerError.noDevicesForAccount:
-				
-				// Remove loading animation
-				for child in self.children {
-					if child is LoadingViewController {
-						child.remove()
-					}
-				}
-				
 				// Show no devices overlay
-				self.mainView.isHidden = true
-				let noDevicesOverlay = NoDevicesViewController()
-				noDevicesOverlay.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-				self.add(noDevicesOverlay)
-				
+				self.addOverlay(.NoDevicesOverlay)
 			default:
 				print("Error: \(error)")
+				// Check if no internet connection error
+				let _ = self.noInternetErrorHandler(error)
 			}
-        }
+		}.finally {
+			// Remove loading animation
+			self.removeOverlay(.LoadingOverlay)
+		}
     }
 	
 	//
@@ -215,6 +290,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		return index
 	}
 	
+	//
+	// Updaes the currently shown/selected device with new data from API
+	//
 	func updateCurrentDevice() {
 		print("Updating current device list")
 		
@@ -242,12 +320,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
 	
 			// Update widget views
-			self.updateWidgetViews()
+			self.updateMainView()
 		}.catch { error in
 			print("Error: \(error)")
+			let _ = self.noInternetErrorHandler(error)
 		}
 	}
-	
 	func changeModeIcon(to mode: SimpleMode) {
 		let deviceList = try! DeviceManager.Local.getDeviceList()
 		var updatedDeviceList = deviceList
@@ -280,12 +358,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 				print("Feedback given: \(comfortLevel!)")
 				// Set mode icon
 				self.changeModeIcon(to: .Comfort)
-				self.updateWidgetViews()
+				self.updateMainView()
 			} else {
 				print("Something went wrong while trying to give comfort feedback.")
 			}
 		}.catch { error in
 			print("Error: \(error)")
+			let _ = self.noInternetErrorHandler(error)
 		}.finally {
 			// Hide loading indicator.
 			comfortLevel == .BitWarm ? self.bitWarmButton.loadingIndicator(show: false) : self.bitColdButton.loadingIndicator(show: false)
@@ -293,6 +372,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func switchToComfortMode(_ sender: UIButton) {
+		print("func switchToConfortMode()")
 		// Show loading indicator.
         self.comfortButton.loadingIndicator(show: true)
         
@@ -308,12 +388,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 				print("The device has been set to comfort mode.")
 				// Set mode icon
 				self.changeModeIcon(to: .Comfort)
-				self.updateWidgetViews()
+				self.updateMainView()
 			} else {
 				print("Failed to set the device to comfort mode.")
 			}
 		}.catch { error in
 			print("Error: \(error)")
+			let _ = self.noInternetErrorHandler(error)
 		}.finally {
 			// Hide loading indicator.
 			self.comfortButton.loadingIndicator(show: false)
@@ -337,12 +418,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 				print("The device has been set to off mode.")
 				// Set mode icon
 				self.changeModeIcon(to: .Off)
-				self.updateWidgetViews()
+				self.updateMainView()
 			} else {
 				print("Failed to set the device to off mode.")
 			}
 		}.catch { error in
 			print("Error: \(error)")
+			// Check if no internet connection error
+			let _ = self.noInternetErrorHandler(error)
 		}.finally {
 			// Hide loading indicator.
 			self.offButton.loadingIndicator(show: false)
@@ -350,6 +433,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func touchSwitchDeviceButton(_ sender: UIButton) {
+		print("func touchSwitchDeviceButton()")
         var direction: SwitchDirection?
         
         if sender.tag == 6 {
@@ -393,7 +477,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		try! DeviceManager.Local.saveDeviceList(deviceList: deviceList)
 		
 		// Update view (with local data)
-        self.updateWidgetViews()
+        self.updateMainView()
 		
 		// Update current shown device with new status data and update view again
 		self.updateCurrentDevice()

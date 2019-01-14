@@ -8,9 +8,4 @@
 
 import UIKit
 
-class NoDevicesViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+class NoDevicesViewController: UIViewController {}

@@ -47,10 +47,11 @@ class DeviceViewModel {
 		return "\(value)%"
     }
     
-    public var modeIcon: UIImage {
+    public var modeIcon: UIImage? {
+		print("modeIcon getter: simpleMode = \(device.simpleMode)")
 		
 		guard let simpleMode = device.simpleMode else {
-			return UIImage(named: "icn_mode_off_grey")!
+			return nil
 		}
 		
         switch simpleMode {
@@ -62,6 +63,12 @@ class DeviceViewModel {
             return UIImage(named: "icn_mode_manual")!
         case .Off:
             return UIImage(named: "icn_mode_off_grey")!
-        }
+		case .AwayHumidityUpper:
+			return UIImage(named: "icn_mode_away")!
+		case .AwayTemperatureLower:
+			return UIImage(named: "icn_mode_away")!
+		case .AwayTemperatureUpper:
+			return UIImage(named: "icn_mode_away")!
+		}
     }
 }

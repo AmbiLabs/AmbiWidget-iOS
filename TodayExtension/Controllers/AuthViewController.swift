@@ -17,6 +17,7 @@ class AuthOverlayViewController: UIViewController {
     let responseType = "code"
 
     @IBOutlet weak var authButton: UIButton!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         

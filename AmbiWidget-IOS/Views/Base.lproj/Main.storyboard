@@ -30,8 +30,11 @@
                                 <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs permission from the Ambi Climate Cloud to control and read your Ambi devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-0x-R8x">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-0x-R8x">
                                 <rect key="frame" x="30" y="253" width="315" height="70"/>
+                                <string key="text">This app needs permission from 
+the Ambi Climate Cloud to control 
+and read your Ambi devices.</string>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -85,29 +88,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5k-vu-0vb" userLabel="AboutTitle">
                                 <rect key="frame" x="20" y="84" width="54.5" height="25"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-Ej-ETH" userLabel="About">
                                 <rect key="frame" x="20" y="117" width="335" height="93"/>
                                 <string key="text">With this app you can add an Ambi Widget to your Today View. Ambi Widget allows you to have quick controls on Comfort Mode, Off mode and comfort feedback.</string>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a widget?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to add a widget?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oew-BC-YVJ" userLabel="InstructionsTitle">
                                 <rect key="frame" x="20" y="235.5" width="193" height="25"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham">
-                                <rect key="frame" x="20" y="268.5" width="302" height="139.5"/>
-                                <string key="text">1. Swipe right over the Home screen or
-    Lock screen
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-w0-ham" userLabel="Instructions">
+                                <rect key="frame" x="20" y="268.5" width="306" height="139.5"/>
+                                <string key="text">1. Swipe right over the Home screen or Lock screen
 2. Scroll to the bottom and tap Edit
 3. Look for "Ambi Widget"
 4. Tap the green (+) button
@@ -119,9 +121,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="20" id="0RW-Dn-WhJ"/>
+                            <constraint firstItem="vGl-w0-ham" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="mOd-dR-R2E" secondAttribute="trailing" constant="-20" id="0RW-Dn-WhJ"/>
                             <constraint firstItem="vGl-w0-ham" firstAttribute="top" secondItem="oew-BC-YVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Bb5-Eo-8lU"/>
-                            <constraint firstItem="mOd-dR-R2E" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="w5k-vu-0vb" secondAttribute="trailing" symbolic="YES" id="HCj-VE-rr6"/>
                             <constraint firstItem="WPt-Ej-ETH" firstAttribute="top" secondItem="w5k-vu-0vb" secondAttribute="bottom" constant="8" symbolic="YES" id="Kdq-py-lti"/>
                             <constraint firstItem="oew-BC-YVJ" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="SA5-De-FaP"/>
                             <constraint firstItem="w5k-vu-0vb" firstAttribute="leading" secondItem="mOd-dR-R2E" secondAttribute="leading" constant="20" id="XR9-oN-aGz"/>

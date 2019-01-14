@@ -8,13 +8,6 @@
 
 import Foundation
 
-enum SimpleMode {
-	case Off
-	case Comfort
-	case Temperature
-	case Manual
-}
-
 struct Device: Codable {
 	let id: String
 	let name: String
@@ -33,29 +26,44 @@ struct Device: Codable {
         get {
             var simpleMode: SimpleMode?
             
-            guard let applianceControlTarget = status?.applianceControlTarget, let applianceState = status?.applianceState else {
+            guard let rawMode = status?.applianceControlTarget.quantity.lowercased(), let applianceState = status?.applianceState else {
                 return nil
             }
             
             // If device is off
-            if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() == "off") || applianceControlTarget.quantity.lowercased() == "off" {
+            if (rawMode == "manual" && applianceState.power.lowercased() == "off") || rawMode == "off" {
                 simpleMode = SimpleMode.Off
             }
             
             // If Manual mode
-            if (applianceControlTarget.quantity.lowercased() == "manual" && applianceState.power.lowercased() != "off") {
+            if (rawMode == "manual" && applianceState.power.lowercased() != "off") {
                 simpleMode = SimpleMode.Manual
             }
                 
-                // If Comfort mode
-            else if applianceControlTarget.quantity.lowercased() == "climate" {
+			// If Comfort mode
+            else if rawMode == "climate" {
                 simpleMode = SimpleMode.Comfort
             }
                 
-                // If Temperature mode
-            else if applianceControlTarget.quantity.lowercased() == "temperature" {
+			// If Temperature mode
+            else if rawMode == "temperature" {
                 simpleMode = SimpleMode.Temperature
             }
+				
+			// If Away mode (temp. lower)
+			else if rawMode == "away_temperature_lower" {
+				simpleMode = SimpleMode.AwayTemperatureLower
+			}
+				
+			// If Away mode (temp. upper)
+			else if rawMode == "away_temperature_upper" {
+				simpleMode = SimpleMode.AwayTemperatureUpper
+			}
+				
+			// If Away mode (hum. upper)
+			else if rawMode == "away_humidity_upper" {
+				simpleMode = SimpleMode.AwayHumidityUpper
+			}
             
             return simpleMode
         }

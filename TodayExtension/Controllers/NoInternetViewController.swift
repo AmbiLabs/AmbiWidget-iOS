@@ -10,7 +10,8 @@ import UIKit
 
 class NoInternetViewController: UIViewController {
     
-    @IBOutlet weak var retryButton: UIButton!
+	@IBOutlet weak var noInternetLabel: UILabel!
+	@IBOutlet weak var retryButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,6 @@ class NoInternetViewController: UIViewController {
     }
     
     @IBAction func retryLoadingWidget(_ sender: UIButton) {
-        TodayViewController().updateWidget()
+		NotificationCenter.default.post(name: .onReconnectButtonPressed, object: self)
     }
 }

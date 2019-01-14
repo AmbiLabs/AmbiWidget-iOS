@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoInternetViewController" customModule="TodayExtension" customModuleProvider="target">
             <connections>
+                <outlet property="noInternetLabel" destination="pGk-Zn-Oz3" id="Q7d-WO-e8d"/>
                 <outlet property="retryButton" destination="K7z-wM-N4b" id="xuR-CR-PKk"/>
                 <outlet property="view" destination="iN0-l3-epB" id="qaV-W8-jYc"/>
             </connections>
@@ -38,7 +39,7 @@
                                 <constraint firstAttribute="height" constant="40" id="G07-Ei-Udq"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Retry">
+                            <state key="normal" title="Reconnect">
                                 <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>

@@ -65,6 +65,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+		
+		// Listener for no internet connect subview
+		NotificationCenter.default.addObserver(self, selector: #selector(onReconnectButtonPressed(_:)), name: .onReconnectButtonPressed, object: nil)
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -90,22 +93,35 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	//
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
 		
-		func hideAuthOverlayLabel(_ value: Bool) {
-			for child in children {
-				if child is AuthOverlayViewController {
-					let realChild = child as! AuthOverlayViewController
-					realChild.authLabel.isHidden = value
+		func hideOverlayLabel(for overlay: Overlay, _ value: Bool) {
+			
+			for child in self.children {
+				switch overlay {
+				case .AuthOverlay:
+					if child is AuthOverlayViewController { (child as! AuthOverlayViewController).authLabel.isHidden = value }
+				case .NoInternetOverlay:
+					if child is NoInternetViewController { (child as! NoInternetViewController).noInternetLabel.isHidden = value }
+				default:
+					break
 				}
 			}
 		}
 		
         if activeDisplayMode == .compact {
-			hideAuthOverlayLabel(true)
+			// SubViews
+			hideOverlayLabel(for: .AuthOverlay, true)
+			hideOverlayLabel(for: .NoInternetOverlay, true)
+			
+			// MainView
             self.buttonRow.isHidden = true
             self.preferredContentSize = maxSize
         }
 		else if activeDisplayMode == .expanded {
-			hideAuthOverlayLabel(false)
+			// SubViews
+			hideOverlayLabel(for: .AuthOverlay, false)
+			hideOverlayLabel(for: .NoInternetOverlay, false)
+			
+			// MainView
             self.buttonRow.isHidden = false
             self.preferredContentSize = CGSize(width: maxSize.width, height: 220)
         }
@@ -115,15 +131,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	// Called when the widget needs to update according to iOS.
 	//
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-		
 		updateWidget()
         completionHandler(NCUpdateResult.newData)
     }
+	
+	@objc func onReconnectButtonPressed(_ notification: Notification) {
+		removeOverlay(.NoInternetOverlay)
+		addOverlay(.LoadingOverlay)
+		updateWidget()
+	}
     
     //
     // Performs an update on the widget.
-    //
-    func updateWidget() {
+    //_
+	func updateWidget() {
         // If the refresh token does not exist, show authentication overlay with button to containing app.
         guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
             addOverlay(.AuthOverlay)
@@ -144,16 +165,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		overlayViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
 		add(overlayViewController)
 		
-		// Hide or show elements based on available space
+		// ## Hide or show elements based on available space
 		// If compact
 		if self.extensionContext!.widgetActiveDisplayMode == .compact {
 			// Hide Auth Overlay's label (text)
-			if overlayType == Overlay.AuthOverlay { (overlayViewController as! AuthOverlayViewController).authLabel.isHidden = true }
+			switch overlayType {
+			case .AuthOverlay:
+				(overlayViewController as! AuthOverlayViewController).authLabel.isHidden = true
+			case .NoInternetOverlay:
+				(overlayViewController as! NoInternetViewController).noInternetLabel.isHidden = true
+			default:
+				break
+			}
 		}
 		// If expanded
 		else {
 			// Show Auth Overlay's label (text)
-			if overlayType == Overlay.AuthOverlay { (overlayViewController as! AuthOverlayViewController).authLabel.isHidden = false }
+			switch overlayType {
+			case .AuthOverlay:
+				(overlayViewController as! AuthOverlayViewController).authLabel.isHidden = false
+			case .NoInternetOverlay:
+				(overlayViewController as! NoInternetViewController).noInternetLabel.isHidden = false
+			default:
+				break
+			}
 		}
 	}
 	

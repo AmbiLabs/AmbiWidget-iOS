@@ -271,6 +271,7 @@ class DeviceManager {
 		
 		//
 		// Give comfort feedback to the AI
+		// Returns a boolean that represents if the device is online or not (false = disconnected)
 		//
 		static func giveComfortFeedback(for device: Device, with feedback: ComfortLevel) -> Promise<Bool> {
 			print("feedback: \(feedback)")
@@ -281,6 +282,7 @@ class DeviceManager {
 					let counts_unlocking: Bool?
 					let created_on: String?
 					let device_id: String?
+					let device_online: Bool?
 					let feedback: Int?
 					let origin: String?
 					let error: String?
@@ -295,7 +297,11 @@ class DeviceManager {
 					throw DeviceManagerError.errorInResult(errorMessage: error)
 				}
 				
-				return true
+				guard let deviceOnline = decodedData.device_online else {
+					throw DeviceManagerError.noDataInResult(errorMessage: "No device_online parameter found.")
+				}
+				
+				return deviceOnline
 			}
 			
 			return TokenManager.getAccessToken()
@@ -308,6 +314,7 @@ class DeviceManager {
 		
 		//
 		// Set the mode of the ambi device
+		// Returns a boolean that represents if the device is online or not (false = disconnected)
 		//
 		static func comfortMode(for device: Device, with simpleMode: SimpleMode) -> Promise<Bool> {
 			
@@ -315,6 +322,7 @@ class DeviceManager {
 				
 				struct Result: Codable {
 					let status: String?
+					let device_online: Bool?
 					let status_code: Int?
 				}
 				
@@ -322,16 +330,11 @@ class DeviceManager {
 				let decodedData = try JSONDecoder().decode([Result].self, from: data)
 				print("<<< {comfort mode} \(decodedData)")
 				
-				// Check for errors in result
-				guard let status = decodedData[0].status else {
-					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
+				guard let deviceOnline = decodedData[0].device_online else {
+					throw DeviceManagerError.noDataInResult(errorMessage: "No device_online parameter found.")
 				}
 				
-				if status == "ok" {
-					return true
-				} else {
-					return false
-				}
+				return deviceOnline
 			}
 			
 			return TokenManager.getAccessToken()
@@ -343,43 +346,44 @@ class DeviceManager {
 		}
 		
 		//
-		// Update Mode
+		// Change to temp Mode
 		//
-		static func temperatureMode(for device: Device, with value: String) -> Promise<Bool> {
-			
-			func decodeData(_ data: Data) throws -> Bool {
-				
-				struct Result: Codable {
-					let status: String?
-					let status_code: Int?
-				}
-				
-				// Decode retrieved data with JSONDecoder
-				let decodedData = try JSONDecoder().decode([Result].self, from: data)
-				print("<<< {temperatute mode} \(decodedData)")
-				
-				// Check for errors in result
-				guard let status = decodedData[0].status else {
-					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
-				}
-				
-				if status == "ok" {
-					return true
-				} else {
-					return false
-				}
-			}
-			
-			return TokenManager.getAccessToken()
-				.then { accessToken in
-					DeviceManager.API.fetchData(for: RequestType.temperatureMode, with: accessToken, by: device, modeValue: value)
-				}.compactMap { result in
-					try decodeData(result.data)
-			}
-		}
+//		static func temperatureMode(for device: Device, with value: String) -> Promise<Bool> {
+//
+//			func decodeData(_ data: Data) throws -> Bool {
+//
+//				struct Result: Codable {
+//					let status: String?
+//					let status_code: Int?
+//				}
+//
+//				// Decode retrieved data with JSONDecoder
+//				let decodedData = try JSONDecoder().decode([Result].self, from: data)
+//				print("<<< {temperatute mode} \(decodedData)")
+//
+//				// Check for errors in result
+//				guard let status = decodedData[0].status else {
+//					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
+//				}
+//
+//				if status == "ok" {
+//					return true
+//				} else {
+//					return false
+//				}
+//			}
+//
+//			return TokenManager.getAccessToken()
+//				.then { accessToken in
+//					DeviceManager.API.fetchData(for: RequestType.temperatureMode, with: accessToken, by: device, modeValue: value)
+//				}.compactMap { result in
+//					try decodeData(result.data)
+//			}
+//		}
 		
 		//
 		// Give comfort feedback to the AI
+		// Returns a boolean that represents if the device is online or not (false = disconnected)
 		//
 		static func powerOff(for device: Device) -> Promise<Bool> {
 			
@@ -387,6 +391,7 @@ class DeviceManager {
 				
 				struct Result: Codable {
 					let status: String?
+					let device_online: Bool?
 					let status_code: Int?
 				}
 				
@@ -394,19 +399,11 @@ class DeviceManager {
 				let decodedData = try JSONDecoder().decode([Result].self, from: data)
 				print("<<< {power off} \(decodedData)")
 				
-				// Check for errors in result
-				guard let status = decodedData[0].status else {
-					throw DeviceManagerError.noDataInResult(errorMessage: "No status found in result.")
+				guard let deviceOnline = decodedData[0].device_online else {
+					throw DeviceManagerError.noDataInResult(errorMessage: "No device_online parameter found.")
 				}
 				
-				// If status is 'device offline' it means the server could not reach the Ambi Device,
-				// however the appliance target is still set to off mode. Therefore OUR request for off is still a success.
-				// TODO: Maybe show the user that their device is not actually in OFF mode now, because it couldn't be reached
-				if status == "ok" || status == "device offline" {
-					return true
-				} else {
-					return false
-				}
+				return deviceOnline
 			}
 			
 			return TokenManager.getAccessToken()

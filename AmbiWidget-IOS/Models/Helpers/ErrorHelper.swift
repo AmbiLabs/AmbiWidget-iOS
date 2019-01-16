@@ -12,6 +12,7 @@ import PromiseKit
 enum HttpError: Error {
 	case unauthorised(errorMessage: String)
 	case unknown(errorMessage: String)
+	case serviceUnavailable(errorMessage: String)
 }
 
 class ErrorHelper {
@@ -63,7 +64,12 @@ class ErrorHelper {
 			
 		// 500 - 599 (Server Error)
 		else if (statusCode >= 500 && statusCode <= 599) {
-			error = HttpError.unknown(errorMessage: "Error (\(statusCode)): Unknown server error.")
+			switch statusCode {
+			case 503:
+				error = HttpError.serviceUnavailable(errorMessage: "Error (\(statusCode)): Service unavailable.")
+			default:
+				error = HttpError.unknown(errorMessage: "Error (\(statusCode)): Unknown server error.")
+			}
 		}
 		
 		return error

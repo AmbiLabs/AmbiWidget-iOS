@@ -29,14 +29,19 @@ struct Device: Codable {
             guard let rawMode = status?.applianceControlTarget.quantity.lowercased(), let applianceState = status?.applianceState else {
                 return nil
             }
+			
+			// If device is offline, return disconnected device icon
+			if let deviceOnline = self.status?.deviceOnline, !deviceOnline {
+				simpleMode = SimpleMode.Disconnected
+			}
             
             // If device is off
-            if (rawMode == "manual" && applianceState.power.lowercased() == "off") || rawMode == "off" {
+            else if (rawMode == "manual" && applianceState.power.lowercased() == "off") || rawMode == "off" {
                 simpleMode = SimpleMode.Off
             }
             
             // If Manual mode
-            if (rawMode == "manual" && applianceState.power.lowercased() != "off") {
+            else if (rawMode == "manual" && applianceState.power.lowercased() != "off") {
                 simpleMode = SimpleMode.Manual
             }
                 
@@ -73,10 +78,15 @@ struct Device: Codable {
             switch newMode! {
             case .Off:
                 self.status?.applianceControlTarget.quantity = "off"
+				self.status?.deviceOnline = true
             case .Comfort:
                 self.status?.applianceControlTarget.quantity = "climate"
+				self.status?.deviceOnline = true
             case .Temperature:
                 self.status?.applianceControlTarget.quantity = "temperature"
+				self.status?.deviceOnline = true
+			case .Disconnected:
+				self.status?.deviceOnline = false
             default:
                 return
             }

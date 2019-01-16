@@ -8,15 +8,14 @@
 
 import UIKit
 
-class AuthOverlayViewController: UIViewController {
+class AuthViewController: UIViewController {
     
     @IBOutlet weak var authLabel: UILabel!
+	@IBOutlet weak var authButton: UIButton!
     
     // Authentication Url & Parameters
     let authoriseURL = "https://api.ambiclimate.com/oauth2/authorize"
     let responseType = "code"
-
-    @IBOutlet weak var authButton: UIButton!
 	
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthOverlayViewController" customModule="TodayExtension" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthViewController" customModule="TodayExtension" customModuleProvider="target">
             <connections>
                 <outlet property="authButton" destination="ga3-nv-wfh" id="D2g-uu-EpX"/>
                 <outlet property="authLabel" destination="ghL-bN-WeY" id="k9g-Sh-xSe"/>

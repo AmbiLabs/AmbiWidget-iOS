@@ -21,4 +21,5 @@ enum SimpleMode {
 	case AwayTemperatureLower
 	case AwayTemperatureUpper
 	case AwayHumidityUpper
+	case Disconnected
 }

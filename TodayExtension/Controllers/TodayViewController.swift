@@ -29,7 +29,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		var viewController: UIViewController {
 			switch self {
 			case .AuthOverlay:
-				return AuthOverlayViewController()
+				return AuthViewController()
 			case .NoDevicesOverlay:
 				return NoDevicesViewController()
 			case .NoInternetOverlay:
@@ -98,7 +98,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			for child in self.children {
 				switch overlay {
 				case .AuthOverlay:
-					if child is AuthOverlayViewController { (child as! AuthOverlayViewController).authLabel.isHidden = value }
+					if child is AuthViewController { (child as! AuthViewController).authLabel.isHidden = value }
 				case .NoInternetOverlay:
 					if child is NoInternetViewController { (child as! NoInternetViewController).noInternetLabel.isHidden = value }
 				default:
@@ -143,11 +143,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     //
     // Performs an update on the widget.
-    //_
+    //
 	func updateWidget() {
         // If the refresh token does not exist, show authentication overlay with button to containing app.
         guard let _ = try? TokenManager.loadTokenFromUserDefaults(with: .RefreshToken) else {
-            addOverlay(.AuthOverlay)
+			self.addOverlay(.AuthOverlay)
             return
         }
         
@@ -171,7 +171,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			// Hide Auth Overlay's label (text)
 			switch overlayType {
 			case .AuthOverlay:
-				(overlayViewController as! AuthOverlayViewController).authLabel.isHidden = true
+				(overlayViewController as! AuthViewController).authLabel.isHidden = true
 			case .NoInternetOverlay:
 				(overlayViewController as! NoInternetViewController).noInternetLabel.isHidden = true
 			default:
@@ -183,7 +183,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			// Show Auth Overlay's label (text)
 			switch overlayType {
 			case .AuthOverlay:
-				(overlayViewController as! AuthOverlayViewController).authLabel.isHidden = false
+				(overlayViewController as! AuthViewController).authLabel.isHidden = false
 			case .NoInternetOverlay:
 				(overlayViewController as! NoInternetViewController).noInternetLabel.isHidden = false
 			default:
@@ -200,7 +200,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		for child in self.children {
 			switch overlay {
 			case .AuthOverlay:
-				if child is AuthOverlayViewController { child.remove() }
+				if child is AuthViewController { child.remove() }
 			case .NoDevicesOverlay:
 				if child is NoDevicesViewController { child.remove() }
 			case .NoInternetOverlay:
@@ -369,6 +369,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			let _ = self.noInternetErrorHandler(error)
 		}
 	}
+	
 	func changeModeIcon(to mode: SimpleMode) {
 		let deviceList = try! DeviceManager.Local.getDeviceList()
 		var updatedDeviceList = deviceList
@@ -382,7 +383,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			print("Could not give comfort feedback, currentDeviceViewModel not found")
 			return
 		}
-        
+		
+		// Determine feedback type based on the button tag / id that is pressed
         var comfortLevel: ComfortLevel?
         if sender.tag == 1 {
             // Show loading indicator.
@@ -396,15 +398,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Send comfort feedback to the API.
         DeviceManager.API.giveComfortFeedback(for: currentDevice, with: comfortLevel!)
-		.done { success in
-			if success {
-				print("Feedback given: \(comfortLevel!)")
-				// Set mode icon
-				self.changeModeIcon(to: .Comfort)
-				self.updateMainView()
-			} else {
-				print("Something went wrong while trying to give comfort feedback.")
-			}
+		.done { deviceOnline in
+			print("Feedback given: \(comfortLevel!)")
+			// Set mode icon
+			deviceOnline ? self.changeModeIcon(to: .Comfort) : self.changeModeIcon(to: .Disconnected)
+			self.updateMainView()
 		}.catch { error in
 			print("Error: \(error)")
 			let _ = self.noInternetErrorHandler(error)
@@ -426,15 +424,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Send comfort mode instruction to the API.
         DeviceManager.API.comfortMode(for: currentDevice, with: SimpleMode.Comfort)
-		.done { success in
-			if success {
-				print("The device has been set to comfort mode.")
-				// Set mode icon
-				self.changeModeIcon(to: .Comfort)
-				self.updateMainView()
-			} else {
-				print("Failed to set the device to comfort mode.")
-			}
+		.done { deviceOnline in
+			print("The device has been set to comfort mode.")
+			// Set mode icon
+			deviceOnline ? self.changeModeIcon(to: .Comfort) : self.changeModeIcon(to: .Disconnected)
+			self.updateMainView()
 		}.catch { error in
 			print("Error: \(error)")
 			let _ = self.noInternetErrorHandler(error)
@@ -456,19 +450,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Send power off instruction to the API.
         DeviceManager.API.powerOff(for: currentDevice)
-		.done { success in
-			if success {
-				print("The device has been set to off mode.")
-				// Set mode icon
-				self.changeModeIcon(to: .Off)
-				self.updateMainView()
-			} else {
-				print("Failed to set the device to off mode.")
-			}
+		.done { deviceOnline in
+			print("The device has been set to off mode.")
+			// Set mode icon
+			deviceOnline ? self.changeModeIcon(to: .Off) : self.changeModeIcon(to: .Disconnected)
+			self.updateMainView()
 		}.catch { error in
 			print("Error: \(error)")
 			// Check if no internet connection error
 			let _ = self.noInternetErrorHandler(error)
+			
+			// API Bug: When 503 http error (service unavailable) it means the device is offline/unreachable
+			if case HttpError.serviceUnavailable = error {
+				self.changeModeIcon(to: .Disconnected)
+				self.updateMainView()
+			}
 		}.finally {
 			// Hide loading indicator.
 			self.offButton.loadingIndicator(show: false)

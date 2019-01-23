@@ -273,13 +273,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DeviceManager.API.getDeviceList()
 		.then { newDeviceList in
 			DeviceManager.API.getDeviceStatus(for: newDeviceList)
-		}.done { updatedDeviceList in
+		}.done { [weak self] updatedDeviceList in
 			
 			// Save deviceList to local storage
 			try! DeviceManager.Local.saveDeviceList(deviceList: updatedDeviceList)
 			
 			// Update mainView to show the new data
-			self.updateMainView()
+			self?.updateMainView()
 		}.catch { error in
 			switch error {
 			case DeviceManagerError.noDevicesForAccount:

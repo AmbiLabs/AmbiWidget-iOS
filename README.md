@@ -9,7 +9,7 @@ However, you can still install this standalone Ambi Widget app through here:
 [Install Standalone Ambi Widget (v1.2)](http://www.brandonyuen.nl/apps/ios/ambiwidget/download)
 *This is not through the App Store, but an unofficial website.*
 
-<img src="https://raw.githubusercontent.com/TongLaiCha/AmbiWidget-iOS/Screenshots/preview_image.jpeg" height="500">
+<img src="https://github.com/TongLaiCha/AmbiWidget-iOS/blob/master/Screenshots/preview_image.jpeg?raw=true" height="500">
 
 ## Features
 * Give comfort feedback to your AC with a single click on the widget.

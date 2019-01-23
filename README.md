@@ -2,12 +2,12 @@
 An open source standalone IOS widget (today extension) for the [Ambi Climate](http://www.ambiclimate.com) smart home device.
 
 ## Download
-Ambi Widget for iOS is currently only officialy available for a select few interal testers through TestFlight and will probably be integrated in the main Ambi Climate app in the future for public use.
-
-However, you can still install this standalone Ambi Widget app through here:
-
 [Install Standalone Ambi Widget (v1.2)](http://www.brandonyuen.nl/apps/ios/ambiwidget/download)
 *This is not through the App Store, but an unofficial website.*
+
+### Note
+Ambi Widget for iOS is currently only officialy available for a select few interal testers through TestFlight and will probably be integrated in the main Ambi Climate app in the future for public use.
+However, you can still install this standalone Ambi Widget app with the link above.
 
 <img src="https://github.com/TongLaiCha/AmbiWidget-iOS/blob/master/Screenshots/preview_image.jpeg?raw=true" height="500">
 

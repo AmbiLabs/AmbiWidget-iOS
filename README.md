@@ -6,7 +6,9 @@ An open source standalone IOS widget (today extension) for the [Ambi Climate](ht
 ## Download
 Ambi Widget for iOS is at the time of writing (23-01-2019) only officialy available for a select few interal testers through TestFlight.
 However, if anyone wishes to install the app through an unofficial website:
+
 [Install Unofficial Version (v1.2)](http://www.brandonyuen.nl/apps/ios/ambiwidget/download)
+*This is not through the App Store, but an unofficial website.*
 
 ## Features
 * Give comfort feedback to your AC with a single click on the widget.
